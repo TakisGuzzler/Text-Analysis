@@ -1,0 +1,101 @@
+---
+title: "Your Title Goes Here"
+subtitle: "A report to the Quantum Insight AI research team."
+author: "My Name"
+date: last-modified
+format:
+  pdf:
+    number-sections: true
+    indent: true
+    toc: false
+    include-in-header:
+      text: |
+        \addtokomafont{disposition}{\rmfamily}
+execute:
+  echo: false
+---
+
+# Statement of the Problem
+
+
+
+# Summary of Findings
+
+
+
+# Recommendations
+
+
+
+# Appendix
+
+```{r}
+library(quanteda)
+library(quanteda.textstats)
+library(tidyverse)
+library(knitr)
+library(gt)
+library(syuzhet)
+library(dplyr)
+source("../R/helper_functions.R")
+source("../R/keyness_functions.R")
+```
+
+```{r}
+test <- read.table("spacy_Meta-Llama-3-8B.tsv", header=TRUE, sep='\t', fill=TRUE)
+```
+
+```{r}
+anno_edit <- structure(test, class = c("spacyr_parsed", "data.frame"))
+```
+```{r}
+subtkns <- as.tokens(anno_edit, include_pos = "tag", concatenator = "")
+doc_categories <- names(subtkns) %>%
+  data.frame(text_type = .) %>%
+  mutate(text_type = str_extract(text_type, "^[a-z]+"))
+
+docvars(subtkns) <- doc_categories
+
+sub_dfm <- dfm(subtkns)
+textstat_frequency(sub_dfm, n = 10) |>
+  gt()
+```
+```{r}
+subdfm <- subtkns %>%
+  tokens_select("^.[a-zA-Z0-9]+.[a-z]", selection = "keep", valuetype = "regex", case_insensitive = T) %>%
+  dfm()
+textstat_frequency(subdfm, n = 10) |>
+  gt() |>
+  as_raw_html()
+```
+
+
+```{r}
+### KEYNESS TABLES ####
+###Key: jj = adj.; vb = verb; nn = noun, prp = pronoun; vbp = ??? rb = ???, in/to = preposition
+harris_v_obama <- keyness_table(harris_all_dfm, obama_all_dfm) %>%
+  separate(col = Token, into = c("Token", "Tag"), sep = "_") %>%
+  filter(Tag == "jj") %>%
+  select(-Tag) %>%
+  select(-DP_Ref)
+
+harris_v_obama |>
+  head(10) |>
+  gt() |>
+  tab_header(
+    title = "Keyness Table",
+    subtitle = "Comparison of Harris to the Obama reference corpus"
+  ) |>
+  fmt_number(columns = c('LL', 'LR', 'Per_10.3_Tar', 'Per_10.3_Ref'), decimals = 2) |>
+  fmt_number(columns = c('DP_Tar'), decimals = 3) |>
+  fmt_number(columns = c('PV'), decimals = 5) |>
+  tab_options(data_row.padding = px(2), 
+              column_labels.padding = px(2), 
+              heading.padding = px(2),
+              heading.title.font.size = "small",
+              heading.subtitle.font.size = "small",
+              table.font.size = "small",
+              table.align = "left")
+```
+
+
