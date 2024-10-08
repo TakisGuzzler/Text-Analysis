@@ -29,7 +29,7 @@ execute:
 
 # Appendix
 
-```{r}
+```{r, include=FALSE}
 library(quanteda)
 library(quanteda.textstats)
 library(tidyverse)
@@ -42,33 +42,101 @@ source("../R/keyness_functions.R")
 ```
 
 ```{r}
-test <- read.table("spacy_Meta-Llama-3-8B.tsv", header=TRUE, sep='\t', fill=TRUE)
-```
+### Generate arxiv sub DFM from SPACY ####
 
-```{r}
-anno_edit <- structure(test, class = c("spacyr_parsed", "data.frame"))
-```
-```{r}
-subtkns <- as.tokens(anno_edit, include_pos = "tag", concatenator = "")
-doc_categories <- names(subtkns) %>%
+arxiv_spacy <- read.table("arxiv_sample/arxiv_spacy.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+anno_edit_arxiv <- structure(arxiv_spacy, class = c("spacyr_parsed", "data.frame"))
+
+subtkns_arxiv <- as.tokens(anno_edit_arxiv, include_pos = "tag", concatenator = "")
+doc_categories_arxiv <- names(subtkns_arxiv) %>%
   data.frame(text_type = .) %>%
   mutate(text_type = str_extract(text_type, "^[a-z]+"))
 
-docvars(subtkns) <- doc_categories
+docvars(subtkns_arxiv) <- doc_categories_arxiv
 
-sub_dfm <- dfm(subtkns)
-textstat_frequency(sub_dfm, n = 10) |>
-  gt()
-```
-```{r}
-subdfm <- subtkns %>%
+sub_dfm_arxiv <- subtkns_arxiv %>%
   tokens_select("^.[a-zA-Z0-9]+.[a-z]", selection = "keep", valuetype = "regex", case_insensitive = T) %>%
   dfm()
-textstat_frequency(subdfm, n = 10) |>
+
+textstat_frequency(sub_dfm_arxiv, n = 10) |>
   gt() |>
   as_raw_html()
+
 ```
 
+```{r}
+### Generate ML3s sub DFM from SPACY ####
+
+meta_llama_3_spacy <- read.table("hape_sample/spacy_data/spacy_Meta-Llama-3-8B.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+anno_edit_ml3s <- structure(meta_llama_3_spacy, class = c("spacyr_parsed", "data.frame"))
+
+subtkns_ml3s <- as.tokens(anno_edit_ml3s, include_pos = "tag", concatenator = "")
+doc_categories_ml3s <- names(subtkns_ml3s) %>%
+  data.frame(text_type = .) %>%
+  mutate(text_type = str_extract(text_type, "^[a-z]+"))
+
+docvars(subtkns_ml3s) <- doc_categories_ml3s
+
+sub_dfm_ml3s <- subtkns_ml3s %>%
+  tokens_select("^.[a-zA-Z0-9]+.[a-z]", selection = "keep", valuetype = "regex", case_insensitive = T) %>%
+  dfm()
+
+textstat_frequency(sub_dfm_ml3s, n = 10) |>
+  gt() |>
+  as_raw_html()
+
+```
+
+```{r}
+### Generate chatGPT4.0 sub DFM from SPACY ####
+
+gpt_4o_spacy <- read.table("hape_sample/spacy_data/spacy_gpt-4o-2024-08-06.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+anno_edit_gpt4o <- structure(gpt_4o_spacy, class = c("spacyr_parsed", "data.frame"))
+
+subtkns_gpt4o <- as.tokens(anno_edit_gpt4o, include_pos = "tag", concatenator = "")
+
+doc_categories_gpt4o <- names(subtkns_gpt4o) %>%
+  data.frame(text_type = .) %>%
+  mutate(text_type = str_extract(text_type, "^[a-z]+"))
+
+docvars(subtkns_gpt4o) <- doc_categories_gpt4o
+
+sub_dfm_gpt4o <- subtkns_gpt4o %>%
+  tokens_select("^.[a-zA-Z0-9]+.[a-z]", selection = "keep", valuetype = "regex", case_insensitive = T) %>%
+  dfm()
+
+textstat_frequency(sub_dfm_gpt4o, n = 10) |>
+  gt() |>
+  as_raw_html()
+
+```
+
+```{r}
+### Generate chunk sub DFM from SPACY ####
+
+chunk_spacy <- read.table("hape_sample/spacy_data/spacy_chunk_2.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+anno_edit_chunk <- structure(chunk_spacy, class = c("spacyr_parsed", "data.frame"))
+
+subtkns_chunk <- as.tokens(anno_edit_chunk, include_pos = "tag", concatenator = "")
+doc_categories_chunk <- names(subtkns_chunk) %>%
+  data.frame(text_type = .) %>%
+  mutate(text_type = str_extract(text_type, "^[a-z]+"))
+
+docvars(subtkns_chunk) <- doc_categories_chunk
+
+sub_dfm_chunk <- subtkns_chunk %>%
+  tokens_select("^.[a-zA-Z0-9]+.[a-z]", selection = "keep", valuetype = "regex", case_insensitive = T) %>%
+  dfm()
+
+textstat_frequency(sub_dfm_chunk, n = 10) |>
+  gt() |>
+  as_raw_html()
+
+```
 
 ```{r}
 ### KEYNESS TABLES ####
@@ -98,4 +166,15 @@ harris_v_obama |>
               table.align = "left")
 ```
 
+
+```{r}
+####read in biber data ####
+chunk_biber <- read.table("hape_sample/biber_data/biber_chunk_2.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+gpt_4o_biber <- read.table("hape_sample/biber_data/biber_gpt-4o-2024-08-06.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+meta_llama_3_biber <- read.table("hape_sample/biber_data/biber_Meta-Llama-3-8B.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+
+arxiv_biber <- read.table("arxiv_sample/arxiv_biber.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+```
 
