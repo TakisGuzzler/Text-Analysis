@@ -1,3 +1,4 @@
+
 ---
 title: "Your Title Goes Here"
 subtitle: "A report to the Quantum Insight AI research team."
@@ -37,8 +38,11 @@ library(knitr)
 library(gt)
 library(syuzhet)
 library(dplyr)
+library(nFactors)
 source("../R/helper_functions.R")
 source("../R/keyness_functions.R")
+source("../R/mda_functions.R")
+
 ```
 
 ```{r}
@@ -138,6 +142,7 @@ textstat_frequency(sub_dfm_chunk, n = 10) |>
 
 ```
 
+
 ```{r}
 ### KEYNESS TABLES ####
 ###Key: jj = adj.; vb = verb; nn = noun, prp = pronoun; vbp = ??? rb = ???, in/to = preposition
@@ -167,14 +172,61 @@ harris_v_obama |>
 ```
 
 
-```{r}
+```{r, include = FALSE}
 ####read in biber data ####
-chunk_biber <- read.table("hape_sample/biber_data/biber_chunk_2.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+human_chunk_biber <- read_tsv("hape_sample/biber_data/biber_chunk_2.tsv")
 
-gpt_4o_biber <- read.table("hape_sample/biber_data/biber_gpt-4o-2024-08-06.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+gpt_4o_biber <- read_tsv("hape_sample/biber_data/biber_gpt-4o-2024-08-06.tsv")
 
-meta_llama_3_biber <- read.table("hape_sample/biber_data/biber_Meta-Llama-3-8B.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+meta_llama_3_biber <- read_tsv("hape_sample/biber_data/biber_Meta-Llama-3-8B.tsv")
 
-arxiv_biber <- read.table("arxiv_sample/arxiv_biber.tsv", header=TRUE, sep='\t', quote="", fill=TRUE)
+arxiv_biber <- read_tsv("arxiv_sample/arxiv_biber.tsv")
+
+text_chunk <- read_tsv("hape_sample/text_data/text_chunk_2.tsv")
+
 ```
 
+```{r}
+
+arxiv_biber_human <- arxiv_biber %>% 
+  filter(str_detect(doc_id, "human")) %>%
+  select(where(~ is.numeric(.x) && sum(.x) != 0))
+
+arxiv_biber_machine <- arxiv_biber %>% 
+  filter(str_detect(doc_id, "machine")) %>%
+  select(where(~ is.numeric(.x) && sum(.x) != 0))
+
+# only filter arxiv out 
+
+```
+
+```{r}
+bc_cor <- cor(arxiv_biber_human[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+```{r}
+bc_cor <- cor(arxiv_biber_machine[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+
+```{r}
+bc_cor <- cor(human_chunk_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+```{r}
+bc_cor <- cor(gpt_4o_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+
+
+```{r}
+screeplot_mda(chunk_biber)
+```
+
+```{r}
+heatmap_mda(bc_mda, n_factor = 1)
+```
