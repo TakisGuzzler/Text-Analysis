@@ -197,6 +197,9 @@ bc_cor <- cor(gpt_4o_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
+As an example of graph interpretation, the high positive correlation between biber features such as *f_09* and *f_59* and the high negative correlation between features such as *f_44* and *f_06* could indicate that the corpus has an informal register and is comprised primarily of informal texts. This can be seen due to the high usage of contractions, which are uncommon in formal texts. Furthermore, the negative correlation between mean word length and first person pronouns indicate that words are often shorter where first person pronouns occur - further bolstering the claim that this corpus has an informal register.
+
+
 ```{r, fig.cap="Correlation Matrix of In-Sample GPT 4o Mini", out.height = "30%"}
 bc_cor <- cor(gpt_4o_mini_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
@@ -250,7 +253,7 @@ As a general example for interpreting the graphs, if the feature nouns (might or
 On the flip side, a dark red color would show a negative correlation which could mean???
 
 
-what does a high negative correlation establish? high positive? why do some graphs have very minimal correlation overall. Note that this is for the entire data set --> if you have a lot of a similar writing style, how might this reflect in the graphs and what might this say about our models. As an example, if the models are highly trained to recognize a specific pattern of relationships, would they do well at then recognizing a different pattern? Are there patterns accross the biber features?
+what does a high negative correlation establish? high positive? why do some graphs have very minimal correlation overall. Note that this is for the entire data set --> if you have a lot of a similar writing style, how might this reflect in the graphs and what might this say about our models. As an example, if the models are highly trained to recognize a specific pattern of relationships, would they do well at then recognizing a different pattern? Are there patterns across the biber features?
 
 I don't know how relevant this stuff is, but it is food for thought, so to speak.
 
