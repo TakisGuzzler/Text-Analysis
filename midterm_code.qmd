@@ -19,7 +19,9 @@ execute:
 # Statement of the Problem
 Quantum Insights is aiming to distinguish human-authored text from AI-generated content. The team developed initial models that, on in-sample test data, correctly differentiated human-generated text from AI generated text with high accuracy ($81.78%-96.25%$). When this model was applied to out-of sample test data, however, the accuracy of the models drops significantly, with the lowest accuracy on the meta models being $52.25%$. Our team is interested in determining the contributing factors to this drop in performance and recommending potential next steps to solve this problem and improve the models' accuracy.
 
-# Aproach
+# Approach
+
+The Team investigated this problem on three different avenues. We analyzed the models to determine what variables were of greatest importance when making classifications of texts. We then looked at the correlation matrices of biber features for each of the data sets for in and out of sample data to determine whether there were significantly different trends that might over specify classifications and hamper the models' generalizability. While investigating the correlation matrices, we also investigated the text files themselves, to see if there were any obvious trends or similarities among the human and machine samples in our data. We isolated and analyzed the prompts given to humans and LLMs for the out of sample data to determine whether prompt engineering could play a role in low performance. Finally, we analyzed the histograms of key features to further illuminate any underlying issues.
 
 
 # Summary of Findings
