@@ -235,3 +235,24 @@ screeplot_mda(human_chunk_biber)
 text_chunk <- read_tsv("hape_sample/text_data/text_chunk_2.tsv")
 
 ```
+
+
+General comments for interpreting the correlational plots -- delete later --
+
+Positive Correlation means that as one linguistic feature increases, so too does the other
+
+Negative correlation means that as one linguistic feature increases, the other decreases
+
+Zero correlation means that there is no linear relationship between the features
+
+As a general example for interpreting the graphs, if the feature nouns (might or might not be an actual feature, this is an example not an actual comment) and adjectives show a dark blue color, then the texts where nouns are frequent also tend to use more adjectives. So, when we extrapolate this to new texts or new tests, maybe we are expecting texts with a lot of nouns to have a lot of adjectives and thus might miss several test cases where this is not the case.
+
+On the flip side, a dark red color would show a negative correlation which could mean???
+
+
+what does a high negative correlation establish? high positive? why do some graphs have very minimal correlation overall. Note that this is for the entire data set --> if you have a lot of a similar writing style, how might this reflect in the graphs and what might this say about our models. As an example, if the models are highly trained to recognize a specific pattern of relationships, would they do well at then recognizing a different pattern? Are there patterns accross the biber features?
+
+I don't know how relevant this stuff is, but it is food for thought, so to speak.
+
+For these interpretations, context is important. If you are going to comment on the relationship of a text set, might as well also look at the data itself to see if there are any visual patterns? Is there anything to suggest that the model is more used to formal/informal language, etc...
+
