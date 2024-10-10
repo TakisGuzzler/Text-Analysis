@@ -17,7 +17,9 @@ execute:
 ---
 
 # Statement of the Problem
+Quantum Insights is aiming to distinguish human-authored text from AI-generated content. The team developed initial models that, on in-sample test data, correctly differentiated human-generated text from AI generated text with high accuracy ($81.78%-96.25%$). When this model was applied to out-of sample test data, however, the accuracy of the models drops significantly, with the lowest accuracy on the meta models being $52.25%$. Our team is interested in determining the contributing factors to this drop in performance and recommending potential next steps to solve this problem and improve the models' accuracy.
 
+# Aproach
 
 
 # Summary of Findings
