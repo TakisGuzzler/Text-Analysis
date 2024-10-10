@@ -179,48 +179,48 @@ arxiv_biber_machine <- arxiv_biber %>%
 ```{r}
 bc_cor <- cor(arxiv_biber_human[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(arxiv_biber_machine[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 
 ```{r}
 bc_cor <- cor(human_chunk_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(gpt_4o_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(gpt_4o_mini_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(meta_llama_3_8b_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(meta_llama_3_8b_Instruct_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(meta_llama_3_70B_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 ```{r}
 bc_cor <- cor(meta_llama_3_70B_Instruct_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 
 
