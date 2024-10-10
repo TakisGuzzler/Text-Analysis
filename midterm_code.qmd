@@ -143,47 +143,23 @@ textstat_frequency(sub_dfm_chunk, n = 10) |>
 ```
 
 
-```{r}
-### KEYNESS TABLES ####
-###Key: jj = adj.; vb = verb; nn = noun, prp = pronoun; vbp = ??? rb = ???, in/to = preposition
-harris_v_obama <- keyness_table(harris_all_dfm, obama_all_dfm) %>%
-  separate(col = Token, into = c("Token", "Tag"), sep = "_") %>%
-  filter(Tag == "jj") %>%
-  select(-Tag) %>%
-  select(-DP_Ref)
-
-harris_v_obama |>
-  head(10) |>
-  gt() |>
-  tab_header(
-    title = "Keyness Table",
-    subtitle = "Comparison of Harris to the Obama reference corpus"
-  ) |>
-  fmt_number(columns = c('LL', 'LR', 'Per_10.3_Tar', 'Per_10.3_Ref'), decimals = 2) |>
-  fmt_number(columns = c('DP_Tar'), decimals = 3) |>
-  fmt_number(columns = c('PV'), decimals = 5) |>
-  tab_options(data_row.padding = px(2), 
-              column_labels.padding = px(2), 
-              heading.padding = px(2),
-              heading.title.font.size = "small",
-              heading.subtitle.font.size = "small",
-              table.font.size = "small",
-              table.align = "left")
-```
-
-
 ```{r, include = FALSE}
 ####read in biber data ####
 human_chunk_biber <- read_tsv("hape_sample/biber_data/biber_chunk_2.tsv")
 
 gpt_4o_biber <- read_tsv("hape_sample/biber_data/biber_gpt-4o-2024-08-06.tsv")
 
-meta_llama_3_biber <- read_tsv("hape_sample/biber_data/biber_Meta-Llama-3-8B.tsv")
+gpt_4o_mini_biber <- read_tsv("hape_sample/biber_data/biber_gpt-4o-mini-2024-07-18.tsv")
+
+meta_llama_3_8b_biber <- read_tsv("hape_sample/biber_data/biber_Meta-Llama-3-8B.tsv")
+
+meta_llama_3_8b_Instruct_biber <- read_tsv("hape_sample/biber_data/biber_Meta-Llama-3-8B-Instruct.tsv")
+
+meta_llama_3_70B_biber <- read_tsv("hape_sample/biber_data/biber_Meta-Llama-3-70B.tsv")
+
+meta_llama_3_70B_Instruct_biber <- read_tsv("hape_sample/biber_data/biber_Meta-Llama-3-70B-Instruct.tsv")
 
 arxiv_biber <- read_tsv("arxiv_sample/arxiv_biber.tsv")
-
-text_chunk <- read_tsv("hape_sample/text_data/text_chunk_2.tsv")
-
 ```
 
 ```{r}
@@ -221,12 +197,41 @@ bc_cor <- cor(gpt_4o_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
 ```
-
-
 ```{r}
-screeplot_mda(chunk_biber)
+bc_cor <- cor(gpt_4o_mini_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+```{r}
+bc_cor <- cor(meta_llama_3_8b_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+```{r}
+bc_cor <- cor(meta_llama_3_8b_Instruct_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+```{r}
+bc_cor <- cor(meta_llama_3_70B_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
+```
+```{r}
+bc_cor <- cor(meta_llama_3_70B_Instruct_biber[-1], method = "pearson")
+corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.5)
 ```
 
+
 ```{r}
-heatmap_mda(bc_mda, n_factor = 1)
+screeplot_mda(human_chunk_biber)
+```
+
+
+```{r, include=FALSE}
+#read in text cunks for analysis
+
+text_chunk <- read_tsv("hape_sample/text_data/text_chunk_2.tsv")
+
 ```
