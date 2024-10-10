@@ -1,8 +1,8 @@
 
 ---
-title: "Your Title Goes Here"
+title: "An Investigagtion into Model Preformance for Identification of Human vs. AI text"
 subtitle: "A report to the Quantum Insight AI research team."
-author: "My Name"
+author: "Jenny, Lauren, Amalia"
 date: last-modified
 format:
   pdf:
