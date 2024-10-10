@@ -255,4 +255,3 @@ what does a high negative correlation establish? high positive? why do some grap
 I don't know how relevant this stuff is, but it is food for thought, so to speak.
 
 For these interpretations, context is important. If you are going to comment on the relationship of a text set, might as well also look at the data itself to see if there are any visual patterns? Is there anything to suggest that the model is more used to formal/informal language, etc...
-
