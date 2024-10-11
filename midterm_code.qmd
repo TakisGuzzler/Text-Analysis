@@ -1,6 +1,6 @@
 
 ---
-title: "An Investigagtion into Model Preformance for Identification of Human vs. AI text"
+title: "An Investigation into Model Performance for Identification of Human vs. AI text"
 subtitle: "A report to the Quantum Insight AI research team."
 author: "Jenny, Lauren, Amalia"
 date: last-modified
@@ -20,8 +20,7 @@ execute:
 Quantum Insights is aiming to distinguish human-authored text from AI-generated content. The team developed initial models that, on in-sample test data, correctly differentiated human-generated text from AI generated text with high accuracy ($81.78%-96.25%$). When this model was applied to out-of sample test data, however, the accuracy of the models drops significantly, with the lowest accuracy on the meta models being $52.25%$. Our team is interested in determining the contributing factors to this drop in performance and recommending potential next steps to solve this problem and improve the models' accuracy.
 
 # Approach
-
-The Team investigated this problem on three different avenues. We analyzed the models to determine what variables were of greatest importance when making classifications of texts. We then looked at the correlation matrices of biber features for each of the data sets for in and out of sample data to determine whether there were significantly different trends that might over specify classifications and hamper the models' generalizability. While investigating the correlation matrices, we also investigated the text files themselves, to see if there were any obvious trends or similarities among the human and machine samples in our data. We isolated and analyzed the prompts given to humans and LLMs for the out of sample data to determine whether prompt engineering could play a role in low performance. Finally, we analyzed the histograms of key features to further illuminate any underlying issues.
+We first read and pre-processed the data. Then, we used the varImp function to identify the most important features used for classification in the original models. Following this, we used correlation matrices to find connections between these features and across the different data samples. A comparison was made between human-written and AI-generated texts to check for correlated features.
 
 
 # Summary of Findings
@@ -31,7 +30,7 @@ The Team investigated this problem on three different avenues. We analyzed the m
 # Recommendations
 
 
-
+\newpage
 # Appendix
 
 ```{r, include=FALSE}
@@ -43,12 +42,51 @@ library(gt)
 library(syuzhet)
 library(dplyr)
 library(nFactors)
+library(randomForest)
+library(caret)
+library(kableExtra)
 source("../R/helper_functions.R")
 source("../R/keyness_functions.R")
 source("../R/mda_functions.R")
-
+load("models/rf_models.rda")
 ```
 
+
+```{r}
+biber_test <- read_tsv("arxiv_sample/arxiv_biber.tsv", 
+                       show_col_types = FALSE)
+
+model_names <- c("ChatGPT", "Meta LLaMA 70B Instruct", "Meta LLaMA 70B")
+selected_model_indices <- c(1, 3, 4)  
+var_importance_results <- list()
+
+var_importance_results <- list()
+for (i in seq_along(selected_model_indices)) {
+  rf <- rf_models[[selected_model_indices[i]]]
+  importance <- varImp(rf, scale = FALSE)
+  model_name <- model_names[i]
+  
+  var_importance_results[[model_name]] <- as.data.frame(importance$importance) %>%
+    rownames_to_column("Feature") %>%
+    arrange(desc(Overall)) %>%
+    slice(1:5) %>%
+    select(Feature, Overall)
+}
+```
+
+```{r}
+kable(var_importance_results["ChatGPT"], caption = "Top 5 Important Features for ChatGPT") %>% kable_styling(latex_options = "striped") %>%
+  row_spec(0, extra_css = "margin-bottom: 0px; padding-bottom: 0px;") %>% kable_styling(latex_options = "HOLD_position")
+```
+```{r}
+kable(var_importance_results["Meta LLaMA 70B Instruct"], caption = "Top 5 Important Features for Meta LLaMA 70B  Instruct") %>% kable_styling(position = "center", latex_options = "striped") %>%
+  row_spec(0, extra_css = "margin-bottom: 0px; padding-bottom: 0px;") %>% kable_styling(latex_options = "HOLD_position")
+
+
+kable(var_importance_results["Meta LLaMA 70B"], caption = "Top 5 Important Features for Meta LLaMA 70B") %>% kable_styling(position = "center", latex_options = "striped") %>%
+  row_spec(0, extra_css = "margin-bottom: 0px; padding-bottom: 0px;") %>% kable_styling(latex_options = "HOLD_position")
+
+```
 
 ```{r, include = FALSE}
 ####read in biber data ####
@@ -105,21 +143,7 @@ corrplot::corrplot(bc_cor, type = "upper", order = "hclust",
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 
-```{r, fig.cap="Correlation Matrix of In-Sample GPT 4o Mini", out.height = "30%"}
-bc_cor <- cor(gpt_4o_mini_biber[-1], method = "pearson")
-corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
-```
-```{r, fig.cap="Correlation Matrix of In-Sample Meta 8B", out.height = "30%"}
-bc_cor <- cor(meta_llama_3_8b_biber[-1], method = "pearson")
-corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
-```
-```{r, fig.cap="Correlation Matrix of In-Sample Meta 8B Instruct", out.height = "30%"}
-bc_cor <- cor(meta_llama_3_8b_Instruct_biber[-1], method = "pearson")
-corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
-```
+
 ```{r, fig.cap="Correlation Matrix of In-Sample Meta 70B", out.height = "30%"}
 bc_cor <- cor(meta_llama_3_70B_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
@@ -129,43 +153,4 @@ corrplot::corrplot(bc_cor, type = "upper", order = "hclust",
 bc_cor <- cor(meta_llama_3_70B_Instruct_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
-```
-
-```{r}
-load("models/rf_models.rda")
-library(caret)
-biber_test <- read_tsv("arxiv_sample/arxiv_biber.tsv", 
-                       show_col_types = FALSE)
-
-model_names <- c("ChatGPT", "Meta LLaMA 70B Instruct", "Meta LLaMA 70B")
-selected_model_indices <- c(1, 3, 4)  
-var_importance_results <- list()
-
-var_importance_results <- list()
-for (i in seq_along(selected_model_indices)) {
-  rf <- rf_models[[selected_model_indices[i]]]
-  importance <- varImp(rf, scale = FALSE)
-  model_name <- model_names[i]
-  
-  var_importance_results[[model_name]] <- as.data.frame(importance$importance) %>%
-    rownames_to_column("Feature") %>%
-    arrange(desc(Overall)) %>%
-    slice(1:5) %>%
-    select(Feature, Overall)
-}
-kable(var_importance_results["ChatGPT"], caption = "Top 5 Important Features for ChatGPT")
-kable(var_importance_results["Meta LLaMA 70B Instruct"], caption = "Top 5 Important Features for Meta LLaMA 70B  Instruct")
-kable(var_importance_results["Meta LLaMA 70B"], caption = "Top 5 Important Features for Meta LLaMA 70B")
-```
-
-```{r}
-screeplot_mda(human_chunk_biber)
-```
-
-
-```{r, include=FALSE}
-#read in text cunks for analysis
-
-text_chunk <- read_tsv("hape_sample/text_data/text_chunk_2.tsv")
-
 ```
