@@ -75,16 +75,14 @@ for (i in seq_along(selected_model_indices)) {
 ```
 
 ```{r}
-kable(var_importance_results["ChatGPT"], caption = "Top 5 Important Features for ChatGPT") %>% kable_styling(latex_options = "striped") %>%
-  row_spec(0, extra_css = "margin-bottom: 0px; padding-bottom: 0px;") %>% kable_styling(latex_options = "HOLD_position")
-```
-```{r}
-kable(var_importance_results["Meta LLaMA 70B Instruct"], caption = "Top 5 Important Features for Meta LLaMA 70B  Instruct") %>% kable_styling(position = "center", latex_options = "striped") %>%
-  row_spec(0, extra_css = "margin-bottom: 0px; padding-bottom: 0px;") %>% kable_styling(latex_options = "HOLD_position")
+kable(var_importance_results["ChatGPT"], caption = "Top 5 Important Features for ChatGPT") %>% kable_styling(latex_options = "striped", font_size = 10) %>%
+ kable_styling(latex_options = "HOLD_position")
+
+kable(var_importance_results["Meta LLaMA 70B Instruct"], caption = "Top 5 Important Features for Meta LLaMA 70B  Instruct") %>% kable_styling( latex_options = "striped", font_size = 10) %>%
+  kable_styling(latex_options = "HOLD_position")
 
 
-kable(var_importance_results["Meta LLaMA 70B"], caption = "Top 5 Important Features for Meta LLaMA 70B") %>% kable_styling(position = "center", latex_options = "striped") %>%
-  row_spec(0, extra_css = "margin-bottom: 0px; padding-bottom: 0px;") %>% kable_styling(latex_options = "HOLD_position")
+kable(var_importance_results["Meta LLaMA 70B"], caption = "Top 5 Important Features for Meta LLaMA 70B") %>% kable_styling(latex_options = "striped", font_size = 10)  %>% kable_styling(latex_options = "HOLD_position")
 
 ```
 
@@ -121,35 +119,35 @@ arxiv_biber_machine <- arxiv_biber %>%
 
 ```
 
-```{r, fig.cap="Correlation Matrix of Out-Sample Human", out.height = "30%"}
+```{r, fig.cap="Correlation Matrix of Out-Sample Human", out.height = "50%", out.width="50%"}
 bc_cor <- cor(arxiv_biber_human[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
-```{r, fig.cap="Correlation Matrix of Out-Sample Machine", out.height = "30%"}
+```{r, fig.cap="Correlation Matrix of Out-Sample Machine", out.height = "50%", out.width="50%"}
 bc_cor <- cor(arxiv_biber_machine[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 
-```{r, fig.cap="Correlation Matrix of In-Sample Human", out.height = "30%"}
+```{r, fig.cap="Correlation Matrix of In-Sample Human", out.height = "50%", out.width="50%"}
 bc_cor <- cor(human_chunk_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
-```{r, fig.cap="Correlation Matrix of In-Sample GPT 4o", out.height = "30%"}
+```{r, fig.cap="Correlation Matrix of In-Sample GPT 4o", out.height = "50%", out.width="50%"}
 bc_cor <- cor(gpt_4o_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 
 
-```{r, fig.cap="Correlation Matrix of In-Sample Meta 70B", out.height = "30%"}
+```{r, fig.cap="Correlation Matrix of In-Sample Meta 70B", out.height = "50%", out.width="50%"}
 bc_cor <- cor(meta_llama_3_70B_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
-```{r, fig.cap="Correlation Matrix of In-Sample Meta 70B Instruct", out.height = "30%"}
+```{r, fig.cap="Correlation Matrix of In-Sample Meta 70B Instruct", out.height = "50%", out.width="50%"}
 bc_cor <- cor(meta_llama_3_70B_Instruct_biber[-1], method = "pearson")
 corrplot::corrplot(bc_cor, type = "upper", order = "hclust", 
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
