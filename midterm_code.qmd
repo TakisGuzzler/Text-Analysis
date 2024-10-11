@@ -131,6 +131,32 @@ corrplot::corrplot(bc_cor, type = "upper", order = "hclust",
          tl.col = "black", tl.srt = 45, diag = F, tl.cex = 0.2)
 ```
 
+```{r}
+load("models/rf_models.rda")
+library(caret)
+biber_test <- read_tsv("arxiv_sample/arxiv_biber.tsv", 
+                       show_col_types = FALSE)
+
+model_names <- c("ChatGPT", "Meta LLaMA 70B Instruct", "Meta LLaMA 70B")
+selected_model_indices <- c(1, 3, 4)  
+var_importance_results <- list()
+
+var_importance_results <- list()
+for (i in seq_along(selected_model_indices)) {
+  rf <- rf_models[[selected_model_indices[i]]]
+  importance <- varImp(rf, scale = FALSE)
+  model_name <- model_names[i]
+  
+  var_importance_results[[model_name]] <- as.data.frame(importance$importance) %>%
+    rownames_to_column("Feature") %>%
+    arrange(desc(Overall)) %>%
+    slice(1:5) %>%
+    select(Feature, Overall)
+}
+kable(var_importance_results["ChatGPT"], caption = "Top 5 Important Features for ChatGPT")
+kable(var_importance_results["Meta LLaMA 70B Instruct"], caption = "Top 5 Important Features for Meta LLaMA 70B  Instruct")
+kable(var_importance_results["Meta LLaMA 70B"], caption = "Top 5 Important Features for Meta LLaMA 70B")
+```
 
 ```{r}
 screeplot_mda(human_chunk_biber)
