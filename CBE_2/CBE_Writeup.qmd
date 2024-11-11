@@ -1,0 +1,84 @@
+---
+title: "CBE 2"
+author: "Amalia, Lauren, and Jenny"
+date: last-modified
+format:
+  pdf:
+    number-sections: true
+    indent: true
+    toc: true
+    include-in-header:
+      text: |
+        \addtokomafont{disposition}{\rmfamily}
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+execute:
+  echo: false
+---
+
+\newpage
+
+# Introduction
+
+# Data
+
+```{r, include=FALSE}
+library(quanteda)
+library(quanteda.textstats)
+library(tidyverse)
+library(sentimentr)
+library(knitr)
+library(gt)
+library(syuzhet)
+library(tidytext)
+library(dplyr)
+source("../R/helper_functions.R")
+source("../R/keyness_functions.R")
+
+```
+
+```{r}
+txt_1939 <- readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt")
+txt_1942 <- readLines("Text_Files/the_masque_of_the_red_death_1842.txt")
+
+corpus_1939 <- txt_1939 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+corpus_1942 <- txt_1942 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+# short_stories_corpus <-   data.frame(doc_id = c("txt_1939", "txt_1942"), text = c(txt_1939, txt_1942)) %>%
+#   mutate(text = preprocess_text(text)) %>%
+#   corpus()
+```
+
+```{r}
+#general token frequency
+freq_1939 <- corpus_1939 %>%
+dfm() %>%
+textstat_frequency() %>%
+as_tibble() %>%
+dplyr::select(feature, frequency) %>%
+rename(Token = feature, AF = frequency) %>%
+mutate(RF = AF/sum(AF)*100)
+
+freq_1942 <- corpus_1942 %>%
+dfm() %>%
+textstat_frequency() %>%
+as_tibble() %>%
+dplyr::select(feature, frequency) %>%
+rename(Token = feature, AF = frequency) %>%
+mutate(RF = AF/sum(AF)*100)
+
+```
+# Methods
+
+# Results
+
+# Discussion
+
+# Acknowledgments {.appendix}
+
+# Works Cited
