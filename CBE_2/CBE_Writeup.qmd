@@ -38,21 +38,21 @@ source("../R/keyness_functions.R")
 ```
 
 ```{r}
-txt_1839 <- readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt")
-txt_1842 <- readLines("Text_Files/the_masque_of_the_red_death_1842.txt")
-txt_1941 <- readLines("Text_Files/a_painful_case_1914.txt")
-txt_1930 <- readLines("Text_Files/a_rose_for_emily_1930.txt")
-txt_1952 <- readLines("Text_Files/a_sound_of_thunder_1952.txt")
-txt_1968 <- readLines("Text_Files/a_very_old_man_with_enormous_wings_1968.txt")
-txt_1914 <- readLines("Text_Files/draculas_guest_1914.txt")
-txt_1927 <- readLines("Text_Files/hills_like_white_elephants_1927.txt")
-txt_1905 <- readLines("Text_Files/the_gift_of_the_magi_1905.txt")
-txt_1940 <- readLines("Text_Files/the_man_who_killed_the_world_1940.txt")
-txt_1915 <- readLines("Text_Files/the_metamorphasis_1915.txt")
-txt_1884 <- readLines("Text_Files/the_necklace_1884.txt")
-txt_1973 <- readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt")
-txt_1926 <- readLines("Text_Files/the_rocking-horse_winner_1926.txt")
-txt_1986 <- readLines("Text_Files/to_build_a_fire_1986.txt")
+txt_1839 <- paste(readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt"), collapse = " ")
+txt_1842 <- paste(readLines("Text_Files/the_masque_of_the_red_death_1842.txt"), collapse = " ")
+txt_1914b <- paste(readLines("Text_Files/a_painful_case_1914.txt"), collapse = " ")
+txt_1930 <- paste(readLines("Text_Files/a_rose_for_emily_1930.txt"), collapse = " ")
+txt_1952 <- paste(readLines("Text_Files/a_sound_of_thunder_1952.txt"), collapse = " ")
+txt_1968 <- paste(readLines("Text_Files/a_very_old_man_with_enormous_wings_1968.txt"), collapse = " ")
+txt_1914 <- paste(readLines("Text_Files/draculas_guest_1914.txt"), collapse = " ")
+txt_1927 <- paste(readLines("Text_Files/hills_like_white_elephants_1927.txt"), collapse = " ")
+txt_1905 <- paste(readLines("Text_Files/the_gift_of_the_magi_1905.txt"), collapse = " ")
+txt_1940 <- paste(readLines("Text_Files/the_man_who_killed_the_world_1940.txt"), collapse = " ")
+txt_1915 <- paste(readLines("Text_Files/the_metamorphasis_1915.txt"), collapse = " ")
+txt_1884 <- paste(readLines("Text_Files/the_necklace_1884.txt"), collapse = " ")
+txt_1973 <- paste(readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt"), collapse = " ")
+txt_1926 <- paste(readLines("Text_Files/the_rocking-horse_winner_1926.txt"), collapse = " ")
+txt_1986 <- paste(readLines("Text_Files/to_build_a_fire_1986.txt"), collapse = " ")
 
 
 tokens_1986 <- txt_1986 %>%
@@ -103,7 +103,7 @@ tokens_1839 <- txt_1839 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-tokens_1941 <- txt_1941 %>%
+tokens_1914b <- txt_1914b %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
@@ -114,10 +114,6 @@ tokens(what = "word", remove_punct = TRUE)
 tokens_1842 <- txt_1842 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
-
-# short_stories_corpus <-   data.frame(doc_id = c("txt_1839", "txt_1842"), text = c(txt_1839, txt_1842)) %>%
-#   mutate(text = preprocess_text(text)) %>%
-#   corpus()
 ```
 
 ```{r}
@@ -142,6 +138,26 @@ mutate(RF = AF/sum(AF)*100)
 # Methods
 
 # Results
+
+```{r}
+
+years_q <- c("1839", "1842", "1884", "1905", "1914", "1914b", "1915", "1926", "1927", "1930", "1940", "1952", "1968", "1973", "1986")
+years <- c(txt_1839, txt_1842, txt_1884, txt_1905, txt_1914, txt_1914b, txt_1915, txt_1926, txt_1927, txt_1930, txt_1940, txt_1952, txt_1968, txt_1973, txt_1986)
+
+short_stories_corpus <- data.frame(doc_id = years_q, text = years) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+short_stories_tokens <- short_stories_corpus %>%
+tokens(what = "word", remove_punct = TRUE)
+
+dfmat_inaug <- dfm_remove(dfm(short_stories_tokens), stopwords("en"))
+tstat_lexdiv <- textstat_lexdiv(dfmat_inaug)
+tail(tstat_lexdiv, 15)
+plot(tstat_lexdiv$TTR, type = "l", xaxt = "n", xlab = NULL, ylab = "TTR")
+grid()
+axis(1, at = seq_len(nrow(tstat_lexdiv)), labels = years_q)
+```
 
 # Discussion
 
