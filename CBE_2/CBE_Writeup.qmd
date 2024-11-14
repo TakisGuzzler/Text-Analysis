@@ -120,6 +120,21 @@ tokens(what = "word", remove_punct = TRUE)
 ```
 
 ```{r}
+#Tokens
+token_1839 <- tokens(corpus_1839)
+token_1842 <- tokens(corpus_1842)
+token_1884 <- tokens(corpus_1884)
+token_1905 <- tokens(corpus_1905)
+token_1914 <- tokens(corpus_1914)
+token_1915 <- tokens(corpus_1915)
+token_1914 <- tokens(corpus_1914)
+token_1952 <- tokens(corpus_1952)
+token_1968 <- tokens(corpus_1968)
+token_1973 <- tokens(corpus_1973)
+token_1986 <- tokens(corpus_1986)
+```
+
+```{r}
 #general token frequency
 freq_1939 <- corpus_1939 %>%
 dfm() %>%
