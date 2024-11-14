@@ -54,84 +54,70 @@ txt_1973 <- readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt")
 txt_1926 <- readLines("Text_Files/the_rocking-horse_winner_1926.txt")
 txt_1986 <- readLines("Text_Files/to_build_a_fire_1986.txt")
 
-corpus_1986 <- txt_1986 %>%
+
+tokens_1986 <- txt_1986 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1926 <- txt_1926 %>%
+tokens_1926 <- txt_1926 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1973 <- txt_1973 %>%
+tokens_1973 <- txt_1973 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1884 <- txt_1884 %>%
+tokens_1884 <- txt_1884 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1915 <- txt_1915 %>%
+tokens_1915 <- txt_1915 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1940 <- txt_1940 %>%
+tokens_1940 <- txt_1940 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1905 <- txt_1905 %>%
+tokens_1905 <- txt_1905 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1927 <- txt_1927 %>%
+tokens_1927 <- txt_1927 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1914 <- txt_1914 %>%
+tokens_1914 <- txt_1914 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1968 <- txt_1968 %>%
+tokens_1968 <- txt_1968 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1952 <- txt_1952 %>%
+tokens_1952 <- txt_1952 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1839 <- txt_1839 %>%
+tokens_1839 <- txt_1839 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1941 <- txt_1941 %>%
+tokens_1941 <- txt_1941 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1930 <- txt_1930 %>%
+tokens_1930 <- txt_1930 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-corpus_1842 <- txt_1842 %>%
+tokens_1842 <- txt_1842 %>%
 corpus() %>%
 tokens(what = "word", remove_punct = TRUE)
 
-# short_stories_corpus <-   data.frame(doc_id = c("txt_1939", "txt_1942"), text = c(txt_1939, txt_1942)) %>%
+# short_stories_corpus <-   data.frame(doc_id = c("txt_1839", "txt_1842"), text = c(txt_1839, txt_1842)) %>%
 #   mutate(text = preprocess_text(text)) %>%
 #   corpus()
-```
-
-```{r}
-#Tokens
-token_1839 <- tokens(corpus_1839)
-token_1842 <- tokens(corpus_1842)
-token_1884 <- tokens(corpus_1884)
-token_1905 <- tokens(corpus_1905)
-token_1914 <- tokens(corpus_1914)
-token_1915 <- tokens(corpus_1915)
-token_1914 <- tokens(corpus_1914)
-token_1952 <- tokens(corpus_1952)
-token_1968 <- tokens(corpus_1968)
-token_1973 <- tokens(corpus_1973)
-token_1986 <- tokens(corpus_1986)
 ```
 
 ```{r}
