@@ -38,8 +38,21 @@ source("../R/keyness_functions.R")
 ```
 
 ```{r}
-txt_1939 <- readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt")
-txt_1942 <- readLines("Text_Files/the_masque_of_the_red_death_1842.txt")
+txt_1839 <- readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt")
+txt_1842 <- readLines("Text_Files/the_masque_of_the_red_death_1842.txt")
+txt_1941 <- readLines("Text_Files/a_painful_case_1914.txt")
+txt_1930 <- readLines("Text_Files/a_rose_for_emily_1930.txt")
+txt_1952 <- readLines("Text_Files/a_sound_of_thunder_1952.txt")
+txt_1968 <- readLines("Text_Files/a_very_old_man_with_enormous_wings_1968.txt")
+txt_1914 <- readLines("Text_Files/draculas_guest_1914.txt")
+txt_1927 <- readLines("Text_Files/hills_like_white_elephants_1927.txt")
+txt_1905 <- readLines("Text_Files/the_gift_of_the_magi_1905.txt")
+txt_1940 <- readLines("Text_Files/the_man_who_killed_the_world_1940.txt")
+txt_1915 <- readLines("Text_Files/the_metamorphasis_1915.txt")
+txt_1884 <- readLines("Text_Files/the_necklace_1884.txt")
+txt_1973 <- readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt")
+txt_1926 <- readLines("Text_Files/the_rocking-horse_winner_1926.txt")
+txt_1986 <- readLines("Text_Files/to_build_a_fire_1986.txt")
 
 corpus_1939 <- txt_1939 %>%
 corpus() %>%
