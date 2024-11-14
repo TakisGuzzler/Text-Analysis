@@ -1,0 +1,196 @@
+---
+title: "CBE 2"
+author: "Amalia, Lauren, and Jenny"
+date: last-modified
+format:
+  pdf:
+    number-sections: true
+    indent: true
+    toc: true
+    include-in-header:
+      text: |
+        \addtokomafont{disposition}{\rmfamily}
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+execute:
+  echo: false
+---
+
+\newpage
+
+# Introduction
+
+# Data
+
+```{r, include=FALSE}
+library(quanteda)
+library(quanteda.textstats)
+library(tidyverse)
+library(sentimentr)
+library(knitr)
+library(gt)
+library(syuzhet)
+library(tidytext)
+library(dplyr)
+source("../R/helper_functions.R")
+source("../R/keyness_functions.R")
+
+```
+
+```{r}
+txt_1839 <- readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt")
+txt_1842 <- readLines("Text_Files/the_masque_of_the_red_death_1842.txt")
+txt_1914b <- readLines("Text_Files/a_painful_case_1914.txt")
+txt_1930 <- readLines("Text_Files/a_rose_for_emily_1930.txt")
+txt_1952 <- readLines("Text_Files/a_sound_of_thunder_1952.txt")
+txt_1968 <- readLines("Text_Files/a_very_old_man_with_enormous_wings_1968.txt")
+txt_1914 <- readLines("Text_Files/draculas_guest_1914.txt")
+txt_1927 <- readLines("Text_Files/hills_like_white_elephants_1927.txt")
+txt_1905 <- readLines("Text_Files/the_gift_of_the_magi_1905.txt")
+txt_1940 <- readLines("Text_Files/the_man_who_killed_the_world_1940.txt")
+txt_1915 <- readLines("Text_Files/the_metamorphasis_1915.txt")
+txt_1884 <- readLines("Text_Files/the_necklace_1884.txt")
+txt_1973 <- readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt")
+txt_1926 <- readLines("Text_Files/the_rocking-horse_winner_1926.txt")
+txt_1986 <- readLines("Text_Files/to_build_a_fire_1986.txt")
+
+
+tokens_1986 <- txt_1986 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1926 <- txt_1926 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1973 <- txt_1973 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1884 <- txt_1884 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1915 <- txt_1915 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1940 <- txt_1940 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1905 <- txt_1905 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1927 <- txt_1927 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1914 <- txt_1914 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1968 <- txt_1968 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1952 <- txt_1952 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1839 <- txt_1839 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1914b <- txt_1914b %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1930 <- txt_1930 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+tokens_1842 <- txt_1842 %>%
+corpus() %>%
+tokens(what = "word", remove_punct = TRUE)
+
+# short_stories_corpus <-   data.frame(doc_id = c("txt_1839", "txt_1842"), text = c(txt_1839, txt_1842)) %>%
+#   mutate(text = preprocess_text(text)) %>%
+#   corpus()
+```
+
+```{r}
+#general token frequency
+freq_1839 <- tokens_1839 %>%
+dfm() %>%
+textstat_frequency() %>%
+as_tibble() %>%
+dplyr::select(feature, frequency) %>%
+rename(Token = feature, AF = frequency) %>%
+mutate(RF = AF/sum(AF)*100)
+
+```
+
+
+```{r}
+calculate_asl <- function(tokens) {
+  tokens %>%
+    tokens(what = "sentence") %>%
+    lengths() %>%
+    mean()
+}
+
+calculate_awl <- function(tokens) {
+  tokens %>%
+    tokens(what = "word") %>%
+    as.list() %>%
+    unlist() %>%
+    nchar() %>%
+    mean()
+}
+
+tokens_list <- list(
+  tokens_1839 = tokens_1839, tokens_1986 = tokens_1986, tokens_1926 = tokens_1926, tokens_1973 = tokens_1973, tokens_1884 = tokens_1884, tokens_1915 = tokens_1915, tokens_1940 = tokens_1940, tokens_1905 = tokens_1905, tokens_1927 = tokens_1927, tokens_1914 = tokens_1914, tokens_1968 = tokens_1968, tokens_1952 = tokens_1952, tokens_1914b = tokens_1914b, tokens_1930 = tokens_1930, tokens_1842 = tokens_1842)
+
+results <- tibble(
+  Year = names(tokens_list),
+  ASL = sapply(tokens_list, calculate_asl),
+  AWL = sapply(tokens_list, calculate_awl)
+)
+
+results %>%
+  arrange(Year) %>%
+  print()
+
+```
+
+```{r}
+ggplot(results, aes(x = as.numeric(gsub("tokens_", "", Year)), y = ASL)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(color = "blue", size = 2) +
+  labs(title = "Average Sentence Length (ASL) Over Time",
+       x = "Year",
+       y = "Average Sentence Length (ASL)") +
+  theme_minimal()
+
+ggplot(results, aes(x = as.numeric(gsub("tokens_", "", Year)), y = AWL)) +
+  geom_line(color = "red", size = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(title = "Average Word Length (AWL) Over Time",
+       x = "Year",
+       y = "Average Word Length (AWL)") +
+  theme_minimal()
+```
+
+
+
+# Methods
+
+# Results
+
+# Discussion
+
+# Acknowledgments {.appendix}
+
+# Works Cited
