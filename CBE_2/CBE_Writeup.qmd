@@ -294,6 +294,8 @@ kable(lex_div_res, caption = "Average Lexical for 1850s and 1950s", colnames = c
 
 # Discussion
 
+A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
+
 # Acknowledgments {.appendix}
 
 # Works Cited
