@@ -135,6 +135,95 @@ results %>%
 
 ```
 
+```{r}
+all_text <- paste(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
+words <- unlist(strsplit(all_text, "\\s+"))
+total_word_count <- length(words)
+print(total_word_count)
+all_text1950s <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+words1950s <- unlist(strsplit(all_text1950s, "\\s+"))
+total_word_count1950s <- length(words1950s)
+```
+```{r}
+word_count_1839 <- length(unlist(strsplit(txt_1839, "\\s+")))
+word_count_1842 <- length(unlist(strsplit(txt_1842, "\\s+")))
+word_count_1852 <- length(unlist(strsplit(txt_1852, "\\s+")))
+word_count_1852b <- length(unlist(strsplit(txt_1852b, "\\s+")))
+word_count_1853 <- length(unlist(strsplit(txt_1853, "\\s+")))
+word_count_1853b <- length(unlist(strsplit(txt_1853b, "\\s+")))
+word_count_1858 <- length(unlist(strsplit(txt_1858, "\\s+")))
+word_count_1859 <- length(unlist(strsplit(txt_1859, "\\s+")))
+word_counts1850s <- c(word_count_1839, word_count_1842, word_count_1852, word_count_1852b, word_count_1853, word_count_1853b, word_count_1858, word_count_1859)
+average_word_count1850s <- mean(word_counts1850s)
+
+#average word count 1850s: 8718.625
+#average word count 1950s: 5379.615
+```
+
+```{r}
+word_count_1940 <- length(unlist(strsplit(txt_1940, "\\s+")))
+word_count_1942 <- length(unlist(strsplit(txt_1942, "\\s+")))
+word_count_1945 <- length(unlist(strsplit(txt_1945, "\\s+")))
+word_count_1948 <- length(unlist(strsplit(txt_1948, "\\s+")))
+word_count_1950 <- length(unlist(strsplit(txt_1950, "\\s+")))
+word_count_1950b <- length(unlist(strsplit(txt_1950b, "\\s+")))
+word_count_1950c <- length(unlist(strsplit(txt_1950c, "\\s+")))
+word_count_1951 <- length(unlist(strsplit(txt_1951, "\\s+")))
+word_count_1952 <- length(unlist(strsplit(txt_1952, "\\s+")))
+word_count_1952b <- length(unlist(strsplit(txt_1952b, "\\s+")))
+word_count_1954 <- length(unlist(strsplit(txt_1954, "\\s+")))
+word_count_1954b <- length(unlist(strsplit(txt_1954b, "\\s+")))
+word_count_1955 <- length(unlist(strsplit(txt_1955, "\\s+")))
+
+word_counts1950s <- c(word_count_1940, word_count_1942, word_count_1945, word_count_1948, word_count_1950, word_count_1950b, word_count_1950c, 
+                      word_count_1951, word_count_1952, word_count_1952b, 
+                      word_count_1954, word_count_1954b, word_count_1955)
+average_word_count1850s <- mean(word_counts1950s)
+```
+
+```{r}
+word_count_range1850s <- range(word_counts1850s)
+word_count_range1950s <- range(word_counts1950s)
+#1850s range 2396 17574
+#1950s range 762 17321
+```
+
+```{r}
+data <- data.frame(
+  Year = c(1839, 1842, 1852, 1852, 1853, 1853, 1858, 1859, 1940, 1942,
+           1945, 1948, 1950, 1950, 1950, 1951, 1952, 1952, 1954, 1954, 1955),
+  ASL = c(32.958716, 24.089109, 9.452273, 28.935211, 28.892704, 20.823613, 26.641892, 
+          31.801418, 12.713514, 12.625000, 21.357798, 14.830313, 9.020110, 19.818182, 
+          11.798595, 24.065574, 12.590164, 9.076132, 10.485348, 22.316456, 14.430213),
+  AWL = c(4.581013, 4.498561, 3.907167, 4.320058, 4.607382, 4.348931, 4.229521, 
+          4.417706, 4.331188, 4.116343, 3.994943, 3.942544, 4.325866, 3.859438, 
+          4.184095, 3.960326, 3.658392, 4.101703, 4.006108, 4.400313, 3.929711)
+)
+
+data_1800s <- subset(data, Year >= 1839 & Year <= 1859)
+data_1900s <- subset(data, Year >= 1940 & Year <= 1955)
+
+avg_1800s <- colMeans(data_1800s[, c("ASL", "AWL")])
+avg_1900s <- colMeans(data_1900s[, c("ASL", "AWL")])
+```
+
+
+```{r}
+data <- data.frame(
+  Decade = c("1850s", "1950s"),
+  Text_Count = c(8, 13),
+    Total_Word_Count = c(69749, 69935)
+,
+  Mean_Word_Count = c(8718.625, 5379.615),
+  Word_Range = c("2396 - 17574", "762 - 17321"),
+ Mean_Average_Sentence_Length = c(25.449367, 15.009800),
+  Mean_Average_Word_Length = c(4.363792, 4.062382)
+  )
+
+kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c', 
+      col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
+```
+
 # Methods
 
 # Results
