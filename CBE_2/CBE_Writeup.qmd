@@ -89,7 +89,6 @@ txt_1951 <- paste(readLines("Text Files/A_&_P_1951.txt"), collapse = " ")
 ```
 
 ```{r}
-
 years_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859", "1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
 
 years <- c(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859, txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
@@ -100,7 +99,57 @@ short_stories_corpus <- data.frame(doc_id = years_q, text = years) %>%
    corpus()
 
 dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
+```
 
+```{r}
+tokens_list <- tokens(short_stories_corpus)
+tokens_lexical <- tokens_select(tokens_list, pattern = stopwords("en"), selection = "remove")
+```
+
+```{r}
+calculate_asl <- function(text) {
+   unlist(str_split(text, pattern = "\\.\\s*")) %>%
+    sapply(function(x) str_count(x, "\\w+")) %>%
+    mean()
+}
+
+
+calculate_awl <- function(tokens) {
+  tokens %>%
+    tokens(what = "word") %>%
+    as.list() %>%
+    unlist() %>%
+    nchar() %>%
+    mean()
+}
+
+results <- tibble(
+  Year = years_q,
+  ASL = sapply(years, calculate_asl),
+  AWL = sapply(short_stories_corpus, calculate_awl)
+)
+
+results %>%
+  arrange(Year) %>%
+  print()
+
+```
+
+# Methods
+
+# Results
+
+```{r}
+# Calculate lexical density for each text
+total_words <- ntoken(tokens_list)
+lexical_words <- ntoken(tokens_lexical)
+lexical_density <- lexical_words / total_words
+lexical_density
+#0.481744825 is the average for 1850s
+#0.4976068 is the average for 1950s
+```
+
+```{r}
 lexdiv_pshort_stories <- textstat_lexdiv(dfm_short_stories, measure = c("CTTR", "U", "R", "C", "TTR", "K", "I", "Mass", "S"))
 
 ### TTR is the Type Token Ratio --> tells us lexical diversity
@@ -143,13 +192,7 @@ plot(lexdiv_pshort_stories$I, type = "l", xaxt = "n", xlab = NULL, ylab = "Yule'
 grid()
 axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
 
-### Maas is Maas' Indices --> tells us ????
 ```
-
-
-# Methods
-
-# Results
 
 # Discussion
 
