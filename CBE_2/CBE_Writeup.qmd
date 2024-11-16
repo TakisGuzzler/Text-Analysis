@@ -89,29 +89,6 @@ txt_1951 <- paste(readLines("Text Files/A_&_P_1951.txt"), collapse = " ")
 ```
 
 ```{r}
-#general token frequency
-freq_1939 <- corpus_1939 %>%
-dfm() %>%
-textstat_frequency() %>%
-as_tibble() %>%
-dplyr::select(feature, frequency) %>%
-rename(Token = feature, AF = frequency) %>%
-mutate(RF = AF/sum(AF)*100)
-
-freq_1942 <- corpus_1942 %>%
-dfm() %>%
-textstat_frequency() %>%
-as_tibble() %>%
-dplyr::select(feature, frequency) %>%
-rename(Token = feature, AF = frequency) %>%
-mutate(RF = AF/sum(AF)*100)
-
-```
-# Methods
-
-# Results
-
-```{r}
 
 years_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859", "1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
 
@@ -122,13 +99,57 @@ short_stories_corpus <- data.frame(doc_id = years_q, text = years) %>%
    mutate(text = preprocess_text(text)) %>%
    corpus()
 
-dfmat_inaug <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
-tstat_lexdiv <- textstat_lexdiv(dfmat_inaug)
-tail(tstat_lexdiv, 15)
-plot(tstat_lexdiv$TTR, type = "l", xaxt = "n", xlab = NULL, ylab = "TTR")
+dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
+
+lexdiv_pshort_stories <- textstat_lexdiv(dfm_short_stories, measure = c("CTTR", "U", "R", "C", "TTR", "K", "I", "Mass", "S"))
+
+### TTR is the Type Token Ratio --> tells us lexical diversity
+plot(lexdiv_pshort_stories$TTR, type = "l", xaxt = "n", xlab = NULL, ylab = "TTR")
 grid()
-axis(1, at = seq_len(nrow(tstat_lexdiv)), labels = years_q)
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### C is the Log Type Token Ratio --> tells us lexical diversity
+plot(lexdiv_pshort_stories$C, type = "l", xaxt = "n", xlab = NULL, ylab = "log(TTR)")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### R is the Root Type Token Ratio --> tells us lexical diversity
+plot(lexdiv_pshort_stories$R, type = "l", xaxt = "n", xlab = NULL, ylab = "Root TTR")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### CTTR is the Corrected Type Token Ratio --> tells us lexical diversity corrected for text length
+plot(lexdiv_pshort_stories$CTTR, type = "l", xaxt = "n", xlab = NULL, ylab = "Corrected TTR")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### U is the Uber Index --> this is another mesure of lexical richness and diversity which is less sensitive to text length
+plot(lexdiv_pshort_stories$U, type = "l", xaxt = "n", xlab = NULL, ylab = "Uber Index")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### S is the Summer's Index --> similar to Uber's Index
+plot(lexdiv_pshort_stories$S, type = "l", xaxt = "n", xlab = NULL, ylab = "Summer Index")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### K is the Yule's K --> quantifies how varied vocab is within a given text and specifically captures the distribution of word frequencies; more stable, for larger texts
+plot(lexdiv_pshort_stories$K, type = "l", xaxt = "n", xlab = NULL, ylab = "Yule's K")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### I is Yule's I --> quantifies the uneveness in the frequency distribution of words in a text; focusses on the distribution of unique words' frequencies
+plot(lexdiv_pshort_stories$I, type = "l", xaxt = "n", xlab = NULL, ylab = "Yule's I")
+grid()
+axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
+
+### Maas is Maas' Indices --> tells us ????
 ```
+
+
+# Methods
+
+# Results
 
 # Discussion
 
