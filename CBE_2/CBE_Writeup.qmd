@@ -288,3 +288,4 @@ axis(1, at = seq_len(nrow(lexdiv_pshort_stories)), labels = years_q)
 # Acknowledgments {.appendix}
 
 # Works Cited
+1. Brown, D. W. (n.d.). textstat documentation. https://browndw.github.io/textstat_docs/
