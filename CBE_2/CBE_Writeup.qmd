@@ -38,82 +38,54 @@ source("../R/keyness_functions.R")
 ```
 
 ```{r}
-txt_1839 <- paste(readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt"), collapse = " ")
-txt_1842 <- paste(readLines("Text_Files/the_masque_of_the_red_death_1842.txt"), collapse = " ")
-txt_1914b <- paste(readLines("Text_Files/a_painful_case_1914.txt"), collapse = " ")
-txt_1930 <- paste(readLines("Text_Files/a_rose_for_emily_1930.txt"), collapse = " ")
-txt_1952 <- paste(readLines("Text_Files/a_sound_of_thunder_1952.txt"), collapse = " ")
-txt_1968 <- paste(readLines("Text_Files/a_very_old_man_with_enormous_wings_1968.txt"), collapse = " ")
-txt_1914 <- paste(readLines("Text_Files/draculas_guest_1914.txt"), collapse = " ")
-txt_1927 <- paste(readLines("Text_Files/hills_like_white_elephants_1927.txt"), collapse = " ")
-txt_1905 <- paste(readLines("Text_Files/the_gift_of_the_magi_1905.txt"), collapse = " ")
-txt_1940 <- paste(readLines("Text_Files/the_man_who_killed_the_world_1940.txt"), collapse = " ")
-txt_1915 <- paste(readLines("Text_Files/the_metamorphasis_1915.txt"), collapse = " ")
-txt_1884 <- paste(readLines("Text_Files/the_necklace_1884.txt"), collapse = " ")
-txt_1973 <- paste(readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt"), collapse = " ")
-txt_1926 <- paste(readLines("Text_Files/the_rocking-horse_winner_1926.txt"), collapse = " ")
-txt_1986 <- paste(readLines("Text_Files/to_build_a_fire_1986.txt"), collapse = " ")
+
+txt_1945 <- paste(readLines("Text Files/the_other_side_of_the_hedge_1945.txt"), collapse = " ")
+
+txt_1852 <- paste(readLines("Text Files/the_old_nurses_story_1852.txt"), collapse = " ")
+
+txt_1952 <- paste(readLines("Text Files/the_old_man_at_the_bridge_1952.txt"), collapse = " ")
+
+txt_1950 <- paste(readLines("Text Files/the_mindworm_1950.txt"), collapse = " ")
+
+txt_1842 <- paste(readLines("Text Files/the_masque_of_the_red_death_1842.txt"), collapse = " ")
+
+txt_1940 <- paste(readLines("Text Files/the_man_who_killed_the_world_1940.txt"), collapse = " ")
+
+txt_1859 <- paste(readLines("Text Files/the_lifted_veil_1859.txt"), collapse = " ")
+
+txt_1839 <- paste(readLines("Text Files/the_fall_of_the_house_of_usher_1839.txt"), collapse = " ")
+
+txt_1852 <- paste(readLines("Text Files/the_district_doctor_1852.txt"), collapse = " ")
+
+txt_1954 <- paste(readLines("Text Files/the_destructors_1954.txt"), collapse = " ")
+
+txt_1942 <- paste(readLines("Text Files/the_catbird_seat_1942.txt"), collapse = " ")
+
+txt_1858 <- paste(readLines("Text Files/psyche's_art_1858.txt"), collapse = " ")
 
 
-tokens_1986 <- txt_1986 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1954b <- paste(readLines("Text Files/master_zacharius_1954.txt"), collapse = " ")
 
-tokens_1926 <- txt_1926 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1955 <- paste(readLines("Text Files/good_country_people_1955.txt"), collapse = " ")
 
-tokens_1973 <- txt_1973 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
 
-tokens_1884 <- txt_1884 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1853 <- paste(readLines("Text Files/gods_in_exile_1853.txt"), collapse = " ")
 
-tokens_1915 <- txt_1915 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
 
-tokens_1940 <- txt_1940 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1950b <- paste(readLines("Text Files/first_confession_1950.txt"), collapse = " ")
 
-tokens_1905 <- txt_1905 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1950c <- paste(readLines("Text Files/coming_attraction_1950.txt"), collapse = " ")
 
-tokens_1927 <- txt_1927 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1853b <- paste(readLines("Text Files/bartelby_the_scrivener_1853.txt"), collapse = " ")
 
-tokens_1914 <- txt_1914 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1852b <- paste(readLines("Text Files/a_terribly_strange_bed_1852.txt"), collapse = " ")
 
-tokens_1968 <- txt_1968 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1952b <- paste(readLines("Text Files/a_sound_of_thunder_1952.txt"), collapse = " ")
 
-tokens_1952 <- txt_1952 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1948 <- paste(readLines("Text Files/a_perfect_day_for_bananafish_1948.txt"), collapse = " ")
 
-tokens_1839 <- txt_1839 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1951 <- paste(readLines("Text Files/A_&_P_1951.txt"), collapse = " ")
 
-tokens_1914b <- txt_1914b %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
-
-tokens_1930 <- txt_1930 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
-
-tokens_1842 <- txt_1842 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
 ```
 
 ```{r}
@@ -141,17 +113,16 @@ mutate(RF = AF/sum(AF)*100)
 
 ```{r}
 
-years_q <- c("1839", "1842", "1884", "1905", "1914", "1914b", "1915", "1926", "1927", "1930", "1940", "1952", "1968", "1973", "1986")
-years <- c(txt_1839, txt_1842, txt_1884, txt_1905, txt_1914, txt_1914b, txt_1915, txt_1926, txt_1927, txt_1930, txt_1940, txt_1952, txt_1968, txt_1973, txt_1986)
+years_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859", "1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
+
+years <- c(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859, txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+
 
 short_stories_corpus <- data.frame(doc_id = years_q, text = years) %>%
    mutate(text = preprocess_text(text)) %>%
    corpus()
 
-short_stories_tokens <- short_stories_corpus %>%
-tokens(what = "word", remove_punct = TRUE)
-
-dfmat_inaug <- dfm_remove(dfm(short_stories_tokens), stopwords("en"))
+dfmat_inaug <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
 tstat_lexdiv <- textstat_lexdiv(dfmat_inaug)
 tail(tstat_lexdiv, 15)
 plot(tstat_lexdiv$TTR, type = "l", xaxt = "n", xlab = NULL, ylab = "TTR")
