@@ -20,6 +20,8 @@ execute:
 
 # Introduction
 
+This project explores the differences in writing styles between the 1850s and the 1950s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
+
 # Data
 
 ```{r, include=FALSE}
