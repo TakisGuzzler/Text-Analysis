@@ -253,7 +253,14 @@ kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c',
 total_words <- ntoken(tokens_list)
 lexical_words <- ntoken(tokens_lexical)
 lexical_density <- lexical_words / total_words
-lexical_density
+
+lexical_density_data <- data.frame(
+  Decade = c("1850s", "1950s"),
+  Lexical_Density_Avg = c(0.481744825, 0.4976068)
+)
+
+kable(lexical_density_data, caption = "Average Lexical Density for 1850s and 1950s")
+
 #0.481744825 is the average for 1850s
 #0.4976068 is the average for 1950s
 ```
@@ -273,7 +280,7 @@ lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "
 
 
 lex_div_res <- data.frame(
-  Decades = c("1850s", "1950s"),
+  Decade = c("1850s", "1950s"),
   CTTR = c( round(mean(lexdiv_ss_18$CTTR), 3),
                    round(mean(lexdiv_ss_19$CTTR), 3)
   ),
@@ -288,7 +295,7 @@ lex_div_res <- data.frame(
   )
 )
 
-kable(lex_div_res, caption = "Average Lexical for 1850s and 1950s", colnames = c("Decades", "Uber's Index", "Summer's Index", "Yule's Index"))
+kable(lex_div_res, caption = "Average Lexical for 1850s and 1950s", colnames = c("Decade", "Uber's Index", "Summer's Index", "Yule's Index"))
 
 ```
 
