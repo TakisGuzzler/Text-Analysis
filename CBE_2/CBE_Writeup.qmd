@@ -256,7 +256,7 @@ lexical_density <- lexical_words / total_words
 
 lexical_density_data <- data.frame(
   Decade = c("1850s", "1950s"),
-  Lexical_Density_Avg = c(0.481744825, 0.4976068)
+  Lexical_Density = c(0.481744825, 0.4976068)
 )
 
 kable(lexical_density_data, caption = "Average Lexical Density for 1850s and 1950s")
