@@ -143,15 +143,15 @@ calculate_awl <- function(tokens) {
     mean()
 }
 
-results <- tibble(
-  Year = years_q,
-  ASL = sapply(years, calculate_asl),
-  AWL = sapply(short_stories_corpus, calculate_awl)
-)
-
-results %>%
-  arrange(Year) %>%
-  print()
+# results <- tibble(
+#   Year = years_q,
+#   ASL = sapply(years, calculate_asl),
+#   AWL = sapply(short_stories_corpus, calculate_awl)
+# )
+# 
+# results %>%
+#   arrange(Year) %>%
+#   print()
 
 ```
 
@@ -159,11 +159,13 @@ results %>%
 all_text <- paste(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
 words <- unlist(strsplit(all_text, "\\s+"))
 total_word_count <- length(words)
-print(total_word_count)
+
 all_text1950s <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
 words1950s <- unlist(strsplit(all_text1950s, "\\s+"))
 total_word_count1950s <- length(words1950s)
+
 ```
+
 ```{r}
 word_count_1839 <- length(unlist(strsplit(txt_1839, "\\s+")))
 word_count_1842 <- length(unlist(strsplit(txt_1842, "\\s+")))
