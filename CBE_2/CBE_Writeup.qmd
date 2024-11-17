@@ -250,7 +250,7 @@ For our initial analysis, we wanted to determine the complexity of the texts fro
 
 First we examined the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. 
 
-We then examined lexical diversity using two different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, Summer's Index, and Yule's K. We used three different measurements to provide confirmation on the diversity analysis. These three measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is sensitive to frequency distributions. A low score for all measurements typically indicates lower diversity when compared to a higher score. Yule's K provides additional information concerning the distribution of word frequencies, with a lower value typically indicating an even distribution.
+We then examined lexical diversity using two different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, Summer's Index, and Yule's K. We used three different measurements to provide confirmation on the diversity analysis. These three measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is sensitive to frequency distributions. A high score for Summer's Index typically indicates higher lexical diversity. A low score for CTTR, Uber's Index, and Yule's K typically indicates lower diversity when compared to a higher score. Yule's K provides additional information concerning the distribution of word frequencies, with a lower value typically indicating an even distribution.
 
 # Results
 
@@ -313,7 +313,7 @@ kable(lex_div_res, caption = "Average Lexical Diversity for 1850s and 1950s")
 
 ```
 
-For the CTTR, Uber's Index, and Summer's Index, the average lexical diversity of the texts from the 1850s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. Conversely, the Yule's K value for the 1850s is 193.724 where the Yule's K value for the 1950s is 98.966. This suggests that the texts from the 1950s have a more uniform distribution of word frequencies and thus less lexical diversity.
+For the CTTR and Uber's Index, the average lexical diversity of the texts from the 1850s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the 1850s is 193.724 where the Yule's K value for the 1950s is 98.966. This suggests that the texts from the 1950s have a more uniform distribution of word frequencies and thus less lexical diversity. The lexical diversity reported by Summer's Index also agrees with the trend, though the measurements are within 0.01 of each other.
 
 # Discussion
 
