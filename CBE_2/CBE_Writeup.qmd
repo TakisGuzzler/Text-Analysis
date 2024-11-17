@@ -227,6 +227,45 @@ avg_1800s <- colMeans(data_1800s[, c("ASL", "AWL")])
 avg_1900s <- colMeans(data_1900s[, c("ASL", "AWL")])
 ```
 
+```{r}
+par(mfrow = c(1, 2)) 
+
+# Histogram for the 1800s
+hist(data_1800s$ASL, 
+     main = "Average Sentence Length (1850s)", 
+     xlab = "Average Sentence Length", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 5)
+
+# Histogram for the 1900s
+hist(data_1900s$ASL, 
+     main = "Average Sentence Length (1950s)", 
+     xlab = "Average Sentence Length", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 5)
+```
+
+```{r}
+par(mfrow = c(1, 2)) 
+
+# Histogram for the 1800s
+hist(data_1800s$AWL, 
+     main = "Average Word Length (1850s)", 
+     xlab = "Average Word Length", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 5)
+
+# Histogram for the 1900s
+hist(data_1900s$AWL, 
+     main = "Average Word Length (1950s)", 
+     xlab = "Average Word Length", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 5)
+```
 
 ```{r}
 data <- data.frame(
