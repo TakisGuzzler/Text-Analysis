@@ -14,6 +14,7 @@ format:
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 execute:
   echo: false
+bibliography: citation.bib
 ---
 
 \newpage
@@ -288,10 +289,11 @@ hist(data_1900s$AWL,
      border = "black", 
      breaks = 5, 
      cex.main = 0.90)
+
 ```
 # Methods
 
-For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (CITATION HERE FOR ARTICLE). 
+For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262). 
 
 First we examined the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. 
 
@@ -404,7 +406,6 @@ A future analysis could include more time periods and a larger variety of texts 
 
 # Acknowledgments {.appendix}
 
-ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus.
+ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utalized the texstat page for developing ideas and creating tables (@WinNT).
 
-# Works Cited
-1. Brown, D. W. (n.d.). textstat documentation. https://browndw.github.io/textstat_docs/
+# Works Cited 
