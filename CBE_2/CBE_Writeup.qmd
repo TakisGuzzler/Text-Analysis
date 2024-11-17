@@ -404,5 +404,7 @@ A future analysis could include more time periods and a larger variety of texts 
 
 # Acknowledgments {.appendix}
 
+ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus.
+
 # Works Cited
 1. Brown, D. W. (n.d.). textstat documentation. https://browndw.github.io/textstat_docs/
