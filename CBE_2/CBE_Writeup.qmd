@@ -360,6 +360,42 @@ kable(lex_div_res, caption = "Average Lexical Diversity for 1850s and 1950s")
 
 For the CTTR and Uber's Index, the average lexical diversity of the texts from the 1850s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the 1850s is 193.724 where the Yule's K value for the 1950s is 98.966. This suggests that the texts from the 1950s have a more uniform distribution of word frequencies and thus less lexical diversity. The lexical diversity reported by Summer's Index also agrees with the trend, though the measurements are within 0.01 of each other.
 
+```{r}
+par(mfrow = c(2, 2))  # Layout for 2x2 histograms
+
+# Histogram for CTTR in 1800s
+hist(lexdiv_ss_18$CTTR, 
+     main = "CTTR: 1800s", 
+     xlab = "CTTR", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 10)  
+
+# Histogram for CTTR in 1900s
+hist(lexdiv_ss_19$CTTR, 
+     main = "CTTR: 1900s", 
+     xlab = "CTTR", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 10)  
+
+# Histogram for Uber's Index in 1800s
+hist(lexdiv_ss_18$U, 
+     main = "Uber's Index: 1800s", 
+     xlab = "Uber's Index", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 10)  
+
+# Histogram for Uber's Index in 1900s
+hist(lexdiv_ss_19$U, 
+     main = "Uber's Index: 1900s", 
+     xlab = "Uber's Index", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 10)  
+```
+
 # Discussion
 
 A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
