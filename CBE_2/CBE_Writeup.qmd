@@ -246,6 +246,8 @@ kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c',
 
 # Methods
 
+First we examine the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words. such as articles, conjunctions, prepositions, etc, are more for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. 
+
 # Results
 
 ```{r}
@@ -265,7 +267,7 @@ kable(lexical_density_data, caption = "Average Lexical Density for 1850s and 195
 #0.4976068 is the average for 1950s
 ```
 
-The average lexical density for the texts from the 1850s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the 1950s texts. Content words are words that carry meaning in a sentence, while function words are more for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. However, given the minimal difference between the two decades, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+The average lexical density for the texts from the 1850s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the 1950s texts. However, given the minimal difference between the two decades, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
 
 ```{r}
 lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "S", "I", "Mass"))
