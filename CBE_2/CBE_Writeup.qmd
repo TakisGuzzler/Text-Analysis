@@ -276,9 +276,9 @@ kable(lexical_density_data, caption = "Average Lexical Density for 1850s and 195
 The average lexical density for the texts from the 1850s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the 1950s texts. However, given the minimal difference between the two decades, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
 
 ```{r}
-lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "S", "I", "Mass"))
+lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "S", "K", "Mass"))
 
-lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "S", "I", "Mass"))
+lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "S", "K", "Mass"))
 
 ### CTTR is the Corrected Type Token Ratio --> tells us lexical diversity corrected for text length
 
@@ -286,7 +286,7 @@ lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "
 
 ### S is the Summers Index -> measures the lexical richness of vocabulary in a text
 
-### I is Yule's I --> quantifies the unevenness in the frequency distribution of words in a text; focuses on the distribution of unique words' frequencies
+### K is Yule's K --> quantifies the unevenness in the frequency distribution of words in a text; focuses on the distribution of unique words' frequencies
 
 
 lex_div_res <- data.frame(
@@ -300,12 +300,12 @@ lex_div_res <- data.frame(
   Summer_Index = c(round(mean(lexdiv_ss_18$S), 3),
                 round(mean(lexdiv_ss_19$S), 3)
   ),
-  Yule_index = c(round(mean(lexdiv_ss_18$I), 3),
-                round(mean(lexdiv_ss_19$I), 3)
+  Yule_index = c(round(mean(lexdiv_ss_18$K), 3),
+                round(mean(lexdiv_ss_19$K), 3)
   )
 )
 
-colnames(lex_div_res) <- c("Decade", "CTTR", "Uber's Index","Summer's Index", "Yule's Index")
+colnames(lex_div_res) <- c("Decade", "CTTR", "Uber's Index","Summer's Index", "Yule's K")
 
 
 kable(lex_div_res, caption = "Average Lexical Diversity for 1850s and 1950s")
