@@ -253,6 +253,22 @@ hist(data_1900s$ASL,
 ```
 
 ```{r}
+data <- data.frame(
+  Decade = c("1850s", "1950s"),
+  Text_Count = c(8, 13),
+    Total_Word_Count = c(69749, 69935)
+,
+  Mean_Word_Count = c(8718.625, 5379.615),
+  Word_Range = c("2396 - 17574", "762 - 17321"),
+ Mean_Average_Sentence_Length = c(25.449367, 15.009800),
+  Mean_Average_Word_Length = c(4.363792, 4.062382)
+  )
+
+kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c', 
+      col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
+```
+
+```{r}
 par(mfrow = c(1, 2)) 
 
 # Histogram for the 1800s
@@ -273,24 +289,6 @@ hist(data_1900s$AWL,
      breaks = 5, 
      cex.main = 0.90)
 ```
-
-
-```{r}
-data <- data.frame(
-  Decade = c("1850s", "1950s"),
-  Text_Count = c(8, 13),
-    Total_Word_Count = c(69749, 69935)
-,
-  Mean_Word_Count = c(8718.625, 5379.615),
-  Word_Range = c("2396 - 17574", "762 - 17321"),
- Mean_Average_Sentence_Length = c(25.449367, 15.009800),
-  Mean_Average_Word_Length = c(4.363792, 4.062382)
-  )
-
-kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c', 
-      col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
-```
-
 # Methods
 
 For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (CITATION HERE FOR ARTICLE). 
@@ -383,20 +381,22 @@ hist(lexdiv_ss_19$CTTR,
 
 # Histogram for Uber's Index in 1800s
 hist(lexdiv_ss_18$U, 
-     main = "Uber's Index: 1800s", 
+     main = "Uber's Index: 1850s", 
      xlab = "Uber's Index", 
      col = "lightgreen", 
      border = "black", 
      breaks = 10)  
 
-# Histogram for Uber's Index in 1900s
+# Histogram for Uber's Index in 1950s
 hist(lexdiv_ss_19$U, 
-     main = "Uber's Index: 1900s", 
+     main = "Uber's Index: 1950s", 
      xlab = "Uber's Index", 
      col = "lightgreen", 
      border = "black", 
      breaks = 10)  
 ```
+
+For the histograms, we can see that, within the time periods, there is a spread of CTTR and Uber's Index values. There is no noticeable curve to the histograms, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
 
 # Discussion
 
