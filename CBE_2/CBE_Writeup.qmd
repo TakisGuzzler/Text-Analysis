@@ -232,19 +232,22 @@ par(mfrow = c(1, 2))
 
 # Histogram for the 1800s
 hist(data_1800s$ASL, 
-     main = "Average Sentence Length (1850s)", 
+     main = "Avg. Sentence Length: 1850s", 
      xlab = "Average Sentence Length", 
      col = "lightblue", 
      border = "black", 
-     breaks = 5)
+     breaks = 5, 
+     cex.main = 0.90)  
 
 # Histogram for the 1900s
 hist(data_1900s$ASL, 
-     main = "Average Sentence Length (1950s)", 
+     main = "Avg. Sentence Length: 1950s", 
      xlab = "Average Sentence Length", 
      col = "lightgreen", 
      border = "black", 
-     breaks = 5)
+     breaks = 5, 
+     cex.main = 0.90)  # Adjust title font size
+
 ```
 
 ```{r}
@@ -252,20 +255,23 @@ par(mfrow = c(1, 2))
 
 # Histogram for the 1800s
 hist(data_1800s$AWL, 
-     main = "Average Word Length (1850s)", 
+     main = "Avg. Word Length: 1850s", 
      xlab = "Average Word Length", 
      col = "lightblue", 
      border = "black", 
-     breaks = 5)
+     breaks = 5, 
+     cex.main = 0.90)
 
 # Histogram for the 1900s
 hist(data_1900s$AWL, 
-     main = "Average Word Length (1950s)", 
+     main = "Avg. Word Length: 1950s", 
      xlab = "Average Word Length", 
      col = "lightgreen", 
      border = "black", 
-     breaks = 5)
+     breaks = 5, 
+     cex.main = 0.90)
 ```
+
 
 ```{r}
 data <- data.frame(
