@@ -21,7 +21,7 @@ execute:
 
 # Introduction
 
-This project explores the differences in writing styles between the 1850s and the 1950s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
+This project explores the differences in writing styles between the 1850s and the 1950s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
 
 # Data
 
@@ -248,13 +248,16 @@ kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c',
 
 # Methods
 
-For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262). 
+For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262).
 
-First we examined the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. 
+First we examined the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
 
 We then examined lexical diversity using two different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, Summer's Index, and Yule's K. We used three different measurements to provide confirmation on the diversity analysis. These three measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is sensitive to frequency distributions. A high score for Summer's Index typically indicates higher lexical diversity. A low score for CTTR, Uber's Index, and Yule's K typically indicates lower diversity when compared to a higher score. Yule's K provides additional information concerning the distribution of word frequencies, with a lower value typically indicating an even distribution.
 
 # Results
+
+## Average Sentence and Word Length
+
 ```{r, fig.cap="Distributions of Average Sentence Length", out.height = "35%"}
 par(mfrow = c(1, 2)) 
 
@@ -301,10 +304,11 @@ hist(data_1900s$AWL,
 
 ```
 
-
 To begin our analysis, we looked at the distribution of average sentence length in texts from the 1850s and 1950s. The histograms in Figure 1 reveal that most texts from the 1850s have an average sentence length between 20 and 35 words, indicating a potential preference for longer sentences during this period. In contrast, the distribution of average sentence lengths in the 1950s is more even, with most of the texts falling between 0 and 15 words, reflecting a possible shift towards shorter sentences.
 
-We also examined the distribution of average word lengths. As shown in the histograms in Figure 2, the distributions for the 1850s and 1950s are similar. In both decades, the average word length ranges from 3.6 to 4.8 characters per word. 
+We also examined the distribution of average word lengths. As shown in the histograms in Figure 2, the distributions for the 1850s and 1950s are similar. In both decades, the average word length ranges from 3.6 to 4.8 characters per word.
+
+## Lexical Density
 
 ```{r}
 # Calculate lexical density for each text
@@ -326,6 +330,8 @@ kable(lexical_density_data, caption = "Average Lexical Density for 1850s and 195
 ```
 
 From Table 1, we can see that the average lexical density for the texts from the 1850s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the 1950s texts. However, given the minimal difference between the two decades, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+
+## Lexical Diversity
 
 ```{r}
 lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "S", "K", "Mass"))
@@ -407,17 +413,19 @@ For the histograms, we can see that, within the time periods, there is a spread 
 
 # Discussion
 
-This exploration employed five measures for lexical complexity - four measures of lexical diversity and one measure of lexical density. Additionally, the study explored the histograms generated from mean sentence length for each of the texts. This was done to answer the primary research question concerning the change in writing styles and reader enjoyment between the 1800s and 1900s. From our exploration, we determined that the lexical density showed a small increase over time where the lexical complexity showed a decrease over time. The histograms also showed that sentences from the 1850s were on average longer than sentences from the 1950s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially lending to the preference among young adults for short stories from later time periods. [include results discussions]
+This exploration employed five measures for lexical complexity - four measures of lexical diversity and one measure of lexical density. Additionally, the study explored the histograms generated from mean sentence length for each of the texts. This was done to answer the primary research question concerning the change in writing styles and reader enjoyment between the 1800s and 1900s. From our exploration, we determined that the lexical density showed a small increase over time where the lexical complexity showed a decrease over time. The histograms also showed that sentences from the 1850s were on average longer than sentences from the 1950s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially lending to the preference among young adults for short stories from later time periods. 
 
-Some limitations to consider include the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of decades beyond the 1850s and 1950s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled. We selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends.
+However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of decades beyond the 1850s and 1950s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
 
 A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
 
 # Acknowledgments {.appendix}
 
-ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utalized the texstat page for developing ideas and creating tables (@WinNT).
+ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utilized the texstat page for developing ideas and creating tables (@WinNT).
 
-# Works Cited 
+# Works Cited
+
+
 
 
 
