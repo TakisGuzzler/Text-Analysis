@@ -14,14 +14,37 @@ format:
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 execute:
   echo: false
-  bibliography: citation.bib
+bibliography: citation.bib
+nocite: |
+  @the_other_side_of_the_hedge_1945,
+  @the_old_nurses_story_1852,
+  @the_old_man_at_the_bridge_1952,
+  @the_mindworm_1950,
+  @the_masque_of_the_red_death_1842,
+  @the_man_who_killed_the_world_1940,
+  @the_lifted_veil_1859,
+  @the_fall_of_the_house_of_usher_1839,
+  @the_district_doctor_1852,
+  @the_destructors_1954,
+  @the_catbird_seat_1942,
+  @psyche's_art_1858,
+  @master_zacharius_1954,
+  @good_country_people_1955,
+  @gods_in_exile_1853,
+  @first_confession_1950,
+  @coming_attraction_1950,
+  @bartelby_the_scrivener_1853,
+  @a_terribly_strange_bed_1852,
+  @a_sound_of_thunder_1952,
+  @a_perfect_day_for_bananafish,
+  @A_&_P_1951.txt
 ---
 
 \newpage
 
 # Introduction
 
-This project explores the differences in writing styles between the 1850s and the 1950s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
+This project explores the differences in writing styles between the 1850s and the 1950s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, word length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
 
 # Data
 
@@ -250,9 +273,11 @@ kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c',
 
 For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262).
 
-First we examined the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
+First we examined the average sentence and word lengths of each of the texts from the 1850s and the 1950s. We did so by analyzing histograms for each period, which offered a general overview of the two comparable periods.
 
-We then examined lexical diversity using two different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, Summer's Index, and Yule's K. We used three different measurements to provide confirmation on the diversity analysis. These three measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is sensitive to frequency distributions. A high score for Summer's Index typically indicates higher lexical diversity. A low score for CTTR, Uber's Index, and Yule's K typically indicates lower diversity when compared to a higher score. Yule's K provides additional information concerning the distribution of word frequencies, with a lower value typically indicating an even distribution.
+We then examined the lexical density of texts from the 1850s and 1950s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
+
+We then examined lexical diversity using two different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, Summer's Index, and Yule's K. We used three different measurements to provide confirmation on the diversity analysis. These three measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is sensitive to frequency distributions. A high score for Summer's Index typically indicates higher lexical diversity. A low score for CTTR, Uber's Index, and Yule's K typically indicates lower diversity when compared to a higher score. Yule's K provides additional information concerning the distribution of word frequencies, with a lower value typically indicating an even distribution. For certain measurements, we further expanded our analysis by viewing the CTTR and the Uber's Index scores through a histogram. This gave us an understanding of the trends among the individual texts within each period.
 
 # Results
 
@@ -423,8 +448,7 @@ A future analysis could include more time periods and a larger variety of texts 
 
 ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utilized the texstat page for developing ideas and creating tables (@WinNT).
 
-# Works Cited
-
+# 7  Works Cited
 
 
 
