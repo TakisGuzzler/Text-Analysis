@@ -253,6 +253,8 @@ avg_1800s <- colMeans(data_1800s[, c("ASL", "AWL")])
 avg_1900s <- colMeans(data_1900s[, c("ASL", "AWL")])
 ```
 
+The corpora used for this project are two collections of short stories from the 1850s and 1950s. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
+
 ```{r}
 data <- data.frame(
   Decade = c("1850s", "1950s"),
@@ -268,6 +270,8 @@ data <- data.frame(
 kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c', 
       col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
+
+Although more texts from the 1950s were used, the total word counts for each time period are nearly identical. This means that the average text from the 1850s is longer by a significant amount. More interestingly, the average sentence length for stories from the 1850s was much longer, and the average word length was slightly longer. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
@@ -449,7 +453,6 @@ A future analysis could include more time periods and a larger variety of texts 
 ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utilized the texstat page for developing ideas and creating tables (@WinNT).
 
 # 7  Works Cited
-
 
 
 
