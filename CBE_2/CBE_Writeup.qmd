@@ -400,7 +400,7 @@ kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mi
 
 ```
 
-As seen in Figure 3, for the CTTR and Uber's Index, the average lexical diversity of the texts from the mid 1800s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 193.724 where the Yule's K value for the mid 1900s is 98.966. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. The lexical diversity reported by Summer's Index also agrees with the trend, though the measurements are within 0.01 of each other.
+As seen in Table 3, for the CTTR and Uber's Index, the average lexical diversity of the texts from the mid 1800s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 193.724 where the Yule's K value for the mid 1900s is 98.966. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. The lexical diversity reported by Summer's Index also agrees with the trend, though the measurements are within 0.01 of each other.
 
 ```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
 par(mfrow = c(2, 2))  # Layout for 2x2 histograms
@@ -438,7 +438,7 @@ hist(lexdiv_ss_19$U,
      breaks = 10)  
 ```
 
-For the histograms, we can see that, within the time periods, there is a spread of CTTR and Uber's Index values. There is no noticeable curve to the histograms, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
+For the histograms in Figure 3, we can see that, within the time periods, there is a spread of CTTR and Uber's Index values. There is no noticeable curve to the histograms, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
 
 # Discussion
 
