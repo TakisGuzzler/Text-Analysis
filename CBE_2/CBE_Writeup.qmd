@@ -267,7 +267,7 @@ data <- data.frame(
   Mean_Average_Word_Length = c(4.363792, 4.062382)
   )
 
-kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s", align = 'c', 
+kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s Texts", align = 'c', 
       col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
 
