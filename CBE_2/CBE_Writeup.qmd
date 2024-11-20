@@ -281,7 +281,7 @@ First we examined the average sentence and word lengths of each of the texts fro
 
 We then examined the lexical density of texts from the mid 1800s and mid 1900s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
 
-We then examined lexical diversity using two different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, Summer's Index, and Yule's K. We used three different measurements to provide confirmation on the diversity analysis. These three measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is sensitive to frequency distributions. A high score for Summer's Index typically indicates higher lexical diversity. A low score for CTTR, Uber's Index, and Yule's K typically indicates lower diversity when compared to a higher score. Yule's K provides additional information concerning the distribution of word frequencies, with a lower value typically indicating an even distribution. For certain measurements, we further expanded our analysis by viewing the CTTR and the Uber's Index scores through a histogram. This gave us an understanding of the trends among the individual texts within each period.
+We then examined lexical diversity using four different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). We used these measurements to provide confirmation on the diversity analysis. These measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. Both signify that unique words are repeated more often within the texts. For certain measurements, we further expanded our analysis by viewing the CTTR and the Uber's Index scores through a histogram. This gave us an understanding of the trends among the individual texts within each period.
 
 # Results
 
@@ -363,15 +363,13 @@ From Table 2, we can see that the average lexical density for the texts from the
 ## Lexical Diversity
 
 ```{r}
-lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "S", "K", "Mass"))
+lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "K", "Mass"))
 
-lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "S", "K", "Mass"))
+lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "K", "Mass"))
 
 ### CTTR is the Corrected Type Token Ratio --> tells us lexical diversity corrected for text length
 
 ### U is the Uber Index --> this is another measure of lexical richness and diversity which is less sensitive to text length
-
-### S is the Summers Index -> measures the lexical richness of vocabulary in a text
 
 ### K is Yule's K --> quantifies the unevenness in the frequency distribution of words in a text; focuses on the distribution of unique words' frequencies
 
@@ -384,15 +382,12 @@ lex_div_res <- data.frame(
   Uber_Index = c(round(mean(lexdiv_ss_18$U), 3),
                 round(mean(lexdiv_ss_19$U), 3)
   ),
-  Summer_Index = c(round(mean(lexdiv_ss_18$S), 3),
-                round(mean(lexdiv_ss_19$S), 3)
-  ),
   Yule_index = c(round(mean(lexdiv_ss_18$K), 3),
                 round(mean(lexdiv_ss_19$K), 3)
   )
 )
 
-colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index","Summer's Index", "Yule's K")
+colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index", "Yule's K")
 
 
 kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mid 1900s")
@@ -400,7 +395,7 @@ kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mi
 
 ```
 
-As seen in Table 3, for the CTTR and Uber's Index, the average lexical diversity of the texts from the mid 1800s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 193.724 where the Yule's K value for the mid 1900s is 98.966. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. The lexical diversity reported by Summer's Index also agrees with the trend, though the measurements are within 0.01 of each other.
+As seen in Table 3, for the CTTR and Uber's Index, the average lexical diversity of the texts from the mid 1800s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
 
 ```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
 par(mfrow = c(2, 2))  # Layout for 2x2 histograms
@@ -453,6 +448,5 @@ A future analysis could include more time periods and a larger variety of texts 
 ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utilized the texstat page for developing ideas and creating tables (@WinNT).
 
 # 7  Works Cited
-
 
 
