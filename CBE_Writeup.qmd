@@ -14,11 +14,37 @@ format:
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 execute:
   echo: false
+bibliography: citation.bib
+nocite: |
+  @the_other_side_of_the_hedge_1945,
+  @the_old_nurses_story_1852,
+  @the_old_man_at_the_bridge_1952,
+  @the_mindworm_1950,
+  @the_masque_of_the_red_death_1842,
+  @the_man_who_killed_the_world_1940,
+  @the_lifted_veil_1859,
+  @the_fall_of_the_house_of_usher_1839,
+  @the_district_doctor_1852,
+  @the_destructors_1954,
+  @the_catbird_seat_1942,
+  @psyche's_art_1858,
+  @master_zacharius_1954,
+  @good_country_people_1955,
+  @gods_in_exile_1853,
+  @first_confession_1950,
+  @coming_attraction_1950,
+  @bartelby_the_scrivener_1853,
+  @a_terribly_strange_bed_1852,
+  @a_sound_of_thunder_1952,
+  @a_perfect_day_for_bananafish,
+  @A_&_P_1951.txt
 ---
 
 \newpage
 
 # Introduction
+
+This project explores the differences in writing styles between the mid 1800s and the mid 1900s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, word length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
 
 # Data
 
@@ -37,109 +63,100 @@ source("../R/keyness_functions.R")
 
 ```
 
-```{r}
-txt_1839 <- readLines("Text_Files/the_fall_of_the_house_of_usher_1839.txt")
-txt_1842 <- readLines("Text_Files/the_masque_of_the_red_death_1842.txt")
-txt_1914b <- readLines("Text_Files/a_painful_case_1914.txt")
-txt_1930 <- readLines("Text_Files/a_rose_for_emily_1930.txt")
-txt_1952 <- readLines("Text_Files/a_sound_of_thunder_1952.txt")
-txt_1968 <- readLines("Text_Files/a_very_old_man_with_enormous_wings_1968.txt")
-txt_1914 <- readLines("Text_Files/draculas_guest_1914.txt")
-txt_1927 <- readLines("Text_Files/hills_like_white_elephants_1927.txt")
-txt_1905 <- readLines("Text_Files/the_gift_of_the_magi_1905.txt")
-txt_1940 <- readLines("Text_Files/the_man_who_killed_the_world_1940.txt")
-txt_1915 <- readLines("Text_Files/the_metamorphasis_1915.txt")
-txt_1884 <- readLines("Text_Files/the_necklace_1884.txt")
-txt_1973 <- readLines("Text_Files/the_ones_who_walk_away_from_omelas_1973.txt")
-txt_1926 <- readLines("Text_Files/the_rocking-horse_winner_1926.txt")
-txt_1986 <- readLines("Text_Files/to_build_a_fire_1986.txt")
+```{r, include = FALSE}
+
+txt_1945 <- paste(readLines("Text Files/the_other_side_of_the_hedge_1945.txt"), collapse = " ")
+
+txt_1852 <- paste(readLines("Text Files/the_old_nurses_story_1852.txt"), collapse = " ")
+
+txt_1952 <- paste(readLines("Text Files/the_old_man_at_the_bridge_1952.txt"), collapse = " ")
+
+txt_1950 <- paste(readLines("Text Files/the_mindworm_1950.txt"), collapse = " ")
+
+txt_1842 <- paste(readLines("Text Files/the_masque_of_the_red_death_1842.txt"), collapse = " ")
+
+txt_1940 <- paste(readLines("Text Files/the_man_who_killed_the_world_1940.txt"), collapse = " ")
+
+txt_1859 <- paste(readLines("Text Files/the_lifted_veil_1859.txt"), collapse = " ")
+
+txt_1839 <- paste(readLines("Text Files/the_fall_of_the_house_of_usher_1839.txt"), collapse = " ")
+
+txt_1852 <- paste(readLines("Text Files/the_district_doctor_1852.txt"), collapse = " ")
+
+txt_1954 <- paste(readLines("Text Files/the_destructors_1954.txt"), collapse = " ")
+
+txt_1942 <- paste(readLines("Text Files/the_catbird_seat_1942.txt"), collapse = " ")
+
+txt_1858 <- paste(readLines("Text Files/psyche's_art_1858.txt"), collapse = " ")
 
 
-tokens_1986 <- txt_1986 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1954b <- paste(readLines("Text Files/master_zacharius_1954.txt"), collapse = " ")
 
-tokens_1926 <- txt_1926 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1955 <- paste(readLines("Text Files/good_country_people_1955.txt"), collapse = " ")
 
-tokens_1973 <- txt_1973 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
 
-tokens_1884 <- txt_1884 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1853 <- paste(readLines("Text Files/gods_in_exile_1853.txt"), collapse = " ")
 
-tokens_1915 <- txt_1915 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
 
-tokens_1940 <- txt_1940 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1950b <- paste(readLines("Text Files/first_confession_1950.txt"), collapse = " ")
 
-tokens_1905 <- txt_1905 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1950c <- paste(readLines("Text Files/coming_attraction_1950.txt"), collapse = " ")
 
-tokens_1927 <- txt_1927 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1853b <- paste(readLines("Text Files/bartelby_the_scrivener_1853.txt"), collapse = " ")
 
-tokens_1914 <- txt_1914 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1852b <- paste(readLines("Text Files/a_terribly_strange_bed_1852.txt"), collapse = " ")
 
-tokens_1968 <- txt_1968 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1952b <- paste(readLines("Text Files/a_sound_of_thunder_1952.txt"), collapse = " ")
 
-tokens_1952 <- txt_1952 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
+txt_1948 <- paste(readLines("Text Files/a_perfect_day_for_bananafish_1948.txt"), collapse = " ")
 
-tokens_1839 <- txt_1839 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
-
-tokens_1914b <- txt_1914b %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
-
-tokens_1930 <- txt_1930 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
-
-tokens_1842 <- txt_1842 %>%
-corpus() %>%
-tokens(what = "word", remove_punct = TRUE)
-
-# short_stories_corpus <-   data.frame(doc_id = c("txt_1839", "txt_1842"), text = c(txt_1839, txt_1842)) %>%
-#   mutate(text = preprocess_text(text)) %>%
-#   corpus()
-```
-
-```{r}
-#general token frequency
-freq_1839 <- tokens_1839 %>%
-dfm() %>%
-textstat_frequency() %>%
-as_tibble() %>%
-dplyr::select(feature, frequency) %>%
-rename(Token = feature, AF = frequency) %>%
-mutate(RF = AF/sum(AF)*100)
+txt_1951 <- paste(readLines("Text Files/A_&_P_1951.txt"), collapse = " ")
 
 ```
 
+```{r,include=FALSE}
+years_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859", "1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
+
+years <- c(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859, txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+
+years_18_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859")
+years_19_q <- c("1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
+
+years_18 <- c(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
+years_19 <- c(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+
+
+short_stories_corpus <- data.frame(doc_id = years_q, text = years) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+short_stories_18_corpus <- data.frame(doc_id = years_18_q, text = years_18) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+short_stories_19_corpus <- data.frame(doc_id = years_19_q, text = years_19) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
+
+dfm_short_stories_18 <- dfm_remove(dfm(tokens(short_stories_18_corpus)), stopwords("en"))
+
+dfm_short_stories_19 <- dfm_remove(dfm(tokens(short_stories_19_corpus)), stopwords("en"))
+```
 
 ```{r}
-calculate_asl <- function(tokens) {
-  tokens %>%
-    tokens(what = "sentence") %>%
-    lengths() %>%
+tokens_list <- tokens(short_stories_corpus)
+tokens_lexical <- tokens_select(tokens_list, pattern = stopwords("en"), selection = "remove")
+```
+
+```{r}
+calculate_asl <- function(text) {
+   unlist(str_split(text, pattern = "\\.\\s*")) %>%
+    sapply(function(x) str_count(x, "\\w+")) %>%
     mean()
 }
+
 
 calculate_awl <- function(tokens) {
   tokens %>%
@@ -150,47 +167,286 @@ calculate_awl <- function(tokens) {
     mean()
 }
 
-tokens_list <- list(
-  tokens_1839 = tokens_1839, tokens_1986 = tokens_1986, tokens_1926 = tokens_1926, tokens_1973 = tokens_1973, tokens_1884 = tokens_1884, tokens_1915 = tokens_1915, tokens_1940 = tokens_1940, tokens_1905 = tokens_1905, tokens_1927 = tokens_1927, tokens_1914 = tokens_1914, tokens_1968 = tokens_1968, tokens_1952 = tokens_1952, tokens_1914b = tokens_1914b, tokens_1930 = tokens_1930, tokens_1842 = tokens_1842)
-
-results <- tibble(
-  Year = names(tokens_list),
-  ASL = sapply(tokens_list, calculate_asl),
-  AWL = sapply(tokens_list, calculate_awl)
-)
-
-results %>%
-  arrange(Year) %>%
-  print()
+# results <- tibble(
+#   Year = years_q,
+#   ASL = sapply(years, calculate_asl),
+#   AWL = sapply(short_stories_corpus, calculate_awl)
+# )
+# 
+# results %>%
+#   arrange(Year) %>%
+#   print()
 
 ```
 
 ```{r}
-ggplot(results, aes(x = as.numeric(gsub("tokens_", "", Year)), y = ASL)) +
-  geom_line(color = "blue", size = 1) +
-  geom_point(color = "blue", size = 2) +
-  labs(title = "Average Sentence Length (ASL) Over Time",
-       x = "Year",
-       y = "Average Sentence Length (ASL)") +
-  theme_minimal()
+all_text <- paste(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
+words <- unlist(strsplit(all_text, "\\s+"))
+total_word_count <- length(words)
 
-ggplot(results, aes(x = as.numeric(gsub("tokens_", "", Year)), y = AWL)) +
-  geom_line(color = "red", size = 1) +
-  geom_point(color = "red", size = 2) +
-  labs(title = "Average Word Length (AWL) Over Time",
-       x = "Year",
-       y = "Average Word Length (AWL)") +
-  theme_minimal()
+all_text1950s <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+words1950s <- unlist(strsplit(all_text1950s, "\\s+"))
+total_word_count1950s <- length(words1950s)
+
 ```
 
+```{r}
+word_count_1839 <- length(unlist(strsplit(txt_1839, "\\s+")))
+word_count_1842 <- length(unlist(strsplit(txt_1842, "\\s+")))
+word_count_1852 <- length(unlist(strsplit(txt_1852, "\\s+")))
+word_count_1852b <- length(unlist(strsplit(txt_1852b, "\\s+")))
+word_count_1853 <- length(unlist(strsplit(txt_1853, "\\s+")))
+word_count_1853b <- length(unlist(strsplit(txt_1853b, "\\s+")))
+word_count_1858 <- length(unlist(strsplit(txt_1858, "\\s+")))
+word_count_1859 <- length(unlist(strsplit(txt_1859, "\\s+")))
+word_counts1850s <- c(word_count_1839, word_count_1842, word_count_1852, word_count_1852b, word_count_1853, word_count_1853b, word_count_1858, word_count_1859)
+average_word_count1850s <- mean(word_counts1850s)
 
+#average word count 1850s: 8718.625
+#average word count 1950s: 5379.615
+```
+
+```{r}
+word_count_1940 <- length(unlist(strsplit(txt_1940, "\\s+")))
+word_count_1942 <- length(unlist(strsplit(txt_1942, "\\s+")))
+word_count_1945 <- length(unlist(strsplit(txt_1945, "\\s+")))
+word_count_1948 <- length(unlist(strsplit(txt_1948, "\\s+")))
+word_count_1950 <- length(unlist(strsplit(txt_1950, "\\s+")))
+word_count_1950b <- length(unlist(strsplit(txt_1950b, "\\s+")))
+word_count_1950c <- length(unlist(strsplit(txt_1950c, "\\s+")))
+word_count_1951 <- length(unlist(strsplit(txt_1951, "\\s+")))
+word_count_1952 <- length(unlist(strsplit(txt_1952, "\\s+")))
+word_count_1952b <- length(unlist(strsplit(txt_1952b, "\\s+")))
+word_count_1954 <- length(unlist(strsplit(txt_1954, "\\s+")))
+word_count_1954b <- length(unlist(strsplit(txt_1954b, "\\s+")))
+word_count_1955 <- length(unlist(strsplit(txt_1955, "\\s+")))
+
+word_counts1950s <- c(word_count_1940, word_count_1942, word_count_1945, word_count_1948, word_count_1950, word_count_1950b, word_count_1950c, 
+                      word_count_1951, word_count_1952, word_count_1952b, 
+                      word_count_1954, word_count_1954b, word_count_1955)
+average_word_count1850s <- mean(word_counts1950s)
+```
+
+```{r}
+word_count_range1850s <- range(word_counts1850s)
+word_count_range1950s <- range(word_counts1950s)
+#1850s range 2396 17574
+#1950s range 762 17321
+```
+
+```{r}
+data <- data.frame(
+  Year = c(1839, 1842, 1852, 1852, 1853, 1853, 1858, 1859, 1940, 1942,
+           1945, 1948, 1950, 1950, 1950, 1951, 1952, 1952, 1954, 1954, 1955),
+  ASL = c(32.958716, 24.089109, 9.452273, 28.935211, 28.892704, 20.823613, 26.641892, 
+          31.801418, 12.713514, 12.625000, 21.357798, 14.830313, 9.020110, 19.818182, 
+          11.798595, 24.065574, 12.590164, 9.076132, 10.485348, 22.316456, 14.430213),
+  AWL = c(4.581013, 4.498561, 3.907167, 4.320058, 4.607382, 4.348931, 4.229521, 
+          4.417706, 4.331188, 4.116343, 3.994943, 3.942544, 4.325866, 3.859438, 
+          4.184095, 3.960326, 3.658392, 4.101703, 4.006108, 4.400313, 3.929711)
+)
+
+data_1800s <- subset(data, Year >= 1839 & Year <= 1859)
+data_1900s <- subset(data, Year >= 1940 & Year <= 1955)
+
+avg_1800s <- colMeans(data_1800s[, c("ASL", "AWL")])
+avg_1900s <- colMeans(data_1900s[, c("ASL", "AWL")])
+```
+
+The corpora used for this project are two collections of short stories from the mid 1800s and mid 1900s. The stories from the mid 1800s range from 1830s to 1850s, while the stories from the mid 1900s range from 1940s to 1950s. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
+
+```{r}
+data <- data.frame(
+  Decade = c("Mid 1800s", "Mid 1900s"),
+  Text_Count = c(8, 13),
+    Total_Word_Count = c(69749, 69935)
+,
+  Mean_Word_Count = c(8718.625, 5379.615),
+  Word_Range = c("2396 - 17574", "762 - 17321"),
+ Mean_Average_Sentence_Length = c(25.449367, 15.009800),
+  Mean_Average_Word_Length = c(4.363792, 4.062382)
+  )
+
+kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s Texts", align = 'c', 
+      col.names = c("Time Period", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
+```
+
+From Table 1, we can see that more texts from the mid 1900s were used, but the total word counts for each time period are nearly identical. This means that the average text from the mid 1800s is longer by a significant amount. More interestingly, the average sentence length for stories from the mid 1800s was much longer, and the average word length was slightly longer. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
+For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262).
+
+First we examined the average sentence and word lengths of each of the texts from the mid 1800s and mid 1900s We did so by analyzing histograms for each period, which offered a general overview of the two comparable periods.
+
+We then examined the lexical density of texts from the mid 1800s and mid 1900s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
+
+We then examined lexical diversity using four different measurements - Carroll's Corrected Type Token Ratio (CTTR), Uber's Index, and Yule's K. We used these measurements to provide confirmation on the diversity analysis. These measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. Both signify that unique words are repeated more often within the texts. For certain measurements, we further expanded our analysis by viewing the CTTR and the Uber's Index scores through a histogram. This gave us an understanding of the trends among the individual texts within each period.
+
 # Results
+
+## Average Sentence and Word Length
+
+```{r, fig.cap="Distributions of Average Sentence Length", out.height = "35%"}
+par(mfrow = c(1, 2)) 
+
+# Histogram for the 1800s
+hist(data_1800s$ASL, 
+     main = "Avg. Sentence Length: Mid 1800s", 
+     xlab = "Average Sentence Length", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 5, 
+     cex.main = 0.90)  
+
+# Histogram for the 1900s
+hist(data_1900s$ASL, 
+     main = "Avg. Sentence Length: Mid 1900s", 
+     xlab = "Average Sentence Length", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 5, 
+     cex.main = 0.90)  # Adjust title font size
+
+```
+
+```{r, fig.cap="Distributions of Average Word Length", out.height = "35%"}
+par(mfrow = c(1, 2)) 
+
+# Histogram for the 1800s
+hist(data_1800s$AWL, 
+     main = "Avg. Word Length: Mid 1800s", 
+     xlab = "Average Word Length", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 5, 
+     cex.main = 0.90)
+
+# Histogram for the 1900s
+hist(data_1900s$AWL, 
+     main = "Avg. Word Length: Mid 1900s", 
+     xlab = "Average Word Length", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 5, 
+     cex.main = 0.90)
+
+```
+
+To begin our analysis, we looked at the distribution of average sentence length in texts from the mid 1800s and mid 1900s The histograms in Figure 1 reveal that most texts from the mid 1800s have an average sentence length between 20 and 35 words, indicating a potential preference for longer sentences during this period. In contrast, the distribution of average sentence lengths in the mid 1900s is more even, with most of the texts falling between 0 and 15 words, reflecting a possible shift towards shorter sentences.
+
+We also examined the distribution of average word lengths. As shown in the histograms in Figure 2, the distributions for the mid 1800s and mid 1900s are similar. In both time periods, the average word length ranges from 3.6 to 4.8 characters per word.
+
+## Lexical Density
+
+```{r}
+# Calculate lexical density for each text
+total_words <- ntoken(tokens_list)
+lexical_words <- ntoken(tokens_lexical)
+lexical_density <- lexical_words / total_words
+
+lexical_density_data <- data.frame(
+  Decade = c("Mid 1800s", "Mid 1900s"),
+  Lexical_Density = c(0.481744825, 0.4976068)
+)
+
+colnames(lexical_density_data) <- c("Time Period", "Lexical Diversity")
+
+kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s and Mid 1900s")
+
+#0.481744825 is the average for 1850s
+#0.4976068 is the average for 1950s
+```
+
+From Table 2, we can see that the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+
+## Lexical Diversity
+
+```{r}
+lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "K", "Mass"))
+
+lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "K", "Mass"))
+
+### CTTR is the Corrected Type Token Ratio --> tells us lexical diversity corrected for text length
+
+### U is the Uber Index --> this is another measure of lexical richness and diversity which is less sensitive to text length
+
+### K is Yule's K --> quantifies the unevenness in the frequency distribution of words in a text; focuses on the distribution of unique words' frequencies
+
+
+lex_div_res <- data.frame(
+  Decade = c("Mid 1800s", "Mid 1900s"),
+  CTTR = c( round(mean(lexdiv_ss_18$CTTR), 3),
+                   round(mean(lexdiv_ss_19$CTTR), 3)
+  ),
+  Uber_Index = c(round(mean(lexdiv_ss_18$U), 3),
+                round(mean(lexdiv_ss_19$U), 3)
+  ),
+  Yule_index = c(round(mean(lexdiv_ss_18$K), 3),
+                round(mean(lexdiv_ss_19$K), 3)
+  )
+)
+
+colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index", "Yule's K")
+
+
+kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mid 1900s")
+
+
+```
+
+As seen in Table 3, for the CTTR and Uber's Index, the average lexical diversity of the texts from the mid 1800s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
+
+```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
+par(mfrow = c(2, 2))  # Layout for 2x2 histograms
+
+# Histogram for CTTR in 1800s
+hist(lexdiv_ss_18$CTTR, 
+     main = "CTTR: Mid 1800s", 
+     xlab = "CTTR", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 10)  
+
+# Histogram for CTTR in 1900s
+hist(lexdiv_ss_19$CTTR, 
+     main = "CTTR: Mid 1900s", 
+     xlab = "CTTR", 
+     col = "lightblue", 
+     border = "black", 
+     breaks = 10)  
+
+# Histogram for Uber's Index in 1800s
+hist(lexdiv_ss_18$U, 
+     main = "Uber's Index: Mid 1800s", 
+     xlab = "Uber's Index", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 10)  
+
+# Histogram for Uber's Index in 1950s
+hist(lexdiv_ss_19$U, 
+     main = "Uber's Index: Mid 1900s", 
+     xlab = "Uber's Index", 
+     col = "lightgreen", 
+     border = "black", 
+     breaks = 10)  
+```
+
+For the histograms in Figure 3, we can see that, within the time periods, there is a spread of CTTR and Uber's Index values. There is no noticeable curve to the histograms, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
 
 # Discussion
 
+This exploration employed five measures for lexical complexity - four measures of lexical diversity and one measure of lexical density. Additionally, the study explored the histograms generated from mean sentence length for each of the texts. This was done to answer the primary research question concerning the change in writing styles and reader enjoyment between the 1800s and 1900s. From our exploration, we determined that the lexical density showed a small increase over time where the lexical complexity showed a decrease over time. The histograms also showed that sentences from the mid 1800s were on average longer than sentences from the mid 1900s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially lending to the preference among young adults for short stories from later time periods. 
+
+However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
+
+A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
+
 # Acknowledgments {.appendix}
 
-# Works Cited
+ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utilized the texstat page for developing ideas and creating tables (@WinNT).
+
+# 7  Works Cited
+
+
