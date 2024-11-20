@@ -268,7 +268,7 @@ data <- data.frame(
   )
 
 kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s Texts", align = 'c', 
-      col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
+      col.names = c("Time Period", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
 
 From Table 1, we can see that more texts from the mid 1900s were used, but the total word counts for each time period are nearly identical. This means that the average text from the mid 1800s is longer by a significant amount. More interestingly, the average sentence length for stories from the mid 1800s was much longer, and the average word length was slightly longer. Overall these corpora have similar amounts of content that can be used to draw conclusions.
@@ -335,7 +335,7 @@ hist(data_1900s$AWL,
 
 To begin our analysis, we looked at the distribution of average sentence length in texts from the mid 1800s and mid 1900s The histograms in Figure 1 reveal that most texts from the mid 1800s have an average sentence length between 20 and 35 words, indicating a potential preference for longer sentences during this period. In contrast, the distribution of average sentence lengths in the mid 1900s is more even, with most of the texts falling between 0 and 15 words, reflecting a possible shift towards shorter sentences.
 
-We also examined the distribution of average word lengths. As shown in the histograms in Figure 2, the distributions for the mid 1800s and mid 1900s are similar. In both decades, the average word length ranges from 3.6 to 4.8 characters per word.
+We also examined the distribution of average word lengths. As shown in the histograms in Figure 2, the distributions for the mid 1800s and mid 1900s are similar. In both time periods, the average word length ranges from 3.6 to 4.8 characters per word.
 
 ## Lexical Density
 
@@ -350,7 +350,7 @@ lexical_density_data <- data.frame(
   Lexical_Density = c(0.481744825, 0.4976068)
 )
 
-colnames(lexical_density_data) <- c("Decade", "Lexical Diversity")
+colnames(lexical_density_data) <- c("Time Period", "Lexical Diversity")
 
 kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s and Mid 1900s")
 
@@ -358,7 +358,7 @@ kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s
 #0.4976068 is the average for 1950s
 ```
 
-From Table 1, we can see that the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two decades, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+From Table 2, we can see that the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
 
 ## Lexical Diversity
 
@@ -392,7 +392,7 @@ lex_div_res <- data.frame(
   )
 )
 
-colnames(lex_div_res) <- c("Decade", "CTTR", "Uber's Index","Summer's Index", "Yule's K")
+colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index","Summer's Index", "Yule's K")
 
 
 kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mid 1900s")
@@ -444,7 +444,7 @@ For the histograms, we can see that, within the time periods, there is a spread 
 
 This exploration employed five measures for lexical complexity - four measures of lexical diversity and one measure of lexical density. Additionally, the study explored the histograms generated from mean sentence length for each of the texts. This was done to answer the primary research question concerning the change in writing styles and reader enjoyment between the 1800s and 1900s. From our exploration, we determined that the lexical density showed a small increase over time where the lexical complexity showed a decrease over time. The histograms also showed that sentences from the mid 1800s were on average longer than sentences from the mid 1900s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially lending to the preference among young adults for short stories from later time periods. 
 
-However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of decades beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
+However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
 
 A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
 
