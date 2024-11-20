@@ -271,7 +271,7 @@ kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s", align = 'c'
       col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
 
-Although more texts from the 1950s were used, the total word counts for each time period are nearly identical. This means that the average text from the 1850s is longer by a significant amount. More interestingly, the average sentence length for stories from the 1850s was much longer, and the average word length was slightly longer. Overall these corpora have similar amounts of content that can be used to draw conclusions.
+From Table 1, we can see that more texts from the mid 1900s were used, but the total word counts for each time period are nearly identical. This means that the average text from the mid 1800s is longer by a significant amount. More interestingly, the average sentence length for stories from the mid 1800s was much longer, and the average word length was slightly longer. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
