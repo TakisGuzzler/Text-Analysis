@@ -44,7 +44,7 @@ nocite: |
 
 # Introduction
 
-This project explores the differences in writing styles between the 1850s and the 1950s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, word length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
+This project explores the differences in writing styles between the mid 1800s and the mid 1900s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, word length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
 
 # Data
 
@@ -253,11 +253,11 @@ avg_1800s <- colMeans(data_1800s[, c("ASL", "AWL")])
 avg_1900s <- colMeans(data_1900s[, c("ASL", "AWL")])
 ```
 
-The corpora used for this project are two collections of short stories from the 1850s and 1950s. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
+The corpora used for this project are two collections of short stories from the mid 1800s and mid 1900s. The stories from the mid 1800s range from 1830s to 1850s, while the stories from the mid 1900s range from 1940s to 1950s. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
 
 ```{r}
 data <- data.frame(
-  Decade = c("1850s", "1950s"),
+  Decade = c("mid 1800s", "mid 1900s"),
   Text_Count = c(8, 13),
     Total_Word_Count = c(69749, 69935)
 ,
@@ -267,7 +267,7 @@ data <- data.frame(
   Mean_Average_Word_Length = c(4.363792, 4.062382)
   )
 
-kable(data, caption = "Word Count Data for 1850s and 1950s", align = 'c', 
+kable(data, caption = "Word Count Data for mid 1800s and mid 1900s", align = 'c', 
       col.names = c("Decade", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
 
