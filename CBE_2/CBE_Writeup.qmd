@@ -277,17 +277,19 @@ From Table 1, we can see that more texts from the mid 1900s were used, but the t
 
 For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262).
 
-First we examined the average sentence and word lengths of each of the texts from the mid 1800s and mid 1900s We did so by analyzing histograms for each period, which offered a general overview of the two comparable periods.
+First, average sentence and word lengths of each of the texts from the mid 1800s and mid 1900s were examined. This was done by analyzing histograms for each period, which offered a general overview of the two comparable periods.
 
-We then examined the lexical density of texts from the mid 1800s and mid 1900s. Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
+Average lexical density and average lexical diversity were then examined for the two periods. Lexical density and diversity were chosen because they are measurements for lexical complexity. The averages were used in order to draw a comparison between time periods.
 
-We then examined lexical diversity using four different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). We used these measurements to provide confirmation on the diversity analysis. These measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. Both signify that unique words are repeated more often within the texts. For certain measurements, we further expanded our analysis by viewing the CTTR and the Uber's Index scores through a histogram. This gave us an understanding of the trends among the individual texts within each period.
+Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
+
+We examined lexical diversity using three different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). We used these measurements to provide confirmation on the diversity analysis, and they were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. The high score also signifies that unique words are repeated more often within the texts. For certain measurements, we further expanded our analysis by viewing the CTTR and the Uber's Index scores through a histogram. This gave us an understanding of the trends among the individual texts within each period.
 
 # Results
 
 ## Average Sentence and Word Length
 
-```{r, fig.cap="Distributions of Average Sentence Length", out.height = "35%"}
+```{r, fig.cap="Distributions of Average Sentence Length", out.height = "30%"}
 par(mfrow = c(1, 2)) 
 
 # Histogram for the 1800s
@@ -310,7 +312,7 @@ hist(data_1900s$ASL,
 
 ```
 
-```{r, fig.cap="Distributions of Average Word Length", out.height = "35%"}
+```{r, fig.cap="Distributions of Average Word Length", out.height = "30%"}
 par(mfrow = c(1, 2)) 
 
 # Histogram for the 1800s
@@ -333,9 +335,9 @@ hist(data_1900s$AWL,
 
 ```
 
-To begin our analysis, we looked at the distribution of average sentence length in texts from the mid 1800s and mid 1900s The histograms in Figure 1 reveal that most texts from the mid 1800s have an average sentence length between 20 and 35 words, indicating a potential preference for longer sentences during this period. In contrast, the distribution of average sentence lengths in the mid 1900s is more even, with most of the texts falling between 0 and 15 words, reflecting a possible shift towards shorter sentences.
+The histograms in Figure 1 reveal that most texts from the mid 1800s have an average sentence length between 20 and 35 words, indicating a potential preference for longer sentences during this period. In contrast, the distribution of average sentence lengths in the mid 1900s is more even, with most of the texts falling between 0 and 15 words, reflecting a possible shift towards shorter sentences.
 
-We also examined the distribution of average word lengths. As shown in the histograms in Figure 2, the distributions for the mid 1800s and mid 1900s are similar. In both time periods, the average word length ranges from 3.6 to 4.8 characters per word.
+As shown in the histograms in Figure 2, the distributions for the mid 1800s and mid 1900s are similar. In both time periods, the average word length ranges from 3.6 to 4.8 characters per word.
 
 ## Lexical Density
 
@@ -358,7 +360,7 @@ kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s
 #0.4976068 is the average for 1950s
 ```
 
-From Table 2, we can see that the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+From Table 2, the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
 
 ## Lexical Diversity
 
@@ -395,7 +397,7 @@ kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mi
 
 ```
 
-As seen in Table 3, for the CTTR and Uber's Index, the average lexical diversity of the texts from the mid 1800s is higher than the average lexical diversity from the 1950s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
+As seen in Table 3, for the CTTR and Uber's Index, the value from the mid 1800s is higher than that of the mid 1900s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
 
 ```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
 par(mfrow = c(2, 2))  # Layout for 2x2 histograms
@@ -433,20 +435,19 @@ hist(lexdiv_ss_19$U,
      breaks = 10)  
 ```
 
-For the histograms in Figure 3, we can see that, within the time periods, there is a spread of CTTR and Uber's Index values. There is no noticeable curve to the histograms, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
+For the histograms in Figure 3, we can see that there is no noticeable curves, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
 
 # Discussion
 
-This exploration employed five measures for lexical complexity - four measures of lexical diversity and one measure of lexical density. Additionally, the study explored the histograms generated from mean sentence length for each of the texts. This was done to answer the primary research question concerning the change in writing styles and reader enjoyment between the 1800s and 1900s. From our exploration, we determined that the lexical density showed a small increase over time where the lexical complexity showed a decrease over time. The histograms also showed that sentences from the mid 1800s were on average longer than sentences from the mid 1900s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially lending to the preference among young adults for short stories from later time periods. 
+From our exploration, we determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. The histograms also showed that sentences from the mid 1800s were on average longer than sentences from the mid 1900s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially explaining a wider preference for short stories from later time periods. 
 
 However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
 
 A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
+
 
 # Acknowledgments {.appendix}
 
 ChatGPT was used to supplement our lack of knowledge of lexical analysis and finding short stories. We asked the LLM to describe some of the measures for lexical diversity and density we were considering using. We also asked it for recommendations of short stories from our two chosen time periods. The LLM was helpful in both regards as it gave us useful information on our statistical measures and pointed us towards resources we could use for building our corpus. We also utilized the texstat page for developing ideas and creating tables (@WinNT).
 
 # 7  Works Cited
-
-
