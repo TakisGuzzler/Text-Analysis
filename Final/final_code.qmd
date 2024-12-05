@@ -64,85 +64,165 @@ source("../R/keyness_functions.R")
 ```
 
 ```{r, include = FALSE}
+#1850 texts
 
-txt_1945 <- paste(readLines("Text Files/the_other_side_of_the_hedge_1945.txt"), collapse = " ")
+txt_1842 <- paste(readLines("Text Files/1850/the_masque_of_the_red_death_1842.txt"), collapse = " ")
 
-txt_1852 <- paste(readLines("Text Files/the_old_nurses_story_1852.txt"), collapse = " ")
+txt_1859 <- paste(readLines("Text Files/1850/the_lifted_veil_1859.txt"), collapse = " ")
 
-txt_1952 <- paste(readLines("Text Files/the_old_man_at_the_bridge_1952.txt"), collapse = " ")
+txt_1852 <- paste(readLines("Text Files/1850/the_district_doctor_1852.txt"), collapse = " ")
 
-txt_1950 <- paste(readLines("Text Files/the_mindworm_1950.txt"), collapse = " ")
+txt_1852b <- paste(readLines("Text Files/1850/a_terribly_strange_bed_1852.txt"), collapse = " ")
 
-txt_1842 <- paste(readLines("Text Files/the_masque_of_the_red_death_1842.txt"), collapse = " ")
+txt_1858 <- paste(readLines("Text Files/1850/psyche's_art_1858.txt"), collapse = " ")
 
-txt_1940 <- paste(readLines("Text Files/the_man_who_killed_the_world_1940.txt"), collapse = " ")
+txt_1853b <- paste(readLines("Text Files/1850/bartelby_the_scrivener_1853.txt"), collapse = " ")
 
-txt_1859 <- paste(readLines("Text Files/the_lifted_veil_1859.txt"), collapse = " ")
+txt_1853 <- paste(readLines("Text Files/1850/gods_in_exile_1853.txt"), collapse = " ")
 
-txt_1839 <- paste(readLines("Text Files/the_fall_of_the_house_of_usher_1839.txt"), collapse = " ")
+#1875 texts
 
-txt_1852 <- paste(readLines("Text Files/the_district_doctor_1852.txt"), collapse = " ")
+txt_1877 <- paste(readLines("Text Files/1875/a_simple_soul_1877.txt"), collapse = " ")
 
-txt_1954 <- paste(readLines("Text Files/the_destructors_1954.txt"), collapse = " ")
+txt_1866 <- paste(readLines("Text Files/1875/an_honest_thief_1866.txt"), collapse = " ")
 
-txt_1942 <- paste(readLines("Text Files/the_catbird_seat_1942.txt"), collapse = " ")
+txt_1870 <- paste(readLines("Text Files/1875/ethan_brand_1870.txt"), collapse = " ")
 
-txt_1858 <- paste(readLines("Text Files/psyche's_art_1858.txt"), collapse = " ")
+txt_1869 <- paste(readLines("Text Files/1875/mumu_1869.txt"), collapse = " ")
 
+txt_1884 <- paste(readLines("Text Files/1875/rappaccinis_daughter_1884.txt"), collapse = " ")
 
-txt_1954b <- paste(readLines("Text Files/master_zacharius_1954.txt"), collapse = " ")
+#txt_1865 <- paste(readLines("Text Files/1875/the_celebrated_jumping_frog_of_calaveras_county_1865).txt"), collapse = " ")
 
-txt_1955 <- paste(readLines("Text Files/good_country_people_1955.txt"), collapse = " ")
+txt_1868 <- paste(readLines("Text Files/1875/the_luck_of_roaring_camp_1868.txt"), collapse = " ")
 
+#1900 texts
 
-txt_1853 <- paste(readLines("Text Files/gods_in_exile_1853.txt"), collapse = " ")
+txt_1891 <- paste(readLines("Text Files/1900/a_scandal_in_bohemia_1891.txt"), collapse = " ")
 
+txt_1905 <- paste(readLines("Text Files/1900/the_gift_of_the_magi_1905.txt"), collapse = " ")
 
-txt_1950b <- paste(readLines("Text Files/first_confession_1950.txt"), collapse = " ")
+txt_1902 <- paste(readLines("Text Files/1900/the_monkeys_paw_1902.txt"), collapse = " ")
 
-txt_1950c <- paste(readLines("Text Files/coming_attraction_1950.txt"), collapse = " ")
+txt_1897 <- paste(readLines("Text Files/1900/the_open_boat_1897.txt"), collapse = " ")
 
-txt_1853b <- paste(readLines("Text Files/bartelby_the_scrivener_1853.txt"), collapse = " ")
+txt_1894 <- paste(readLines("Text Files/1900/the_story_of_an_hour_1894.txt"), collapse = " ")
 
-txt_1852b <- paste(readLines("Text Files/a_terribly_strange_bed_1852.txt"), collapse = " ")
+txt_1892 <- paste(readLines("Text Files/1900/the_yellow_wallpaper_1892.txt"), collapse = " ")
 
-txt_1952b <- paste(readLines("Text Files/a_sound_of_thunder_1952.txt"), collapse = " ")
+txt_1908 <- paste(readLines("Text Files/1900/to_build_a_fire_1908.txt"), collapse = " ")
 
-txt_1948 <- paste(readLines("Text Files/a_perfect_day_for_bananafish_1948.txt"), collapse = " ")
+#1925 texts
 
-txt_1951 <- paste(readLines("Text Files/A_&_P_1951.txt"), collapse = " ")
+txt_1922 <- paste(readLines("Text Files/1925/a_hunger_artist_1922.txt"), collapse = " ")
+
+txt_1930 <- paste(readLines("Text Files/1925/a_rose_for_emily_1930.txt"), collapse = " ")
+
+txt_1927 <- paste(readLines("Text Files/1925/hills_like_white_elephants_1927.txt"), collapse = " ")
+
+txt_1919 <- paste(readLines("Text Files/1925/kew_gardens_1919.txt"), collapse = " ")
+
+txt_1922b <- paste(readLines("Text Files/1925/the_diamond_as_big_as_the_ritz_1922.txt"), collapse = " ")
+
+txt_1922c <- paste(readLines("Text Files/1925/the_garden_party_1922.txt"), collapse = " ")
+
+txt_1917 <- paste(readLines("Text Files/1925/the_lottery_ticket_1917.txt"), collapse = " ")
+
+txt_1926 <- paste(readLines("Text Files/1925/the_rocking-horse_winner_1926.txt"), collapse = " ")
+
+#1950 texts
+
+txt_1940 <- paste(readLines("Text Files/1950/the_man_who_killed_the_world_1940.txt"), collapse = " ")
+
+txt_1954b <- paste(readLines("Text Files/1950/master_zacharius_1954.txt"), collapse = " ")
+
+txt_1955 <- paste(readLines("Text Files/1950/good_country_people_1955.txt"), collapse = " ")
+
+txt_1945 <- paste(readLines("Text Files/1950/the_other_side_of_the_hedge_1945.txt"), collapse = " ")
+
+txt_1852 <- paste(readLines("Text Files/1850/the_old_nurses_story_1852.txt"), collapse = " ")
+
+txt_1952 <- paste(readLines("Text Files/1950/the_old_man_at_the_bridge_1952.txt"), collapse = " ")
+
+txt_1950 <- paste(readLines("Text Files/1950/the_mindworm_1950.txt"), collapse = " ")
+
+txt_1950b <- paste(readLines("Text Files/1950/first_confession_1950.txt"), collapse = " ")
+
+txt_1950c <- paste(readLines("Text Files/1950/coming_attraction_1950.txt"), collapse = " ")
+
+txt_1954 <- paste(readLines("Text Files/1950/the_destructors_1954.txt"), collapse = " ")
+
+txt_1942 <- paste(readLines("Text Files/1950/the_catbird_seat_1942.txt"), collapse = " ")
+
+txt_1952b <- paste(readLines("Text Files/1950/a_sound_of_thunder_1952.txt"), collapse = " ")
+
+txt_1948 <- paste(readLines("Text Files/1950/a_perfect_day_for_bananafish_1948.txt"), collapse = " ")
+
+txt_1951 <- paste(readLines("Text Files/1950/A_&_P_1951.txt"), collapse = " ")
 
 ```
 
 ```{r,include=FALSE}
-years_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859", "1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
+years_q <- c("1842", "1852", "1852b", "1853", "1853b", "1858", "1859", "1866", "1868", "1869", "1870", "1877", "1884", "1891", "1892", "1894", "1897", "1902", "1905", "1908", "1917", "1919", "1922", "1922b", "1922c", "1926", "1927", "1930", "1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
 
-years <- c(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859, txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+years <- c(txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859, txt_1866, txt_1868, txt_1869, txt_1870, txt_1877, txt_1884, txt_1891, txt_1892, txt_1894, txt_1897, txt_1902, txt_1905, txt_1908, txt_1917, txt_1919, txt_1922, txt_1922b, txt_1922c, txt_1926, txt_1927, txt_1930, txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
 
-years_18_q <- c("1839", "1842", "1852", "1852b", "1853", "1853b", "1858", "1859")
-years_19_q <- c("1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
+years_1850_q <- c("1842", "1852", "1852b", "1853", "1853b", "1858", "1859")
 
-years_18 <- c(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
-years_19 <- c(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+years_1875_q <- c("1866", "1868", "1869", "1870", "1877", "1884")
+
+years_1900_q <- c("1891", "1892", "1894", "1897", "1902", "1905", "1908")
+
+years_1925_q <- c("1917", "1919", "1922", "1922b", "1922c", "1926", "1927", "1930")
+
+years_1950_q <- c("1940", "1942", "1945", "1948", "1950", "1950b", "1950c", "1951", "1952", "1952b", "1954", "1954b", "1955")
+
+years_1850 <- c(txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
+
+years_1875 <- c(txt_1866, txt_1868, txt_1869, txt_1870, txt_1877, txt_1884)
+
+years_1900 <- c(txt_1891, txt_1892, txt_1894, txt_1897, txt_1902, txt_1905, txt_1908)
+
+years_1925 <- c(txt_1917, txt_1919, txt_1922, txt_1922b, txt_1922c, txt_1926, txt_1927, txt_1930)
+
+years_1950 <- c(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
 
 
 short_stories_corpus <- data.frame(doc_id = years_q, text = years) %>%
    mutate(text = preprocess_text(text)) %>%
    corpus()
 
-short_stories_18_corpus <- data.frame(doc_id = years_18_q, text = years_18) %>%
+short_stories_1850_corpus <- data.frame(doc_id = years_1850_q, text = years_1850) %>%
    mutate(text = preprocess_text(text)) %>%
    corpus()
 
-short_stories_19_corpus <- data.frame(doc_id = years_19_q, text = years_19) %>%
+short_stories_1875_corpus <- data.frame(doc_id = years_1875_q, text = years_1875) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+short_stories_1900_corpus <- data.frame(doc_id = years_1900_q, text = years_1900) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+short_stories_1925_corpus <- data.frame(doc_id = years_1925_q, text = years_1925) %>%
+   mutate(text = preprocess_text(text)) %>%
+   corpus()
+
+short_stories_1950_corpus <- data.frame(doc_id = years_1950_q, text = years_1950) %>%
    mutate(text = preprocess_text(text)) %>%
    corpus()
 
 dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
 
-dfm_short_stories_18 <- dfm_remove(dfm(tokens(short_stories_18_corpus)), stopwords("en"))
+dfm_short_stories_1850 <- dfm_remove(dfm(tokens(short_stories_1850_corpus)), stopwords("en"))
 
-dfm_short_stories_19 <- dfm_remove(dfm(tokens(short_stories_19_corpus)), stopwords("en"))
+dfm_short_stories_1875 <- dfm_remove(dfm(tokens(short_stories_1875_corpus)), stopwords("en"))
+
+dfm_short_stories_1900 <- dfm_remove(dfm(tokens(short_stories_1900_corpus)), stopwords("en"))
+
+dfm_short_stories_1925 <- dfm_remove(dfm(tokens(short_stories_1925_corpus)), stopwords("en"))
+
+dfm_short_stories_1950 <- dfm_remove(dfm(tokens(short_stories_1950_corpus)), stopwords("en"))
 ```
 
 ```{r}
@@ -180,18 +260,29 @@ calculate_awl <- function(tokens) {
 ```
 
 ```{r}
-all_text <- paste(txt_1839, txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
-words <- unlist(strsplit(all_text, "\\s+"))
-total_word_count <- length(words)
+all_text_1850 <- paste(txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
+words_1850 <- unlist(strsplit(all_text_1850, "\\s+"))
+total_word_count1850s <- length(words_1850)
 
-all_text1950s <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
-words1950s <- unlist(strsplit(all_text1950s, "\\s+"))
+all_text_1875 <- paste(txt_1866, txt_1868, txt_1869, txt_1870, txt_1877, txt_1884)
+words_1875 <- unlist(strsplit(all_text_1875, "\\s+"))
+total_word_count1875s <- length(words_1875)
+
+all_text_1900 <- paste(txt_1891, txt_1892, txt_1894, txt_1897, txt_1902, txt_1905, txt_1908)
+words_1900 <- unlist(strsplit(all_text_1900, "\\s+"))
+total_word_count1900s <- length(words_1900)
+
+all_text_1925 <- paste(txt_1917, txt_1919, txt_1922, txt_1922b, txt_1922c, txt_1926, txt_1927, txt_1930)
+words_1925 <- unlist(strsplit(all_text_1925, "\\s+"))
+total_word_count1925s <- length(words_1925)
+
+all_text1950 <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+words1950s <- unlist(strsplit(all_text1950, "\\s+"))
 total_word_count1950s <- length(words1950s)
 
 ```
 
 ```{r}
-word_count_1839 <- length(unlist(strsplit(txt_1839, "\\s+")))
 word_count_1842 <- length(unlist(strsplit(txt_1842, "\\s+")))
 word_count_1852 <- length(unlist(strsplit(txt_1852, "\\s+")))
 word_count_1852b <- length(unlist(strsplit(txt_1852b, "\\s+")))
@@ -199,11 +290,53 @@ word_count_1853 <- length(unlist(strsplit(txt_1853, "\\s+")))
 word_count_1853b <- length(unlist(strsplit(txt_1853b, "\\s+")))
 word_count_1858 <- length(unlist(strsplit(txt_1858, "\\s+")))
 word_count_1859 <- length(unlist(strsplit(txt_1859, "\\s+")))
-word_counts1850s <- c(word_count_1839, word_count_1842, word_count_1852, word_count_1852b, word_count_1853, word_count_1853b, word_count_1858, word_count_1859)
+word_counts1850s <- c(word_count_1842, word_count_1852, word_count_1852b, word_count_1853, word_count_1853b, word_count_1858, word_count_1859)
 average_word_count1850s <- mean(word_counts1850s)
 
-#average word count 1850s: 8718.625
+#average word count 1850s: 10120.429
+#average word count 1875s: 8694.500
+#average word count 1900s: 5426.000
+#average word count 1925s: 4905.375
 #average word count 1950s: 5379.615
+```
+
+```{r}
+word_count_1866 <- length(unlist(strsplit(txt_1866, "\\s+")))
+word_count_1868 <- length(unlist(strsplit(txt_1868, "\\s+")))
+word_count_1869 <- length(unlist(strsplit(txt_1869, "\\s+")))
+word_count_1870 <- length(unlist(strsplit(txt_1870, "\\s+")))
+word_count_1877 <- length(unlist(strsplit(txt_1877, "\\s+")))
+word_count_1884 <- length(unlist(strsplit(txt_1884, "\\s+")))
+
+word_counts1875s <- c(word_count_1866, word_count_1868, word_count_1869, word_count_1870, word_count_1877, word_count_1884)
+average_word_count1875s <- mean(word_counts1875s)
+```
+
+```{r}
+word_count_1891 <- length(unlist(strsplit(txt_1891, "\\s+")))
+word_count_1892 <- length(unlist(strsplit(txt_1892, "\\s+")))
+word_count_1894 <- length(unlist(strsplit(txt_1894, "\\s+")))
+word_count_1897 <- length(unlist(strsplit(txt_1897, "\\s+")))
+word_count_1902 <- length(unlist(strsplit(txt_1902, "\\s+")))
+word_count_1905 <- length(unlist(strsplit(txt_1905, "\\s+")))
+word_count_1908 <- length(unlist(strsplit(txt_1908, "\\s+")))
+
+word_counts1900s <- c(word_count_1891, word_count_1892, word_count_1894, word_count_1897, word_count_1902, word_count_1905, word_count_1908)
+average_word_count1900s <- mean(word_counts1900s)
+```
+
+```{r}
+word_count_1917 <- length(unlist(strsplit(txt_1917, "\\s+")))
+word_count_1919 <- length(unlist(strsplit(txt_1919, "\\s+")))
+word_count_1922 <- length(unlist(strsplit(txt_1922, "\\s+")))
+word_count_1922b <- length(unlist(strsplit(txt_1922b, "\\s+")))
+word_count_1922c <- length(unlist(strsplit(txt_1922c, "\\s+")))
+word_count_1926 <- length(unlist(strsplit(txt_1926, "\\s+")))
+word_count_1927 <- length(unlist(strsplit(txt_1927, "\\s+")))
+word_count_1930 <- length(unlist(strsplit(txt_1930, "\\s+")))
+
+word_counts1925s <- c(word_count_1917, word_count_1919, word_count_1922, word_count_1922b, word_count_1922c, word_count_1926, word_count_1927, word_count_1930)
+average_word_count1925s <- mean(word_counts1925s)
 ```
 
 ```{r}
@@ -224,14 +357,20 @@ word_count_1955 <- length(unlist(strsplit(txt_1955, "\\s+")))
 word_counts1950s <- c(word_count_1940, word_count_1942, word_count_1945, word_count_1948, word_count_1950, word_count_1950b, word_count_1950c, 
                       word_count_1951, word_count_1952, word_count_1952b, 
                       word_count_1954, word_count_1954b, word_count_1955)
-average_word_count1850s <- mean(word_counts1950s)
+average_word_count1950s <- mean(word_counts1950s)
 ```
 
 ```{r}
 word_count_range1850s <- range(word_counts1850s)
+word_count_range1875s <- range(word_counts1875s)
+word_count_range1900s <- range(word_counts1900s)
+word_count_range1925s <- range(word_counts1925s)
 word_count_range1950s <- range(word_counts1950s)
 #1850s range 2396 17574
-#1950s range 762 17321
+#1875s range 4108 12081
+#1900s range 1005 9298
+#1925s range 1460 14819
+#1950s range 698 17321
 ```
 
 ```{r}
@@ -246,11 +385,11 @@ data <- data.frame(
           4.184095, 3.960326, 3.658392, 4.101703, 4.006108, 4.400313, 3.929711)
 )
 
-data_1800s <- subset(data, Year >= 1839 & Year <= 1859)
-data_1900s <- subset(data, Year >= 1940 & Year <= 1955)
+data_1850s <- subset(data, Year >= 1839 & Year <= 1859)
+data_1950s <- subset(data, Year >= 1940 & Year <= 1955)
 
-avg_1800s <- colMeans(data_1800s[, c("ASL", "AWL")])
-avg_1900s <- colMeans(data_1900s[, c("ASL", "AWL")])
+avg_1850s <- colMeans(data_1850s[, c("ASL", "AWL")])
+avg_1950s <- colMeans(data_1950s[, c("ASL", "AWL")])
 ```
 
 The corpora used for this project are two collections of short stories from the mid 1800s and mid 1900s. The stories from the mid 1800s range from 1830s to 1850s, while the stories from the mid 1900s range from 1940s to 1950s. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
@@ -292,8 +431,8 @@ We examined lexical diversity using three different measurements - Carroll's Cor
 ```{r, fig.cap="Distributions of Average Sentence Length", out.height = "30%"}
 par(mfrow = c(1, 2)) 
 
-# Histogram for the 1800s
-hist(data_1800s$ASL, 
+# Histogram for the 1850s
+hist(data_1850s$ASL, 
      main = "Avg. Sentence Length: Mid 1800s", 
      xlab = "Average Sentence Length", 
      col = "lightblue", 
@@ -301,8 +440,8 @@ hist(data_1800s$ASL,
      breaks = 5, 
      cex.main = 0.90)  
 
-# Histogram for the 1900s
-hist(data_1900s$ASL, 
+# Histogram for the 1950s
+hist(data_1950s$ASL, 
      main = "Avg. Sentence Length: Mid 1900s", 
      xlab = "Average Sentence Length", 
      col = "lightgreen", 
@@ -315,8 +454,8 @@ hist(data_1900s$ASL,
 ```{r, fig.cap="Distributions of Average Word Length", out.height = "30%"}
 par(mfrow = c(1, 2)) 
 
-# Histogram for the 1800s
-hist(data_1800s$AWL, 
+# Histogram for the 1850s
+hist(data_1850s$AWL, 
      main = "Avg. Word Length: Mid 1800s", 
      xlab = "Average Word Length", 
      col = "lightblue", 
@@ -324,8 +463,8 @@ hist(data_1800s$AWL,
      breaks = 5, 
      cex.main = 0.90)
 
-# Histogram for the 1900s
-hist(data_1900s$AWL, 
+# Histogram for the 1950s
+hist(data_1950s$AWL, 
      main = "Avg. Word Length: Mid 1900s", 
      xlab = "Average Word Length", 
      col = "lightgreen", 
@@ -365,9 +504,9 @@ From Table 2, the average lexical density for the texts from the mid 1800s is 0.
 ## Lexical Diversity
 
 ```{r}
-lexdiv_ss_18 <- textstat_lexdiv(dfm_short_stories_18, measure = c("CTTR", "U", "K", "Mass"))
+lexdiv_ss_1850 <- textstat_lexdiv(dfm_short_stories_1850, measure = c("CTTR", "U", "K", "Mass"))
 
-lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "K", "Mass"))
+lexdiv_ss_195050 <- textstat_lexdiv(dfm_short_stories_1950, measure = c("CTTR", "U", "K", "Mass"))
 
 ### CTTR is the Corrected Type Token Ratio --> tells us lexical diversity corrected for text length
 
@@ -378,14 +517,14 @@ lexdiv_ss_19 <- textstat_lexdiv(dfm_short_stories_19, measure = c("CTTR", "U", "
 
 lex_div_res <- data.frame(
   Decade = c("Mid 1800s", "Mid 1900s"),
-  CTTR = c( round(mean(lexdiv_ss_18$CTTR), 3),
-                   round(mean(lexdiv_ss_19$CTTR), 3)
+  CTTR = c( round(mean(lexdiv_ss_1850$CTTR), 3),
+                   round(mean(lexdiv_ss_1950$CTTR), 3)
   ),
-  Uber_Index = c(round(mean(lexdiv_ss_18$U), 3),
-                round(mean(lexdiv_ss_19$U), 3)
+  Uber_Index = c(round(mean(lexdiv_ss_1850$U), 3),
+                round(mean(lexdiv_ss_1950$U), 3)
   ),
-  Yule_index = c(round(mean(lexdiv_ss_18$K), 3),
-                round(mean(lexdiv_ss_19$K), 3)
+  Yule_index = c(round(mean(lexdiv_ss_1850$K), 3),
+                round(mean(lexdiv_ss_1950$K), 3)
   )
 )
 
@@ -403,7 +542,7 @@ As seen in Table 3, for the CTTR and Uber's Index, the value from the mid 1800s 
 par(mfrow = c(2, 2))  # Layout for 2x2 histograms
 
 # Histogram for CTTR in 1800s
-hist(lexdiv_ss_18$CTTR, 
+hist(lexdiv_ss_1850$CTTR, 
      main = "CTTR: Mid 1800s", 
      xlab = "CTTR", 
      col = "lightblue", 
@@ -411,7 +550,7 @@ hist(lexdiv_ss_18$CTTR,
      breaks = 10)  
 
 # Histogram for CTTR in 1900s
-hist(lexdiv_ss_19$CTTR, 
+hist(lexdiv_ss_1950$CTTR, 
      main = "CTTR: Mid 1900s", 
      xlab = "CTTR", 
      col = "lightblue", 
@@ -419,7 +558,7 @@ hist(lexdiv_ss_19$CTTR,
      breaks = 10)  
 
 # Histogram for Uber's Index in 1800s
-hist(lexdiv_ss_18$U, 
+hist(lexdiv_ss_1850$U, 
      main = "Uber's Index: Mid 1800s", 
      xlab = "Uber's Index", 
      col = "lightgreen", 
@@ -427,7 +566,7 @@ hist(lexdiv_ss_18$U,
      breaks = 10)  
 
 # Histogram for Uber's Index in 1950s
-hist(lexdiv_ss_19$U, 
+hist(lexdiv_ss_1950$U, 
      main = "Uber's Index: Mid 1900s", 
      xlab = "Uber's Index", 
      col = "lightgreen", 
