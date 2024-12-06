@@ -211,55 +211,11 @@ short_stories_1925_corpus <- data.frame(doc_id = years_1925_q, text = years_1925
 short_stories_1950_corpus <- data.frame(doc_id = years_1950_q, text = years_1950) %>%
    mutate(text = preprocess_text(text)) %>%
    corpus()
-
-dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
-
-dfm_short_stories_1850 <- dfm_remove(dfm(tokens(short_stories_1850_corpus)), stopwords("en"))
-
-dfm_short_stories_1875 <- dfm_remove(dfm(tokens(short_stories_1875_corpus)), stopwords("en"))
-
-dfm_short_stories_1900 <- dfm_remove(dfm(tokens(short_stories_1900_corpus)), stopwords("en"))
-
-dfm_short_stories_1925 <- dfm_remove(dfm(tokens(short_stories_1925_corpus)), stopwords("en"))
-
-dfm_short_stories_1950 <- dfm_remove(dfm(tokens(short_stories_1950_corpus)), stopwords("en"))
 ```
 
 ```{r}
-tokens_list <- tokens(short_stories_corpus)
-tokens_lexical <- tokens_select(tokens_list, pattern = stopwords("en"), selection = "remove")
-```
+### calculation of total words per set of texts
 
-```{r}
-calculate_asl <- function(text) {
-   unlist(str_split(text, pattern = "\\.\\s*")) %>%
-    sapply(function(x) str_count(x, "\\w+")) %>%
-    mean()
-}
-
-
-calculate_awl <- function(tokens) {
-  tokens %>%
-    tokens(what = "word") %>%
-    as.list() %>%
-    unlist() %>%
-    nchar() %>%
-    mean()
-}
-
-# results <- tibble(
-#   Year = years_q,
-#   ASL = sapply(years, calculate_asl),
-#   AWL = sapply(short_stories_corpus, calculate_awl)
-# )
-# 
-# results %>%
-#   arrange(Year) %>%
-#   print()
-
-```
-
-```{r}
 all_text_1850 <- paste(txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859)
 words_1850 <- unlist(strsplit(all_text_1850, "\\s+"))
 total_word_count1850s <- length(words_1850)
@@ -276,13 +232,10 @@ all_text_1925 <- paste(txt_1917, txt_1919, txt_1922, txt_1922b, txt_1922c, txt_1
 words_1925 <- unlist(strsplit(all_text_1925, "\\s+"))
 total_word_count1925s <- length(words_1925)
 
-all_text1950 <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
-words1950s <- unlist(strsplit(all_text1950, "\\s+"))
+all_text_1950 <- paste(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955)
+words1950s <- unlist(strsplit(all_text_1950, "\\s+"))
 total_word_count1950s <- length(words1950s)
 
-```
-
-```{r}
 word_count_1842 <- length(unlist(strsplit(txt_1842, "\\s+")))
 word_count_1852 <- length(unlist(strsplit(txt_1852, "\\s+")))
 word_count_1852b <- length(unlist(strsplit(txt_1852b, "\\s+")))
@@ -430,6 +383,24 @@ We examined lexical diversity using three different measurements - Carroll's Cor
 
 ```{r, fig.cap="Distributions of Average Sentence Length", out.height = "30%"}
 par(mfrow = c(1, 2)) 
+#### Calculations of mean sentence and word length
+
+calculate_asl <- function(text) {
+   unlist(str_split(text, pattern = "\\.\\s*")) %>%
+    sapply(function(x) str_count(x, "\\w+")) %>%
+    mean()
+}
+
+
+calculate_awl <- function(tokens) {
+  tokens %>%
+    tokens(what = "word") %>%
+    as.list() %>%
+    unlist() %>%
+    nchar() %>%
+    mean()
+}
+
 
 # Histogram for the 1850s
 hist(data_1850s$ASL, 
@@ -482,21 +453,40 @@ As shown in the histograms in Figure 2, the distributions for the mid 1800s and 
 
 ```{r}
 # Calculate lexical density for each text
+
+calculate_lexical_density <- function(texts) {
+  token <- tokens(texts)
+  token_lex <- tokens_select(token, pattern=stopwords("en"), selection = "remove")
+  total_words <- ntoken(token)
+  lexical_words <- ntoken(token_lex)
+  lex_density <- lexical_words / total_words
+  
+  return(lex_density)
+}
+
+tokens_list <- tokens(short_stories_corpus)
+tokens_lexical <- tokens_select(tokens_list, pattern = stopwords("en"), selection = "remove")
+
 total_words <- ntoken(tokens_list)
 lexical_words <- ntoken(tokens_lexical)
 lexical_density <- lexical_words / total_words
 
+density_1850 <- calculate_lexical_density(all_text_1850)
+density_1875 <- calculate_lexical_density(all_text_1875)
+density_1900 <- calculate_lexical_density(all_text_1900)
+density_1925 <- calculate_lexical_density(all_text_1925)
+density_1950 <- calculate_lexical_density(all_text_1950)
+Lexical_Density <- c(density_1850[[1]], density_1875[[1]], density_1900[[1]], density_1925[[1]], density_1950[[1]])
+
 lexical_density_data <- data.frame(
-  Decade = c("Mid 1800s", "Mid 1900s"),
-  Lexical_Density = c(0.481744825, 0.4976068)
+  Decade = c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s"),
+  Lexical_Density = Lexical_Density
 )
 
 colnames(lexical_density_data) <- c("Time Period", "Lexical Diversity")
 
 kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s and Mid 1900s")
 
-#0.481744825 is the average for 1850s
-#0.4976068 is the average for 1950s
 ```
 
 From Table 2, the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
@@ -504,9 +494,28 @@ From Table 2, the average lexical density for the texts from the mid 1800s is 0.
 ## Lexical Diversity
 
 ```{r}
-lexdiv_ss_1850 <- textstat_lexdiv(dfm_short_stories_1850, measure = c("CTTR", "U", "K", "Mass"))
+dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
 
-lexdiv_ss_195050 <- textstat_lexdiv(dfm_short_stories_1950, measure = c("CTTR", "U", "K", "Mass"))
+dfm_short_stories_1850 <- dfm_remove(dfm(tokens(short_stories_1850_corpus)), stopwords("en"))
+
+dfm_short_stories_1875 <- dfm_remove(dfm(tokens(short_stories_1875_corpus)), stopwords("en"))
+
+dfm_short_stories_1900 <- dfm_remove(dfm(tokens(short_stories_1900_corpus)), stopwords("en"))
+
+dfm_short_stories_1925 <- dfm_remove(dfm(tokens(short_stories_1925_corpus)), stopwords("en"))
+
+dfm_short_stories_1950 <- dfm_remove(dfm(tokens(short_stories_1950_corpus)), stopwords("en"))
+
+lexdiv_ss_1850 <- textstat_lexdiv(dfm_short_stories_1850, measure = c("CTTR", "U", "K"))
+
+lexdiv_ss_1875 <- textstat_lexdiv(dfm_short_stories_1875, measure = c("CTTR", "U", "K"))
+
+lexdiv_ss_1900 <- textstat_lexdiv(dfm_short_stories_1900, measure = c("CTTR", "U", "K"))
+
+lexdiv_ss_1925 <- textstat_lexdiv(dfm_short_stories_1925, measure = c("CTTR", "U", "K"))
+
+lexdiv_ss_1950 <- textstat_lexdiv(dfm_short_stories_1950, measure = c("CTTR", "U", "K"))
+
 
 ### CTTR is the Corrected Type Token Ratio --> tells us lexical diversity corrected for text length
 
@@ -514,25 +523,29 @@ lexdiv_ss_195050 <- textstat_lexdiv(dfm_short_stories_1950, measure = c("CTTR", 
 
 ### K is Yule's K --> quantifies the unevenness in the frequency distribution of words in a text; focuses on the distribution of unique words' frequencies
 
+cttr <- function(lexdiv) {
+  return(round(mean(lexdiv$CTTR), 3))
+}
 
-lex_div_res <- data.frame(
-  Decade = c("Mid 1800s", "Mid 1900s"),
-  CTTR = c( round(mean(lexdiv_ss_1850$CTTR), 3),
-                   round(mean(lexdiv_ss_1950$CTTR), 3)
-  ),
-  Uber_Index = c(round(mean(lexdiv_ss_1850$U), 3),
-                round(mean(lexdiv_ss_1950$U), 3)
-  ),
-  Yule_index = c(round(mean(lexdiv_ss_1850$K), 3),
-                round(mean(lexdiv_ss_1950$K), 3)
-  )
-)
+u <- function(lexdiv) {
+  return(round(mean(lexdiv$U), 3))
+}
+
+k <- function(lexdiv) {
+  return(round(mean(lexdiv$K), 3))
+}
+
+Decade = c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s")
+CTTR = c(cttr(lexdiv_ss_1850), cttr(lexdiv_ss_1875), cttr(lexdiv_ss_1900), cttr(lexdiv_ss_1925), cttr(lexdiv_ss_1950))
+Uber_Index = c(u(lexdiv_ss_1850), u(lexdiv_ss_1875), u(lexdiv_ss_1900), u(lexdiv_ss_1925), u(lexdiv_ss_1950))
+Yule_Index = c(k(lexdiv_ss_1850), k(lexdiv_ss_1875), k(lexdiv_ss_1900), k(lexdiv_ss_1925), k(lexdiv_ss_1950))
+
+lex_div_res <- data.frame(Decade,CTTR,Uber_Index,Yule_Index)
 
 colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index", "Yule's K")
 
 
 kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mid 1900s")
-
 
 ```
 
