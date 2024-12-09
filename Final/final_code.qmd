@@ -551,6 +551,36 @@ kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mi
 
 As seen in Table 3, for the CTTR and Uber's Index, the value from the mid 1800s is higher than that of the mid 1900s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
 
+```{r}
+# t test for CTTR for consecutive periods
+t_test_1850_75 <- t.test(lexdiv_ss_1850$CTTR, lexdiv_ss_1875$CTTR)
+t_test_18_19 <- t.test(lexdiv_ss_1875$CTTR, lexdiv_ss_1900$CTTR)
+t_test_1900_25 <- t.test(lexdiv_ss_1900$CTTR, lexdiv_ss_1925$CTTR)
+t_test_1925_50 <- t.test(lexdiv_ss_1925$CTTR, lexdiv_ss_1950$CTTR)
+
+# t test for CTTR for end periods
+t_test_1850_1950 <- t.test(lexdiv_ss_1850$CTTR, lexdiv_ss_1950$CTTR)
+
+#Uber's Index t test for consecutive periods
+u_t_test_1850_75 <- t.test(lexdiv_ss_1850$U, lexdiv_ss_1875$U)
+u_t_test_18_19 <- t.test(lexdiv_ss_1875$U, lexdiv_ss_1900$U)
+u_t_test_1900_25 <- t.test(lexdiv_ss_1900$U, lexdiv_ss_1925$U)
+u_t_test_1925_50 <- t.test(lexdiv_ss_1925$U, lexdiv_ss_1950$U)
+
+#Uber's index end periods
+u_t_test_1850_1950 <- t.test(lexdiv_ss_1850$U, lexdiv_ss_1950$U)
+
+#Yule's K t test for consecutive periods
+K_t_test_1850_75 <- t.test(lexdiv_ss_1850$K, lexdiv_ss_1875$K)
+K_t_test_18_19 <- t.test(lexdiv_ss_1875$K, lexdiv_ss_1900$K)
+K_t_test_1900_25 <- t.test(lexdiv_ss_1900$K, lexdiv_ss_1925$K)
+K_t_test_1925_50 <- t.test(lexdiv_ss_1925$K, lexdiv_ss_1950$K)
+
+#Yule's K end periods
+K_t_test_1850_1950 <- t.test(lexdiv_ss_1850$K, lexdiv_ss_1950$K)
+
+```
+
 ```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
 par(mfrow = c(2, 2))  # Layout for 2x2 histograms
 
