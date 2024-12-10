@@ -413,7 +413,7 @@ From Table 1, we observe that the number of texts per time period is relatively 
 
 For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262).
 
-First, average sentence and word lengths of each of the texts from the mid 1800s and mid 1900s were examined. This was done by analyzing histograms for each period, which offered a general overview of the two comparable periods.
+First, average sentence and word length of each of the texts between the mid 1800s and mid 1900s were examined. This was done by analyzing scatter plots of average word length and average sentence length over the years in which the short stories were written, which offered a general overview of the changes over the periods.
 
 Average lexical density and average lexical diversity were then examined for the two periods. Lexical density and diversity were chosen because they are measurements for lexical complexity. The averages were used in order to draw a comparison between time periods.
 
@@ -427,7 +427,7 @@ Finally, we looked at lexical sophistication using 2 measurements. The first met
 
 ## Average Sentence and Word Length
 
-```{r fig.cap="Average Sentence Length of Short Stories from mid 1800s to mid 1900s", out.height = "40%"}
+```{r fig.cap="Average Sentence Length of Short Stories from mid 1800s to mid 1900s", out.height = "30%"}
 library(stringr)
 library(dplyr)
 library(ggplot2)
@@ -467,7 +467,7 @@ ggplot(metrics, aes(x = Year, y = Avg_Sentence_Length, group = 1)) +
 
 ```
 
-```{r fig.cap="Average Word Length of Short Stories from mid 1800s to mid 1900s", out.height = "40%"}
+```{r fig.cap="Average Word Length of Short Stories from mid 1800s to mid 1900s", out.height = "30%"}
 # Plot Average Word Length over Time
 ggplot(metrics, aes(x = Year, y = Avg_Word_Length, group = 1)) +
   geom_line(color = "red") +
