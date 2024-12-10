@@ -729,7 +729,11 @@ Looking at Table 7, the COCA Log Frequency values show a slight increase from th
 
 # Discussion
 
-From our exploration, we determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. The histograms also showed that sentences from the mid 1800s were on average longer than sentences from the mid 1900s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially explaining a wider preference for short stories from later time periods. 
+From our exploration, we found a decreasing trend in average sentence length and a slight decreasing trend in average word length over time. This could indicate that short stories have become easier to read as sentences have gotten shorter and words have gotten shorter. 
+
+We also determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. We also found that lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for CTTR and Yule's K metrics. We found that Uber's Index did not have a significant change between the time periods, but this could be due to the differing ways in which all the metrics are computed. 
+
+Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because our data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication). Future analyses could include computing t-tests to assess the significance of changes in lexical sophistication.
 
 However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
 
