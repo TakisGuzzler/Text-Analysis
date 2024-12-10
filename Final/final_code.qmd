@@ -529,7 +529,7 @@ lexical_density_data <- data.frame(
   Lexical_Density = Lexical_Density
 )
 
-colnames(lexical_density_data) <- c("Time Period", "Lexical Diversity")
+colnames(lexical_density_data) <- c("Time Period", "Lexical Density")
 
 kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s and Mid 1900s")
 
