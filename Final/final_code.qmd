@@ -739,6 +739,94 @@ However, it is important to note that due to the small sample size, we do not ha
 
 A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
 
+## Grammatical Complexity 
+
+```{r, include=FALSE}
+nps_nouns_1850s <- read_csv("annotations_nps/simple_nouns/nps_1850s.csv")
+nps_nouns_1875s <- read_csv("annotations_nps/simple_nouns/nps_1875s.csv")
+nps_nouns_1900s <- read_csv("annotations_nps/simple_nouns/nps_1900s.csv")
+nps_nouns_1925s <- read_csv("annotations_nps/simple_nouns/nps_1925s.csv")
+nps_nouns_1950s <- read_csv("annotations_nps/simple_nouns/nps_1950s.csv")
+
+nps_verbs_1850s <- read_csv("annotations_nps/simple_verbs/nps_simple_verbs_1850s.csv")
+nps_verbs_1875s <- read_csv("annotations_nps/simple_verbs/nps_simple_verbs_1875s.csv")
+nps_verbs_1900s <- read_csv("annotations_nps/simple_verbs/nps_simple_verbs_1900s.csv")
+nps_verbs_1925s <- read_csv("annotations_nps/simple_verbs/nps_simple_verbs_1925s.csv")
+nps_verbs_1950s <- read_csv("annotations_nps/simple_verbs/nps_simple_verbs_1950s.csv")
+
+gen_table <- function(nps){
+  nps_count <- nrow(nps)
+  nps_AN <- nrow(nps %>% filter(pattern == 'AN'))
+  nps_NN <- nrow(nps %>% filter(pattern == 'NN'))
+  nps_P <- nrow(nps %>% filter(grepl('P', pattern)))
+  nps_not <- nrow(nps %>% filter(!grepl('P', pattern), pattern != 'NN', pattern != 'AN'))
+  pattern_counts <- data.frame(Pattern = c('AN', 'NN', 'P', '*'), AF= c(nps_AN, nps_NN, nps_P, nps_not)) %>% mutate(RF = AF/nrow(nps)*100)
+  
+  return(pattern_counts)
+}
+
+table_1850 <- gen_table(nps_nouns_1850s)
+table_1875 <- gen_table(nps_nouns_1875s)
+table_1900 <- gen_table(nps_nouns_1900s)
+table_1925 <- gen_table(nps_nouns_1925s)
+table_1950 <- gen_table(nps_nouns_1950s)
+
+gen_df <- function(table_1850, table_1875, table_1900, table_1925, table_1950, pattern) {
+  table_1850 <- table_1850 %>% filter(Pattern==pattern)
+  table_1875 <- table_1875 %>% filter(Pattern==pattern)
+  table_1900 <- table_1900 %>% filter(Pattern==pattern)
+  table_1925 <- table_1925 %>% filter(Pattern==pattern)
+  table_1950 <- table_1950 %>% filter(Pattern==pattern)
+  
+  pattern_counts <- data.frame(decade = c(1850, 1875, 1900, 1925, 1950),
+                                RF = c(table_1850$RF, table_1875$RF, table_1900$RF, table_1925$RF, table_1950$RF))
+  
+  return(pattern_counts)
+  
+}
+
+df_AN <- gen_df(table_1850, table_1875, table_1900, table_1925, table_1950, "AN")
+df_NN <- gen_df(table_1850, table_1875, table_1900, table_1925, table_1950, "NN")
+df_P <- gen_df(table_1850, table_1875, table_1900, table_1925, table_1950, "P")
+
+```
+
+```{r}
+
+ggplot(df_AN, aes(x = decade, y = RF, group = 1)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  labs(
+    title = "Relative Frequence of Grammatical Adjective Noun Pattern Over Time",
+    x = "Year",
+    y = "Relative Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  labs(
+    title = "Relative Frequence of Grammatical Noun Noun Pattern Over Time",
+    x = "Year",
+    y = "Relative Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ggplot(df_P, aes(x = decade, y = RF, group = 1)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  labs(
+    title = "Relative Frequence of Prepositional Use Over Time",
+    x = "Year",
+    y = "Relative Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
 
 # Acknowledgments {.appendix}
 
