@@ -637,7 +637,7 @@ kable(lex_div_res, caption = "Average Lexical Diversity for the Mid 1800s and Mi
 
 ```
 
-As seen in Table 3, for the CTTR and Uber's Index, the value from the mid 1800s is higher than that of the mid 1900s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
+As seen in Table 4, for the CTTR and Uber's Index, the value from the mid 1800s is higher than that of the mid 1900s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
 
 ```{r}
 # t test for CTTR for consecutive periods
@@ -725,7 +725,7 @@ kable(res, caption = "Average Log Range and Log Frequency between the Mid 1800s 
 
 ```
 
-Looking at Table 4, the COCA Log Frequency values show a slight increase from the mid-1800s to the mid-1900s, suggesting a gradual rise in the use of more everyday vocabulary. Meanwhile, the COCA Log Range values show a slight decrease across these periods, stabilizing after the 1900s, indicating a smaller range of word diversity. Together, these trends point to a general decrease in lexical sophistication, although the differences are small. Therefore, additional data would be needed to draw more definitive conclusions.
+Looking at Table 7, the COCA Log Frequency values show a slight increase from the mid-1800s to the mid-1900s, suggesting a gradual rise in the use of more everyday vocabulary. Meanwhile, the COCA Log Range values show a slight decrease across these periods, stabilizing after the 1900s, indicating a smaller range of word diversity. Together, these trends point to a general decrease in lexical sophistication, although the differences are small. Therefore, additional data would be needed to draw more definitive conclusions.
 
 # Discussion
 
