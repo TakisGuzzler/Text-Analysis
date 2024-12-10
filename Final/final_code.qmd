@@ -742,6 +742,8 @@ A future analysis could include more time periods and a larger variety of texts 
 ## Grammatical Complexity 
 
 ```{r, include=FALSE}
+###error bars
+
 nps_nouns_1850s <- read_csv("annotations_nps/simple_nouns/nps_1850s.csv")
 nps_nouns_1875s <- read_csv("annotations_nps/simple_nouns/nps_1875s.csv")
 nps_nouns_1900s <- read_csv("annotations_nps/simple_nouns/nps_1900s.csv")
@@ -791,42 +793,50 @@ df_P <- gen_df(table_1850, table_1875, table_1900, table_1925, table_1950, "P")
 
 ```
 
-```{r}
+```{r fig.cap="Relative Frequency of Grammatical Adjective Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_AN, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
   labs(
-    title = "Relative Frequence of Grammatical Adjective Noun Pattern Over Time",
     x = "Year",
     y = "Relative Frequency"
   ) +
+  ylim(0, NA)+
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+```{r fig.cap="Relative Frequency of Grammatical Noun Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
   labs(
-    title = "Relative Frequence of Grammatical Noun Noun Pattern Over Time",
     x = "Year",
     y = "Relative Frequency"
   ) +
+  ylim(0, NA) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r fig.cap="Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "30%"}
 
 ggplot(df_P, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
   labs(
-    title = "Relative Frequence of Prepositional Use Over Time",
     x = "Year",
     y = "Relative Frequency"
   ) +
+  ylim(0, NA) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
+
 
 # Acknowledgments {.appendix}
 
