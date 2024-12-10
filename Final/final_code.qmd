@@ -677,7 +677,6 @@ K_t_test_1925_50 <- t.test(lexdiv_ss_1925$K, lexdiv_ss_1950$K)
 K_t_test_1850_1950 <- t.test(lexdiv_ss_1850$K, lexdiv_ss_1950$K)
 
 ```
-
 ```{r}
 # CTTR t-tests
 cttr_results <- data.frame(
@@ -709,14 +708,14 @@ k_results <- data.frame(
 # Displaying the results with kable
 kable(cttr_results, caption = "CTTR t-test Results")
 
-kable(uber_results, caption = "Uber's Index t-test Results")
+# kable(uber_results, caption = "Uber's Index t-test Results")
 
 kable(k_results, caption = "Yule's K t-test Results")
 
 
 ```
 
-From Tables 4 through 6, we see that individual pairwise comparisons of consecutive years are not significant, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127, the p-value for Uber's Index t-test is 0.137, and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans.
+From Tables 5 and 6, we see that individual pairwise comparisons of consecutive years are not significant for CTTR and Yule's K, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127 and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans for these two metrics. The p-values from the t-tests for Uber's Index were considerably larger than the significance level $\alpha = 0.05$, indicating that the differences were not statistically significant.
 
 ## Lexical Sophistication
 
