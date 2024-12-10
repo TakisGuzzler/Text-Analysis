@@ -627,6 +627,47 @@ K_t_test_1850_1950 <- t.test(lexdiv_ss_1850$K, lexdiv_ss_1950$K)
 
 ```
 
+
+```{r}
+# CTTR t-tests
+cttr_results <- data.frame(
+  Comparison = c("1850 vs 1875", "1875 vs 1900", "1900 vs 1925", "1925 vs 1950", "1850 vs 1950"),
+  t_statistic = c(t_test_1850_75$statistic, t_test_18_19$statistic, t_test_1900_25$statistic, 
+                  t_test_1925_50$statistic, t_test_1850_1950$statistic),
+  p_value = c(t_test_1850_75$p.value, t_test_18_19$p.value, t_test_1900_25$p.value, 
+              t_test_1925_50$p.value, t_test_1850_1950$p.value)
+)
+
+# Uber's Index t-tests
+uber_results <- data.frame(
+  Comparison = c("1850 vs 1875", "1875 vs 1900", "1900 vs 1925", "1925 vs 1950", "1850 vs 1950"),
+  t_statistic = c(u_t_test_1850_75$statistic, u_t_test_18_19$statistic, u_t_test_1900_25$statistic, 
+                  u_t_test_1925_50$statistic, u_t_test_1850_1950$statistic),
+  p_value = c(u_t_test_1850_75$p.value, u_t_test_18_19$p.value, u_t_test_1900_25$p.value, 
+              u_t_test_1925_50$p.value, u_t_test_1850_1950$p.value)
+)
+
+# Yule's K t-tests
+k_results <- data.frame(
+  Comparison = c("1850 vs 1875", "1875 vs 1900", "1900 vs 1925", "1925 vs 1950", "1850 vs 1950"),
+  t_statistic = c(K_t_test_1850_75$statistic, K_t_test_18_19$statistic, K_t_test_1900_25$statistic, 
+                  K_t_test_1925_50$statistic, K_t_test_1850_1950$statistic),
+  p_value = c(K_t_test_1850_75$p.value, K_t_test_18_19$p.value, K_t_test_1900_25$p.value, 
+              K_t_test_1925_50$p.value, K_t_test_1850_1950$p.value)
+)
+
+# Displaying the results with kable
+kable(cttr_results, caption = "CTTR t-test Results")
+
+kable(uber_results, caption = "Uber's Index t-test Results")
+
+kable(k_results, caption = "Yule's K t-test Results")
+
+
+```
+
+From Tables 4 through 6, we see that individual pairwise comparisons of consecutive years are not significant, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127, the p-value for Uber's Index t-test is 0.137, and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans.
+
 ```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
 par(mfrow = c(2, 2))  # Layout for 2x2 histograms
 
