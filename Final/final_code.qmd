@@ -533,7 +533,7 @@ kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s
 
 ```
 
-From Table 2, the average lexical density for the texts from the mid 1800s is 0.4817, while for the 1950s, it is 0.4976. This indicates a small increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal difference between the two time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+From Table 2, the average lexical density of the texts from the mid-1800s is 0.5539, compared to 0.5768 in the mid-1900s. The intermediate values between these periods also show a general upward trend. This indicates a slight increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal differences between the time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
 
 ## Lexical Diversity
 
