@@ -427,73 +427,64 @@ Finally, we looked at lexical sophistication using 2 measurements. The first met
 
 ## Average Sentence and Word Length
 
-```{r, fig.cap="Distributions of Average Sentence Length", out.height = "30%"}
-par(mfrow = c(1, 2)) 
-#### Calculations of mean sentence and word length
+```{r fig.cap="Average Sentence Length of Short Stories from mid 1800s to mid 1900s", out.height = "40%"}
+library(stringr)
+library(dplyr)
+library(ggplot2)
 
 calculate_asl <- function(text) {
-   unlist(str_split(text, pattern = "\\.\\s*")) %>%
+  unlist(str_split(text, pattern = "\\.\\s*")) %>%
     sapply(function(x) str_count(x, "\\w+")) %>%
-    mean()
+    mean(na.rm = TRUE)
 }
 
-
-calculate_awl <- function(tokens) {
-  tokens %>%
-    tokens(what = "word") %>%
-    as.list() %>%
-    unlist() %>%
-    nchar() %>%
-    mean()
+calculate_awl <- function(text) {
+  tokens(text, what = "word") %>%  # Tokenize the text into words
+    as.list() %>%                 # Convert to a list
+    unlist() %>%                  # Flatten the list to a vector of words
+    nchar() %>%                   # Count characters in each word
+    mean(na.rm = TRUE)            # Calculate the mean word length
 }
 
+# Compute ASL and AWL for each text
+metrics <- data.frame(
+  Year = years_q,
+  Avg_Sentence_Length = sapply(years, calculate_asl),
+  Avg_Word_Length = sapply(years, calculate_awl)
+)
 
-# Histogram for the 1850s
-hist(data_1850s$ASL, 
-     main = "Avg. Sentence Length: Mid 1800s", 
-     xlab = "Average Sentence Length", 
-     col = "lightblue", 
-     border = "black", 
-     breaks = 5, 
-     cex.main = 0.90)  
-
-# Histogram for the 1950s
-hist(data_1950s$ASL, 
-     main = "Avg. Sentence Length: Mid 1900s", 
-     xlab = "Average Sentence Length", 
-     col = "lightgreen", 
-     border = "black", 
-     breaks = 5, 
-     cex.main = 0.90)  # Adjust title font size
+# Plot Average Sentence Length over Time
+ggplot(metrics, aes(x = Year, y = Avg_Sentence_Length, group = 1)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  labs(
+    title = "Average Sentence Length Over Time",
+    x = "Year",
+    y = "Average Sentence Length (Words)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
 
-```{r, fig.cap="Distributions of Average Word Length", out.height = "30%"}
-par(mfrow = c(1, 2)) 
-
-# Histogram for the 1850s
-hist(data_1850s$AWL, 
-     main = "Avg. Word Length: Mid 1800s", 
-     xlab = "Average Word Length", 
-     col = "lightblue", 
-     border = "black", 
-     breaks = 5, 
-     cex.main = 0.90)
-
-# Histogram for the 1950s
-hist(data_1950s$AWL, 
-     main = "Avg. Word Length: Mid 1900s", 
-     xlab = "Average Word Length", 
-     col = "lightgreen", 
-     border = "black", 
-     breaks = 5, 
-     cex.main = 0.90)
+```{r fig.cap="Average Word Length of Short Stories from mid 1800s to mid 1900s", out.height = "40%"}
+# Plot Average Word Length over Time
+ggplot(metrics, aes(x = Year, y = Avg_Word_Length, group = 1)) +
+  geom_line(color = "red") +
+  geom_point(color = "red") +
+  labs(
+    title = "Average Word Length Over Time",
+    x = "Year",
+    y = "Average Word Length (Characters)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
 
-The histograms in Figure 1 reveal that most texts from the mid 1800s have an average sentence length between 20 and 35 words, indicating a potential preference for longer sentences during this period. In contrast, the distribution of average sentence lengths in the mid 1900s is more even, with most of the texts falling between 0 and 15 words, reflecting a possible shift towards shorter sentences.
+The graph in Figure 1 suggests a potential decreasing trend in average sentence length over time. From the mid-1800s to the mid-1900s, the average sentence length of short stories appears to have generally decreased, with a few outliers, such as the short story from 1919. This could indicate that short stories have become easier to read as sentences have gotten shorter. 
 
-As shown in the histograms in Figure 2, the distributions for the mid 1800s and mid 1900s are similar. In both time periods, the average word length ranges from 3.6 to 4.8 characters per word.
+The graph in Figure 2 suggests a slight decreasing trend in average word length over time. From the mid-1800s to the mid-1900s, the average word length of short stories seems to have slightly decreased, with a few outliers, such as the short story from 1922. This could suggest that short stories are becoming easier to read as words are slightly shorter. However, it's important to note that the difference in average word length is relatively small, ranging from around 3 to 4 characters, which may not be a significant change.
 
 ## Lexical Density
 
