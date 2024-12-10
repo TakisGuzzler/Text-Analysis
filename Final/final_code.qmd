@@ -1,5 +1,5 @@
 ---
-title: "Final Report"
+title: "An Investigation into the Change in Short Story Language Complexity over a 100 Year Period"
 author: "Amalia, Lauren, and Jenny"
 date: last-modified
 format:
@@ -727,21 +727,11 @@ kable(res, caption = "Average Log Range and Log Frequency between the Mid 1800s 
 
 Looking at Table 7, the COCA Log Frequency values show a slight increase from the mid-1800s to the mid-1900s, suggesting a gradual rise in the use of more everyday vocabulary. Meanwhile, the COCA Log Range values show a slight decrease across these periods, stabilizing after the 1900s, indicating a smaller range of word diversity. Together, these trends point to a general decrease in lexical sophistication, although the differences are small. Therefore, additional data would be needed to draw more definitive conclusions.
 
-# Discussion
-
-From our exploration, we found a decreasing trend in average sentence length and a slight decreasing trend in average word length over time. This could indicate that short stories have become easier to read as sentences have gotten shorter and words have gotten shorter. 
-
-We also determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. We also found that lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for CTTR and Yule's K metrics. We found that Uber's Index did not have a significant change between the time periods, but this could be due to the differing ways in which all the metrics are computed. 
-
-Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because our data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication). Future analyses could include computing t-tests to assess the significance of changes in lexical sophistication.
-
-However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
-
-A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
-
 ## Grammatical Complexity 
 
 ```{r, include=FALSE}
+###error bars
+
 nps_nouns_1850s <- read_csv("annotations_nps/simple_nouns/nps_1850s.csv")
 nps_nouns_1875s <- read_csv("annotations_nps/simple_nouns/nps_1875s.csv")
 nps_nouns_1900s <- read_csv("annotations_nps/simple_nouns/nps_1900s.csv")
@@ -791,42 +781,63 @@ df_P <- gen_df(table_1850, table_1875, table_1900, table_1925, table_1950, "P")
 
 ```
 
-```{r}
+```{r fig.cap="Relative Frequency of Grammatical Adjective Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_AN, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
   labs(
-    title = "Relative Frequence of Grammatical Adjective Noun Pattern Over Time",
     x = "Year",
     y = "Relative Frequency"
   ) +
+  ylim(0, NA)+
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+```{r fig.cap="Relative Frequency of Grammatical Noun Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
   labs(
-    title = "Relative Frequence of Grammatical Noun Noun Pattern Over Time",
     x = "Year",
     y = "Relative Frequency"
   ) +
+  ylim(0, NA) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r fig.cap="Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "30%"}
 
 ggplot(df_P, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
   labs(
-    title = "Relative Frequence of Prepositional Use Over Time",
     x = "Year",
     y = "Relative Frequency"
   ) +
+  ylim(0, NA) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
+
+
+# Discussion
+
+From our exploration, we found a decreasing trend in average sentence length and a slight decreasing trend in average word length over time. This could indicate that short stories have become easier to read as sentences have gotten shorter and words have gotten shorter. 
+
+We also determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. We also found that lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for CTTR and Yule's K metrics. We found that Uber's Index did not have a significant change between the time periods, but this could be due to the differing ways in which all the metrics are computed. 
+
+Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because our data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication). Future analyses could include computing t-tests to assess the significance of changes in lexical sophistication.
+
+However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
+
+A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
+
 
 # Acknowledgments {.appendix}
 
