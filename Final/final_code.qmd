@@ -663,6 +663,29 @@ hist(lexdiv_ss_1950$U,
 
 For the histograms in Figure 3, we can see that there is no noticeable curves, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
 
+## Lexical Sophistication
+
+```{r}
+coca_log_freq <- c(2.906083957, 2.95844650214, 3.02225345614,3.00776001575, 3.01792395869)
+coca_log_range <- c(-0.48442091233, -0.45705001557, -0.409846593, -0.40724439112, -0.40615305761)
+
+Decade = c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s")
+
+
+colnames(lex_div_res) <- c("Time Period", "COCA Log Range", "Coca Log Frequency")
+
+res <- data.frame(Decade,coca_log_freq,coca_log_range)
+
+kable(res, caption = "Average Log Range and Log Frequency between the Mid 1800s and Mid 1900s")
+
+```
+
+The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. 
+
+The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. 
+
+Looking at Table 4, the COCA Log Frequency values show a slight increase from the mid-1800s to the mid-1900s, suggesting a gradual rise in the use of more everyday vocabulary. Meanwhile, the COCA Log Range values show a slight decrease across these periods, stabilizing after the 1900s, indicating a smaller range of word diversity. Together, these trends point to a general decrease in lexical sophistication, although the differences are small. Therefore, additional data would be needed to draw more definitive conclusions.
+
 # Discussion
 
 From our exploration, we determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. The histograms also showed that sentences from the mid 1800s were on average longer than sentences from the mid 1900s. Thus, there is a likely decrease in lexical complexity of short stories between the two time periods, potentially explaining a wider preference for short stories from later time periods. 
