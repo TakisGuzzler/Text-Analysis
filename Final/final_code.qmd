@@ -535,11 +535,10 @@ kable(lexical_density_data, caption = "Average Lexical Density for the Mid 1800s
 
 ```
 
-From Table 2, the average lexical density of the texts from the mid-1800s is 0.5539, compared to 0.5768 in the mid-1900s. The intermediate values between these periods also show a general upward trend. This indicates a slight increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal differences between the time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
-
-## Lexical Diversity
+From Table 2, the average lexical density of the texts from the mid-1800s is 0.5539, compared to 0.5768 in the mid-1900s. The intermediate values between these periods also show a general upward trend. This indicates a slight increase in lexical density over time, suggesting a slight rise in the proportion of content words in the mid 1900s texts. However, given the minimal differences between the time periods, this change is unlikely to have a significant impact on the readability or complexity of the texts. 
 
 ```{r}
+
 dfm_short_stories <- dfm_remove(dfm(tokens(short_stories_corpus)), stopwords("en"))
 
 dfm_short_stories_1850 <- dfm_remove(dfm(tokens(short_stories_1850_corpus)), stopwords("en"))
@@ -552,6 +551,58 @@ dfm_short_stories_1925 <- dfm_remove(dfm(tokens(short_stories_1925_corpus)), sto
 
 dfm_short_stories_1950 <- dfm_remove(dfm(tokens(short_stories_1950_corpus)), stopwords("en"))
 
+calculate_lexical_density <- function(texts) {
+  tokens_list <- tokens(texts)
+  tokens_lexical <- tokens_select(tokens_list, pattern = stopwords("en"), selection = "remove")
+  total_words <- ntoken(tokens_list)
+  lexical_words <- ntoken(tokens_lexical)
+  lex_density <- lexical_words / total_words
+  return(lex_density)
+}
+
+# Compute lexical density for each corpus
+density_1850 <- calculate_lexical_density(short_stories_1850_corpus)
+density_1875 <- calculate_lexical_density(short_stories_1875_corpus)
+density_1900 <- calculate_lexical_density(short_stories_1900_corpus)
+density_1925 <- calculate_lexical_density(short_stories_1925_corpus)
+density_1950 <- calculate_lexical_density(short_stories_1950_corpus)
+
+
+# Perform pairwise t-tests for defined time periods
+t_test_1850_1875 <- t.test(density_1850, density_1875)
+t_test_1875_1900 <- t.test(density_1875, density_1900)
+t_test_1900_1925 <- t.test(density_1900, density_1925)
+t_test_1925_1950 <- t.test(density_1925, density_1950)
+t_test_entire_century <- t.test(density_1850, density_1950)
+
+# Combine results into a data frame
+pairwise_results <- data.frame(
+  Comparison = c("1850s vs 1875", "1875 vs 1900s", "1900s vs 1925", "1925 vs 1950s", "1850s vs 1950s"),
+  t_statistic = c(
+    t_test_1850_1875$statistic,
+    t_test_1875_1900$statistic,
+    t_test_1900_1925$statistic,
+    t_test_1925_1950$statistic,
+    t_test_entire_century$statistic
+  ),
+  p_value = c(
+    t_test_1850_1875$p.value,
+    t_test_1875_1900$p.value,
+    t_test_1900_1925$p.value,
+    t_test_1925_1950$p.value,
+    t_test_entire_century$p.value
+  )
+)
+
+# Display results in a kable table
+kable(pairwise_results, caption = "Pairwise T-Test Results for Lexical Density Across Time Periods")
+
+```
+This can be seen in Table 3, where the individual pairwise comparisons of consecutive years are not significant, as they have large p-values. This is also true when comparing across a century (1850s vs. 1950s). Thus, testing at a significance level of $\alpha = 0.05$, the differences in lexical densities are not significant. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
+
+## Lexical Diversity
+
+```{r}
 lexdiv_ss_1850 <- textstat_lexdiv(dfm_short_stories_1850, measure = c("CTTR", "U", "K"))
 
 lexdiv_ss_1875 <- textstat_lexdiv(dfm_short_stories_1875, measure = c("CTTR", "U", "K"))
@@ -627,7 +678,6 @@ K_t_test_1850_1950 <- t.test(lexdiv_ss_1850$K, lexdiv_ss_1950$K)
 
 ```
 
-
 ```{r}
 # CTTR t-tests
 cttr_results <- data.frame(
@@ -667,44 +717,6 @@ kable(k_results, caption = "Yule's K t-test Results")
 ```
 
 From Tables 4 through 6, we see that individual pairwise comparisons of consecutive years are not significant, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127, the p-value for Uber's Index t-test is 0.137, and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans.
-
-```{r, fig.cap="Distributions of CTTR and Uber's Index", out.height = "40%"}
-par(mfrow = c(2, 2))  # Layout for 2x2 histograms
-
-# Histogram for CTTR in 1800s
-hist(lexdiv_ss_1850$CTTR, 
-     main = "CTTR: Mid 1800s", 
-     xlab = "CTTR", 
-     col = "lightblue", 
-     border = "black", 
-     breaks = 10)  
-
-# Histogram for CTTR in 1900s
-hist(lexdiv_ss_1950$CTTR, 
-     main = "CTTR: Mid 1900s", 
-     xlab = "CTTR", 
-     col = "lightblue", 
-     border = "black", 
-     breaks = 10)  
-
-# Histogram for Uber's Index in 1800s
-hist(lexdiv_ss_1850$U, 
-     main = "Uber's Index: Mid 1800s", 
-     xlab = "Uber's Index", 
-     col = "lightgreen", 
-     border = "black", 
-     breaks = 10)  
-
-# Histogram for Uber's Index in 1950s
-hist(lexdiv_ss_1950$U, 
-     main = "Uber's Index: Mid 1900s", 
-     xlab = "Uber's Index", 
-     col = "lightgreen", 
-     border = "black", 
-     breaks = 10)  
-```
-
-For the histograms in Figure 3, we can see that there is no noticeable curves, indicating mostly uniform distributions. Notably, the spread for both measures for both years is very similar. Thus, while there are specific texts within each period that greatly contribute to the previously discussed average values, many of the texts are comparably similar in lexical diversity.
 
 ## Lexical Sophistication
 
