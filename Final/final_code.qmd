@@ -41,7 +41,6 @@ nocite: |
 ---
 
 \newpage
-
 # Introduction
 
 This project explores the differences in writing styles between the mid 1800s and the mid 1900s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, word length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
@@ -345,25 +344,70 @@ avg_1850s <- colMeans(data_1850s[, c("ASL", "AWL")])
 avg_1950s <- colMeans(data_1950s[, c("ASL", "AWL")])
 ```
 
-The corpora used for this project are two collections of short stories from the mid 1800s and mid 1900s. The stories from the mid 1800s range from 1830s to 1850s, while the stories from the mid 1900s range from 1940s to 1950s. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
+The corpora used for this project are 5 collections of short stories from the mid 1800s to the mid 1900s. Each collection spans around 25 years. For example, the first collection spans from around the 1850s to 1875. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
+
+The corpus was tokenized by words, where each token represents an individual word. Tokens were standardized by lowercasing and removing special characters, punctuation, etc. There are a total of 44 documents or short stories in the corpus. 
+
+```{r}
+# Function to calculate average word length
+calculate_avg_word_length <- function(text) {
+  words <- unlist(strsplit(text, "\\s+"))
+  total_chars <- sum(nchar(gsub("[[:punct:][:space:]]", "", words)))
+  avg_word_length <- total_chars / length(words)
+  return(avg_word_length)
+}
+
+# Function to calculate average sentence length
+calculate_avg_sentence_length <- function(text) {
+  sentences <- unlist(strsplit(text, "[.!?]+"))
+  words <- unlist(strsplit(text, "\\s+"))
+  avg_sentence_length <- length(words) / length(sentences)
+  return(avg_sentence_length)
+}
+
+# Calculate metrics for each range
+metrics_by_range <- function(texts) {
+  avg_word_lengths <- sapply(texts, calculate_avg_word_length)
+  avg_sentence_lengths <- sapply(texts, calculate_avg_sentence_length)
+  return(list(avg_word_length = mean(avg_word_lengths),
+              avg_sentence_length = mean(avg_sentence_lengths)))
+}
+
+# Example for 1850s
+metrics_1850s <- metrics_by_range(c(txt_1842, txt_1852, txt_1852b, txt_1853, txt_1853b, txt_1858, txt_1859))
+metrics_1875s <- metrics_by_range(c(txt_1866, txt_1868, txt_1869, txt_1870, txt_1877, txt_1884))
+metrics_1900s <- metrics_by_range(c(txt_1891, txt_1892, txt_1894, txt_1897, txt_1902, txt_1905, txt_1908))
+metrics_1925s <- metrics_by_range(c(txt_1917, txt_1919, txt_1922, txt_1922b, txt_1922c, txt_1926, txt_1927, txt_1930))
+metrics_1950s <- metrics_by_range(c(txt_1940, txt_1942, txt_1945, txt_1948, txt_1950, txt_1950b, txt_1950c, txt_1951, txt_1952, txt_1952b, txt_1954, txt_1954b, txt_1955))
+
+```
+
 
 ```{r}
 data <- data.frame(
-  Decade = c("Mid 1800s", "Mid 1900s"),
-  Text_Count = c(8, 13),
-    Total_Word_Count = c(69749, 69935)
-,
-  Mean_Word_Count = c(8718.625, 5379.615),
-  Word_Range = c("2396 - 17574", "762 - 17321"),
- Mean_Average_Sentence_Length = c(25.449367, 15.009800),
-  Mean_Average_Word_Length = c(4.363792, 4.062382)
+  Decade =c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s"),
+  Text_Count = c(9, 7, 7, 8, 13),
+    Total_Word_Count = c(total_word_count1850s, total_word_count1875s, total_word_count1900s, total_word_count1925s, total_word_count1950s),
+  Average_Word_Count = c(average_word_count1850s, average_word_count1875s, average_word_count1900s, average_word_count1925s, average_word_count1950s),
+  Word_Range = c(
+    paste(word_count_range1850s[1], word_count_range1850s[2], sep = " - "),
+    paste(word_count_range1875s[1], word_count_range1875s[2], sep = " - "),
+    paste(word_count_range1900s[1], word_count_range1900s[2], sep = " - "),
+    paste(word_count_range1925s[1], word_count_range1925s[2], sep = " - "),
+    paste(word_count_range1950s[1], word_count_range1950s[2], sep = " - ")
+  ),
+    Avg_Sentence_Length = c(metrics_1850s$avg_sentence_length, metrics_1875s$avg_sentence_length,
+                          metrics_1900s$avg_sentence_length, metrics_1925s$avg_sentence_length,
+                          metrics_1950s$avg_sentence_length),
+    Avg_Word_Length = c(metrics_1850s$avg_word_length, metrics_1875s$avg_word_length,
+                      metrics_1900s$avg_word_length, metrics_1925s$avg_word_length,
+                      metrics_1950s$avg_word_length)
   )
 
 kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s Texts", align = 'c', 
       col.names = c("Time Period", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
-
-From Table 1, we can see that more texts from the mid 1900s were used, but the total word counts for each time period are nearly identical. This means that the average text from the mid 1800s is longer by a significant amount. More interestingly, the average sentence length for stories from the mid 1800s was much longer, and the average word length was slightly longer. Overall these corpora have similar amounts of content that can be used to draw conclusions.
+From Table 1, we observe that the number of texts per time period is relatively even and well-distributed. However, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
