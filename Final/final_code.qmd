@@ -16,34 +16,13 @@ execute:
   echo: false
 bibliography: citation.bib
 nocite: |
-  @the_other_side_of_the_hedge_1945,
-  @the_old_nurses_story_1852,
-  @the_old_man_at_the_bridge_1952,
-  @the_mindworm_1950,
-  @the_masque_of_the_red_death_1842,
-  @the_man_who_killed_the_world_1940,
-  @the_lifted_veil_1859,
-  @the_fall_of_the_house_of_usher_1839,
-  @the_district_doctor_1852,
-  @the_destructors_1954,
-  @the_catbird_seat_1942,
-  @psyche's_art_1858,
-  @master_zacharius_1954,
-  @good_country_people_1955,
-  @gods_in_exile_1853,
-  @first_confession_1950,
-  @coming_attraction_1950,
-  @bartelby_the_scrivener_1853,
-  @a_terribly_strange_bed_1852,
-  @a_sound_of_thunder_1952,
-  @a_perfect_day_for_bananafish,
-  @A_&_P_1951.txt
+  @*
 ---
 
 \newpage
 # Introduction
 
-This project explores the differences in writing styles between the mid 1800s and the mid 1900s, with a focus on why older texts are often harder to understand. By examining a collection of short stories from both periods, we look at how factors like sentence length, word length, lexical density, and lexical diversity may influence the readability of older texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time, and whether these shifts have made texts more accessible or harder to read.
+This project explores the differences in writing styles across a one hundred year period - sorting texts into five 25 year periods from the mid 1800s to the mid 1900s. The project seeks to determine why older texts are often harder to understand and what might have changed through the twentieth century. While examining a collection of short stories across this period, the project look at how factors like sentence length, word length, lexical complexity, and grammatical complexity may change and influence the readability of the texts. This question is interesting because understanding these shifts in writing style can reveal how language and communication have changed over time and whether these shifts have made texts more accessible or harder to read.
 
 # Data
 
@@ -344,9 +323,9 @@ avg_1850s <- colMeans(data_1850s[, c("ASL", "AWL")])
 avg_1950s <- colMeans(data_1950s[, c("ASL", "AWL")])
 ```
 
-The corpora used for this project are 5 collections of short stories from the mid 1800s to the mid 1900s. Each collection spans around 25 years. For example, the first collection spans from around the 1850s to 1875. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis.
+The corpora used for this project are 5 collections of short stories from the mid 1800s to the mid 1900s, totalling 44 documents or short stories. Each collection spans approximately twenty-five years. The first collection spans from approximately the 1840s to 1860s, the second from 1870s to 1890s, the third from 1890s to 1910s, the fourth from 1920s to 1930s, and the fifth from the 1940s to the 1950s. For ease of reference throughout the paper,each period is referenced by 1850s, 1875s, 1900s, 1925s, and 1950s, respectively. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis and had a large breadth of available texts.
 
-The corpus was tokenized by words, where each token represents an individual word. Tokens were standardized by lowercasing and removing special characters, punctuation, etc. There are a total of 44 documents or short stories in the corpus. 
+The corpus was tokenized by words, where each token represents an individual word. Tokens were standardized by lower casing and removing special characters, punctuation, etc. The corpus was also categorized according to part of speech and further split into unique phrases that matched redux patterns for simple noun and verb phrases.
 
 ```{r}
 # Function to calculate average word length
@@ -382,10 +361,10 @@ metrics_1950s <- metrics_by_range(c(txt_1940, txt_1942, txt_1945, txt_1948, txt_
 
 ```
 
-
+\newpage
 ```{r}
 data <- data.frame(
-  Decade =c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s"),
+  Decade =c("1850s", "1875s", "1900s", "1925s", "1950s"),
   Text_Count = c(9, 7, 7, 8, 13),
     Total_Word_Count = c(total_word_count1850s, total_word_count1875s, total_word_count1900s, total_word_count1925s, total_word_count1950s),
   Average_Word_Count = c(average_word_count1850s, average_word_count1875s, average_word_count1900s, average_word_count1925s, average_word_count1950s),
@@ -404,24 +383,30 @@ data <- data.frame(
                       metrics_1950s$avg_word_length)
   )
 
-kable(data, caption = "Word Count Data for Mid 1800s and Mid 1900s Texts", align = 'c', 
+
+kable(data, caption = "Word Count Data for 25 year periods from 1850-1950", align = 'c', 
       col.names = c("Time Period", "Texts", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
-From Table 1, we observe that the number of texts per time period is relatively even and well-distributed. However, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
+From Table 1, we can observe that the number of texts per time period is relatively even and well-distributed. Due to the greater prevalence and recording of short stories as we approach the present day, there are more texts from the period surrounding the 1950s, specifically. However, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
-For our initial analysis, we wanted to determine the complexity of the texts from the different time periods. In order to do so, we analyzed two different common measurements for lexical complexity - lexical density and lexical diversity (@ZHOU2023101262).
+We sought to determine the complexity of the texts from the different time periods and if there was significant change across the time periods. 
 
-First, average sentence and word length of each of the texts between the mid 1800s and mid 1900s were examined. This was done by analyzing scatter plots of average word length and average sentence length over the years in which the short stories were written, which offered a general overview of the changes over the periods.
+## Average Sentence and Word Length
+In order to do so, we first analyzed the average sentence length and word length of each text across the entire 100 year period and displayed them in scatter plots. This offered a general overview of the changes over the periods and insight into the potential impact of each text on the subsequent measures.
 
-Average lexical density and average lexical diversity were then examined for the two periods. Lexical density and diversity were chosen because they are measurements for lexical complexity. The averages were used in order to draw a comparison between time periods.
+## Lexical Complexity
+We then sought to analyze three different common measurements for lexical complexity - lexical density, lexical diversity, and lexical sophistication (@ZHOU2023101262). We used all three measures because they offered an exhaustive exploration of lexical complexity. Specifically, average lexical density, average lexical diversity, and average lexical sophistication were used in order to draw comparison across time periods.
 
 Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. To assess the significance of the observed differences in lexical density across time periods, we conducted t-tests to determine whether the differences were statistically significant.
 
 We examined lexical diversity using three different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). We used these measurements to provide confirmation on the diversity analysis, and they were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. The high score also signifies that unique words are repeated more often within the texts. To assess the significance of the observed differences in lexical diversity  across time periods, we conducted t-tests to determine whether the differences were statistically significant.
 
-Finally, we looked at lexical sophistication using 2 measurements. The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
+We investigated lexical sophistication using two measurements. The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
+
+## Grammatical Complexity
+Finally, we investigated the grammatical complexity of each of the periods. In order to do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases. The unique phrases were matched to two different regex expressions - one for identifying simple noun phrases and another for identifying simple verb phrases. From there, we calculated the relative frequency of four patterns in the text - *AN*, *NN*, and *P*. *AN* matches to Adjective Noun phrases, *NN* matches to Noun Noun phrases, *P* matches to prepositional phrases that include nouns.
 
 # Results
 
@@ -486,7 +471,9 @@ The graph in Figure 1 suggests a potential decreasing trend in average sentence 
 
 The graph in Figure 2 suggests a slight decreasing trend in average word length over time. From the mid-1800s to the mid-1900s, the average word length of short stories seems to have slightly decreased, with a few outliers, such as the short story from 1922. This could suggest that short stories are becoming easier to read as words are slightly shorter. However, it's important to note that the difference in average word length is relatively small, ranging from around 3 to 4 characters, which may not be a significant change.
 
-## Lexical Density
+## Lexical Complexity
+
+### Lexical Density
 
 ```{r}
 # Calculate lexical density for each text
@@ -591,7 +578,7 @@ kable(pairwise_results, caption = "Pairwise T-Test Results for Lexical Density A
 ```
 This can be seen in Table 3, where the individual pairwise comparisons of consecutive years are not significant, as they have large p-values. This is also true when comparing across a century (1850s vs. 1950s). Thus, testing at a significance level of $\alpha = 0.05$, the differences in lexical densities are not significant. A larger dataset would be needed to draw more definitive conclusions, since our sample size is relatively small.
 
-## Lexical Diversity
+### Lexical Diversity
 
 ```{r}
 lexdiv_ss_1850 <- textstat_lexdiv(dfm_short_stories_1850, measure = c("CTTR", "U", "K"))
@@ -708,7 +695,7 @@ kable(k_results, caption = "Yule's K t-test Results")
 
 From Tables 5 and 6, we see that individual pairwise comparisons of consecutive years are not significant for CTTR and Yule's K, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127 and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans for these two metrics. The p-values from the t-tests for Uber's Index were considerably larger than the significance level $\alpha = 0.05$, indicating that the differences were not statistically significant.
 
-## Lexical Sophistication
+### Lexical Sophistication
 
 ```{r}
 coca_log_freq <- c(2.906083957, 2.95844650214, 3.02225345614,3.00776001575, 3.01792395869)
