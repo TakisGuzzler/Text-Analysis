@@ -772,7 +772,7 @@ load("POS_annotations/annotation_1950s.rda")
 ```
 
 
-```{r fig.cap="Increase in Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "31%"}
+```{r fig.cap="Increase in Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "28%"}
 
 #run the following once (doesn't take long)
 sub_anno_list_1850s_nn <- gen_file(annotation_1850s, "NN")
@@ -814,7 +814,7 @@ all_counts_nn <- c(sub_anno_list_1850s_nn_ct, sub_anno_list_1875s_nn_ct, sub_ann
 From Figure 3, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions. We additionally ran a correlation test between the dates and relative frequencies of the phrases. The Pearson Correlation Coefficient for relative frequency of noun + noun phrases over time is $0.0607$, which implies a very slight positive correlation for the data.
 
 
-```{r fig.cap="Decrease in Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "31%"}
+```{r fig.cap="Decrease in Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "28%"}
 #run the following once (doesn't take long)
 sub_anno_list_1850s_an <- gen_file(annotation_1850s, "AN")
 sub_anno_list_1875s_an <- gen_file(annotation_1875s, "AN")
@@ -851,7 +851,7 @@ all_counts_an <- c(sub_anno_list_1850s_an_ct, sub_anno_list_1875s_an_ct, sub_ann
 ```
 From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
 
-```{r fig.cap="Decrease in Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "31%"}
+```{r fig.cap="Decrease in Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "28%"}
 
 sub_anno_list_1850s_p <- gen_file(annotation_1850s, "P")
 sub_anno_list_1875s_p <- gen_file(annotation_1875s, "P")
