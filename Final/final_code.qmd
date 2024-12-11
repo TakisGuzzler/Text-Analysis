@@ -1,6 +1,6 @@
 ---
 title: "An Investigation into the Change in Short Story Language Complexity over a 100 Year Period"
-author: "Amalia, Lauren, and Jenny"
+author: "Amalia Kutin, Lauren Stampfli, and Jenny Ou"
 date: last-modified
 format:
   pdf:
