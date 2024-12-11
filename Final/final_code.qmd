@@ -1,5 +1,5 @@
 ---
-title: "An Investigation into the Change in the Complexity of Short Stories over a 100 Year Period"
+title: "An Investigation into the Change in Short Story Language Complexity over a 100 Year Period"
 author: "Amalia Kutin, Lauren Stampfli, and Jenny Ou"
 date: last-modified
 format:
@@ -323,9 +323,9 @@ avg_1850s <- colMeans(data_1850s[, c("ASL", "AWL")])
 avg_1950s <- colMeans(data_1950s[, c("ASL", "AWL")])
 ```
 
-The corpora used for this project are 5 collections of short stories from the mid 1800s to the mid 1900s, totalling 44 documents or short stories. Each collection spans approximately twenty-five years. The first collection spans from approximately the 1840s to 1860s, the second from 1870s to 1890s, the third from 1890s to 1910s, the fourth from 1920s to 1930s, and the fifth from the 1940s to the 1950s. For ease of reference throughout the paper, each period is referenced by 1850s, 1875s, 1900s, 1925s, and 1950s, respectively. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories chosen come from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis and had a large breadth of available texts.
+The corpora used for this project are 5 collections of short stories from the mid 1800s to the mid 1900s, totalling 44 text files. Each collection is considered to span approximately twenty-five years. The first collection includes texts from approximately the 1840s to 1860s, the second from the 1870s to 1890s, the third from the 1890s to 1910s, the fourth from the 1920s to 1930s, and the fifth from the 1940s to the 1950s. For ease of reference throughout the paper, each period is referenced by 1850s, 1875s, 1900s, 1925s, and 1950s, respectively. Given the dates chosen, almost all available texts are in the public domain and relatively easily accessible. The stories were chosen from a variety of genres and authors and are generally highly rated. Despite the small sample size, the selection of texts attempts to capture the short story literary trends of their times. The stories were primarily sourced from Project Gutenberg, an online repository of over 70,000 eBooks. This site was chosen because it was simple to copy and paste the stories into individual text files for analysis and had a large breadth of available texts.
 
-The corpus was tokenized by words, where each token represents an individual word. Tokens were standardized by lower casing and removing special characters, punctuation, etc. The corpus was also categorized according to part of speech and further split into unique phrases that matched redux patterns for simple noun and verb phrases.
+The corpus was tokenized by words, where each token represents an individual word. Tokens were standardized by lower casing and removing special characters, punctuation, and spacing. The corpus was also categorized according to part of speech and further split into unique phrases that matched adjective+noun, noun+noun, and preposition patterns.
 
 ```{r}
 # Function to calculate average word length
@@ -387,26 +387,26 @@ data <- data.frame(
 kable(data, caption = "Word Count Data for 25 year periods from 1850-1950", align = 'c', 
       col.names = c("Time Period", "Text Count", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
-From Table 1, we can observe that the number of texts per time period is relatively even and well-distributed. Due to the greater prevalence and recording of short stories as we approach the present day, there are more texts from the period surrounding the 1950s, specifically. However, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
+Evidently, the number of texts per time period is relatively even, with more texts for the 1850s and the 1950s. Due to the greater prevalence and recording of short stories as we approach the present day, we were able to select more texts for the period surrounding the 1950s. Comparatively, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, the stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
-We sought to determine the complexity of the texts from the different time periods and if there was significant change across the time periods. 
+We sought to determine the complexity of the texts from the different time periods and if there was significant change across the time periods. To do so, we began by investigating average sentence and word lengths of each of the texts. We followed this by analyzing the lexical and grammatical complexity of each time period, focusing on average values. We split the corpus of short stories into equal periods of 25 years to allow us to view the impact of the stories over the smaller intervals when compared to each other. We did not shrink the periods more, considering the slow movements of language change and did not increase the periods to greater sizes to allow us enough distinct points of comparisons.
 
 ## Average Sentence and Word Length
-In order to do so, we first analyzed the average sentence length and word length of each text across the entire 100 year period and displayed them in scatter plots. This offered a general overview of the changes over the periods and insight into the potential impact of each text on the subsequent measures.
+We first analyzed the average sentence length and word length of each text across the entire 100 year period and displayed them in scatter plots. For the purpose of displaying additional texts from the same year, we placed these data points sequentially in the plot. The plot was otherwise organized by year. This offered a general overview of the changes over the periods and insight into the potential impact of each text on the subsequent measures.
 
 ## Lexical Complexity
 We then sought to analyze three different common measurements for lexical complexity - lexical density, lexical diversity, and lexical sophistication (@ZHOU2023101262). We used all three measures because they offered an exhaustive exploration of lexical complexity. Specifically, average lexical density, average lexical diversity, and average lexical sophistication were used to draw comparison across time periods.
 
-Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. To assess the significance of the observed differences in lexical density across time periods, we conducted t-tests to determine whether the differences were statistically significant.
+Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. To assess the significance of the observed differences in lexical density across time periods, we conducted t-tests.
 
-We examined lexical diversity using three different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). We used these measurements to provide confirmation on the diversity analysis, and they were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. The high score also signifies that unique words are repeated more often within the texts. To assess the significance of the observed differences in lexical diversity  across time periods, we conducted t-tests to determine whether the differences were statistically significant.
+We examined lexical diversity using three different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). These measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. The high score also signifies that unique words are repeated more often within the texts. To assess the significance of the observed differences in lexical diversity across time periods, we conducted additional t-tests for each of the measures.
 
-We investigated lexical sophistication using two measurements. The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
+We investigated lexical sophistication using two measurements: COCA Log Frequency and COCA Log Range, both of which have been used to measure lexical sophistication in papers concerning similar topics (@ZHOU2023101262). The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
 
 ## Grammatical Complexity
-Finally, we investigated the grammatical complexity of each of the periods. To do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases. The unique phrases were matched to three different patterns - one for noun-noun phrases, *NN*, one for adjective-noun phrases, *AN*, and a third for prepositions, *P*. From there, we calculated the relative frequency of each pattern groupings for each text by summing the occurrences of the pattern and dividing by the total number of words. We then found the mean relative frequency for each of the periods. We chose to investigate adj-noun and noun-noun patterns because they are commonly recognized to represent 'phrasal' complexity in writing. Similarly, we chose to investigate the relative frequency of prepositions because they are common signals of 'clausal' complexity (@Biber_Gray_2016). We attempted to validate these scores in two different ways. When displaying the corresponding graphs, we included confidence intervals to establish the variance of the values for the individual texts used to compute the means. Additionally, we computed Pearson correlations to measure the linear trends of each of the graphs, following the methodology of similar studies (@Biber_Gray_2016).
+We then investigated the grammatical complexity of each of the periods. To do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases (@WinNT). The unique phrases were matched to three different patterns - one for noun-noun phrases, *NN*, one for adjective-noun phrases, *AN*, and a third for prepositions, *P*. From there, we calculated the relative frequency of each pattern groupings for each text by summing the occurrences of the pattern and dividing by the total number of words. We then found the mean relative frequency for each of the periods. We chose to investigate adj-noun and noun-noun patterns because they are commonly recognized to represent 'phrasal' complexity in writing. Similarly, we chose to investigate the relative frequency of prepositions because they are common signals of 'clausal' complexity (@Biber_Gray_2016). We attempted to validate these scores in two different ways. When displaying the corresponding graphs, we included confidence intervals to establish the variance of the values for the individual texts used to compute the means. Additionally, we computed Pearson correlations to measure the linear trends of each of the graphs, following the methodology of similar studies (@Biber_Gray_2016).
 
 # Results
 
@@ -501,7 +501,7 @@ density_1950 <- calculate_lexical_density(all_text_1950)
 Lexical_Density <- c(density_1850[[1]], density_1875[[1]], density_1900[[1]], density_1925[[1]], density_1950[[1]])
 
 lexical_density_data <- data.frame(
-  Decade = c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s"),
+  Decade = c("1850s", "1875s", "1900s", "1925s", "1950s"),
   Lexical_Density = Lexical_Density
 )
 
@@ -608,7 +608,7 @@ k <- function(lexdiv) {
   return(round(mean(lexdiv$K), 3))
 }
 
-Decade = c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s")
+Decade = c("1850s", "1875s", "1900s", "1925s", "1950s")
 CTTR = c(cttr(lexdiv_ss_1850), cttr(lexdiv_ss_1875), cttr(lexdiv_ss_1900), cttr(lexdiv_ss_1925), cttr(lexdiv_ss_1950))
 Uber_Index = c(u(lexdiv_ss_1850), u(lexdiv_ss_1875), u(lexdiv_ss_1900), u(lexdiv_ss_1925), u(lexdiv_ss_1950))
 Yule_Index = c(k(lexdiv_ss_1850), k(lexdiv_ss_1875), k(lexdiv_ss_1900), k(lexdiv_ss_1925), k(lexdiv_ss_1950))
@@ -699,7 +699,7 @@ From Tables 5 and 6, we see that individual pairwise comparisons of consecutive 
 coca_log_freq <- c(2.906083957, 2.95844650214, 3.02225345614,3.00776001575, 3.01792395869)
 coca_log_range <- c(-0.48442091233, -0.45705001557, -0.409846593, -0.40724439112, -0.40615305761)
 
-Decade = c("Mid 1800s", "Late 1800s", "1900s", "Early 1900s", "Mid 1900s")
+Decade = c("1850s", "1875s", "1900s", "1925s", "1950s")
 
 
 colnames(lex_div_res) <- c("Time Period", "COCA Log Range", "Coca Log Frequency")
@@ -772,7 +772,7 @@ load("POS_annotations/annotation_1950s.rda")
 ```
 
 
-```{r fig.cap="Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "28%"}
+```{r fig.cap="Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "26%"}
 
 #run the following once (doesn't take long)
 sub_anno_list_1850s_nn <- gen_file(annotation_1850s, "NN")
@@ -820,7 +820,7 @@ ggplot(pattern_counts_nn, aes(x = decade, y = RF, group = 1)) +
   geom_point(color = "blue") +
   geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
-    x = "Year",
+    x = "Period",
     y = "Mean RF (Unique_NN/total_words)"
   ) +
   ylim(0, NA) +
@@ -833,11 +833,9 @@ all_counts_nn <- c(sub_anno_list_1850s_nn_ct, sub_anno_list_1875s_nn_ct, sub_ann
 
 #cor(all_years, all_counts_nn, method="pearson")
 ```
+From Figure 3, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 7.5 in the 1850s to around 7.8 in the 1950s. There was, however, a dip in complexity for the intermediate periods. This trend could suggest a shift towards more concise and direct language. Many of the error bars for the 95% confidence intervals are very large and overlap greatly, making the true trend less clear. Additionally, the Pearson Correlation Coefficient for relative frequency of noun + noun phrases over time is $0.0607$, which indicates a very slight positive correlation for the data. However, these value is also very close to $0$, which would indicate no correlation.
 
-From Figure 3, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions. Many of the error bars for the 95% confidence intervals are very large and overlap greatly, making the true trend less clear. We additionally ran a correlation test between the dates and relative frequencies of the phrases. The Pearson Correlation Coefficient for relative frequency of noun + noun phrases over time is $0.0607$, which implies a very slight positive correlation for the data.
-
-
-```{r fig.cap="Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "28%"}
+```{r fig.cap="Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "26%"}
 #run the following once (doesn't take long)
 sub_anno_list_1850s_an <- gen_file(annotation_1850s, "AN")
 sub_anno_list_1875s_an <- gen_file(annotation_1875s, "AN")
@@ -884,7 +882,7 @@ ggplot(pattern_counts_an, aes(x = decade, y = RF, group = 1)) +
   geom_point(color = "blue") +
   geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
-    x = "Year",
+    x = "Period",
     y = "Mean RF (Unique_AN/total_words)"
   ) +
   ylim(0, NA)+
@@ -896,9 +894,9 @@ all_counts_an <- c(sub_anno_list_1850s_an_ct, sub_anno_list_1875s_an_ct, sub_ann
 #cor(all_years, all_counts_an)
 
 ```
-From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. Some of the error bars for the 95% confidence intervals overlap, but not all. This lends potential credibility to the observed trend. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
+From Figure 4, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions. Some of the error bars for the 95% confidence intervals overlap, though not all. This lends potential credibility to the observed trend. Additionally, the Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
 
-```{r fig.cap="Relative Frequency of Prepositions Over Time", out.height = "28%"}
+```{r fig.cap="Relative Frequency of Prepositions Over Time", out.height = "26%"}
 
 sub_anno_list_1850s_p <- gen_file(annotation_1850s, "P")
 sub_anno_list_1875s_p <- gen_file(annotation_1875s, "P")
@@ -944,7 +942,7 @@ ggplot(pattern_counts_p, aes(x = decade, y = RF, group = 1)) +
   geom_point(color = "blue") +
   geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
-    x = "Year",
+    x = "Period",
     y = "Mean RF (prep_ct/total_words)"
   ) +
   ylim(0, NA) +
@@ -957,7 +955,7 @@ all_counts_an <- c(sub_anno_list_1850s_p_ct, sub_anno_list_1875s_p_ct, sub_anno_
 
 ```
 
-From Figure 5, the relative frequency of prepositional phrases declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. Many of the error bars for the 95% confidence intervals overlap, calling into question the significance of the observed trend. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4651396$, which implies a negative correlation for the data.
+From Figure 5, the relative frequency of prepositions declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. Many of the error bars for the 95% confidence intervals overlap, calling into question the significance of the observed trend. However, the Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4651396$, implying a negative correlation for mean relative frequency to period.
 
 # Discussion
 
