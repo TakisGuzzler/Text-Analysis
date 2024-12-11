@@ -387,7 +387,7 @@ data <- data.frame(
 kable(data, caption = "Word Count Data for 25 year periods from 1850-1950", align = 'c', 
       col.names = c("Time Period", "Text Count", "Total Words", "Mean Words", "Word Range", "Average Sentence Length", "Average Word Length"))
 ```
-From Table 1, we can observe that the number of texts per time period are relatively even and well-distributed. Due to the greater prevalence and recording of short stories as we approach the present day, there are more texts from the period surrounding the 1950s, specifically. However, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
+From Table 1, we can observe that the number of texts per time period is relatively even and well-distributed. Due to the greater prevalence and recording of short stories as we approach the present day, there are more texts from the period surrounding the 1950s, specifically. However, the total word counts and mean word counts for each time period show greater variation. Specifically, the average number of words per short story tends to decrease over time. Additionally, stories from the 1800s generally exhibit longer average sentence lengths compared to those from the 1900s. In contrast, the average word length appears consistent across the time periods. Overall these corpora have similar amounts of content that can be used to draw conclusions.
 
 # Methods
 
@@ -507,7 +507,7 @@ lexical_density_data <- data.frame(
 
 colnames(lexical_density_data) <- c("Time Period", "Lexical Density")
 
-kable(lexical_density_data, caption = "Average Lexical Density from the Mid 1800s to the Mid 1900s")
+kable(lexical_density_data, caption = "Average Lexical Density from the Mid 1800s and Mid 1900s")
 
 ```
 
@@ -618,7 +618,7 @@ lex_div_res <- data.frame(Decade,CTTR,Uber_Index,Yule_Index)
 colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index", "Yule's K")
 
 
-kable(lex_div_res, caption = "Average Lexical Diversity from the Mid 1800s to the Mid 1900s")
+kable(lex_div_res, caption = "Average Lexical Diversity from the Mid 1800s and Mid 1900s")
 
 ```
 
@@ -851,7 +851,7 @@ all_counts_an <- c(sub_anno_list_1850s_an_ct, sub_anno_list_1875s_an_ct, sub_ann
 ```
 From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
 
-```{r fig.cap="Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "28%"}
+```{r fig.cap="Relative Frequency of Prepositions Over Time", out.height = "28%"}
 
 sub_anno_list_1850s_p <- gen_file(annotation_1850s, "P")
 sub_anno_list_1875s_p <- gen_file(annotation_1875s, "P")
@@ -898,9 +898,9 @@ We also determined that lexical density showed a small increase over time where 
 We also found that the average lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for the CTTR and Yule's K metrics. However, we saw that Uber's Index did not have a significant change between the time periods. It is interesting that the measurements for significance for CTTR and Uber's Index points us towards two different conclusions of the significance of lexical diversity in the differences between the texts over time. There are many explanations for this conclusion, however, including the different computations involved in the measurements and the small sample size for comparisons. 
 Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because our data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication) and thus was not performed on the individual texts in a way that allowed for the use of a t-test. Future analyses could include computing significance tests to assess the usefulness of changes in lexical sophistication in observing changes in short stories over time.
 
-Finally, we found that there were some shifts in grammatical complexity over time. The slight decrease in the relative frequency of adjective-noun phrases indicates a minor decrease in the usage of descriptive detail in sentences, potentially reflecting a move toward more concise writing. Similarly, the slight decline in prepositional phrases may suggest a trend towards simpler sentence structures. In contrast, the small increase in noun-noun phrases suggests a rise in more compact word usage, which could indicate a shift in how writers conveyed information. These trends point to gradual changes in writing style, possibly influenced by changing audience preferences or cultural shifts toward more straightforward writing. However, the differences are relatively small, and the results should be interpreted with caution.
+Finally, we found that there were some shifts in grammatical complexity over time. The slight decrease in the mean relative frequency of adjective-noun phrases indicates a minor decrease in the usage of descriptive detail in sentences, potentially reflecting a move toward more concise writing. Similarly, the slight decline in use of prepositions may suggest a trend towards simpler sentence structures. In contrast, the small increase in mean noun-noun phrases suggests a rise in more compact word usage, which could indicate a shift in how writers conveyed information. These trends point to gradual changes in writing style, possibly influenced by changing audience preferences or cultural shifts toward more straightforward writing. However, the differences are relatively small, and the results should be interpreted with caution. That being said, the results of the pearson correlation coefficient tests do indicate the existence of these positive and negative correlational relationships.
 
-However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 25 texts. Expanding the dataset and incorporating a broader range of time periods beyond the mid 1800s and mid 1900s would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT. Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. 
+However, it is important to note that due to the small sample size, we do not have enough significance to make any conclusive statements. Thus, some limitations to consider are the relatively small size of our dataset, consisting of only about 44 texts. Expanding the dataset and incorporating a broader range of time periods beyond the 100 years would allow us to make more meaningful statements about trends. Additionally, the texts were not randomly sampled, as we selected the top short stories suggested by ChatGPT and those that were recorded in Project Gutenberg Ideally, a larger and more randomly selected sample would allow for more reliable conclusions about trends. Additionally, we could further expand upon our analysis of grammatical complexity trends. Currently, the analysis only observes the trends of the presence of three aspects of grammatical complexity. However, there are many additional measures that could shed greater light on these trends beyond noun, adjectives, and prepositions.
 
 A future analysis could include more time periods and a larger variety of texts to improve the generalizability of our findings. Focusing on specific genres, such as romance or science-fiction, would allow for a better understanding of how different types of writing have evolved over time. This would help us understand whether certain genres have been more resistant to changes in style or if they have had the same characteristics over time. Additionally, analyzing how historical events or societal shifts influence language and writing styles could provide insight into how external factors influence the way people communicate.
 
