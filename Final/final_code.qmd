@@ -772,7 +772,7 @@ load("POS_annotations/annotation_1950s.rda")
 ```
 
 
-```{r fig.cap="Increase in Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "32%"}
+```{r fig.cap="Increase in Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "31%"}
 
 #run the following once (doesn't take long)
 sub_anno_list_1850s_nn <- gen_file(annotation_1850s, "NN")
@@ -814,7 +814,7 @@ all_counts_nn <- c(sub_anno_list_1850s_nn_ct, sub_anno_list_1875s_nn_ct, sub_ann
 From Figure 3, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions. We additionally ran a correlation test between the dates and relative frequencies of the phrases. The Pearson Correlation Coefficient for relative frequency of noun + noun phrases over time is $0.0607$, which implies a very slight positive correlation for the data.
 
 
-```{r fig.cap="Decrease in Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "32%"}
+```{r fig.cap="Decrease in Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "31%"}
 #run the following once (doesn't take long)
 sub_anno_list_1850s_an <- gen_file(annotation_1850s, "AN")
 sub_anno_list_1875s_an <- gen_file(annotation_1875s, "AN")
@@ -851,7 +851,7 @@ all_counts_an <- c(sub_anno_list_1850s_an_ct, sub_anno_list_1875s_an_ct, sub_ann
 ```
 From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
 
-```{r fig.cap="Decrease in Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "32%"}
+```{r fig.cap="Decrease in Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "31%"}
 
 sub_anno_list_1850s_p <- gen_file(annotation_1850s, "P")
 sub_anno_list_1875s_p <- gen_file(annotation_1875s, "P")
@@ -892,11 +892,11 @@ From Figure 5, the relative frequency of prepositional phrases declined slightly
 
 # Discussion
 
-From our exploration, we found a decreasing trend in average sentence length and a slight decreasing trend in average word length over time. This could indicate that short stories have become easier to read as sentences have gotten shorter and words have gotten shorter. 
+From our exploration, we found a decreasing trend in average sentence length and a slight decreasing trend in average word length over time. This could indicate that short stories have become easier to read as both sentences and words have become shorter.
 
-We also determined that the lexical density showed a small increase over time where the lexical diversity showed a decrease over time. However, there was a minimal difference between the two period's lexical density, which might a less significant impact. We also found that lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for CTTR and Yule's K metrics. We found that Uber's Index did not have a significant change between the time periods, but this could be due to the differing ways in which all the metrics are computed. 
-
-Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because our data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication). Future analyses could include computing t-tests to assess the significance of changes in lexical sophistication.
+We also determined that lexical density showed a small increase over time where  lexical diversity showed a decrease over time. However, there was a minimal difference between the five periods' lexical densities. This, alongside the t-test results from comparing concurrent periods and endpoint periods, which established a lack of significance for the measurement, likely implies a less significant impact on any changes in lexical complexity. 
+We also found that the average lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for the CTTR and Yule's K metrics. However, we found that Uber's Index did not have a significant change between the time periods. It is interesting that the measurements for significance for CTTR and Uber's Index points us towards two different conclusions of the significance of lexical diversity in the differences between the texts over time. There are many explanations for this conclusion, however, including the different computations involved in the measurements and the small sample size for comparisons. 
+Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because our data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication) and thus was not preformed on the individual texts in a way that allowed for the use of a t-test. Future analyses could include computing significance tests to assess the usefulness of changes in lexical sophistication in observing changes in short stories over time.
 
 Finally, we found that there were some shifts in grammatical complexity over time. The slight decrease in the relative frequency of adjective-noun phrases indicates a minor decrease in the usage of descriptive detail in sentences, potentially reflecting a move toward more concise writing. Similarly, the slight decline in prepositional phrases may suggest a trend towards simpler sentence structures. In contrast, the small increase in noun-noun phrases suggests a rise in more compact word usage, which could indicate a shift in how writers conveyed information. These trends point to gradual changes in writing style, possibly influenced by changing audience preferences or cultural shifts toward more straightforward writing. However, the differences are relatively small, and the results should be interpreted with caution.
 
