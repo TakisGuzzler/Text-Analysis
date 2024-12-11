@@ -406,7 +406,7 @@ We examined lexical diversity using three different measurements - Carroll's Cor
 We investigated lexical sophistication using two measurements. The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
 
 ## Grammatical Complexity
-Finally, we investigated the grammatical complexity of each of the periods. In order to do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases. The unique phrases were matched to two different regex expressions - one for identifying simple noun phrases and another for identifying simple verb phrases. From there, we calculated the relative frequency of four patterns in the text - *AN*, *NN*, and *P*. *AN* matches to Adjective Noun phrases, *NN* matches to Noun Noun phrases, *P* matches to prepositional phrases that include nouns.
+Finally, we investigated the grammatical complexity of each of the periods. In order to do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases. The unique phrases were matched to two different regex expressions - one for identifying simple noun phrases and another for identifying simple verb phrases. From there, we calculated the relative frequency of four patterns in the text - *AN*, *NN*, and *P*. *AN* matches to Adjective Noun phrases, *NN* matches to Noun Noun phrases, *P* matches to prepositional phrases that include nouns. We chose to investigate adj + noun and noun + noun patterns because they are commonly recognized to represent 'phrasal' complexity in writing. Similarly, we chose to investigate long patterns that contain at least one preposition - *P* - since they are common signals of 'clausal' complexity (@Biber_Gray_2016).
 
 # Results
 
@@ -768,7 +768,7 @@ df_P <- gen_df(table_1850, table_1875, table_1900, table_1925, table_1950, "P")
 
 ```
 
-```{r fig.cap="Relative Frequency of Grammatical Adjective Noun Pattern Over Time", out.height = "30%"}
+```{r fig.cap="Decrease in Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_AN, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
@@ -783,7 +783,7 @@ ggplot(df_AN, aes(x = decade, y = RF, group = 1)) +
 
 ```
 
-```{r fig.cap="Relative Frequency of Grammatical Noun Noun Pattern Over Time", out.height = "30%"}
+```{r fig.cap="Increase in Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
@@ -797,7 +797,7 @@ ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-```{r fig.cap="Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "30%"}
+```{r fig.cap="Decrease in Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "30%"}
 
 ggplot(df_P, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
