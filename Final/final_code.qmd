@@ -783,6 +783,8 @@ ggplot(df_AN, aes(x = decade, y = RF, group = 1)) +
 
 ```
 
+From Figure 3, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions.
+
 ```{r fig.cap="Increase in Relative Frequency of Grammatical Noun + Noun Pattern Over Time", out.height = "30%"}
 
 ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
@@ -796,6 +798,8 @@ ggplot(df_NN, aes(x = decade, y = RF, group = 1)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
+
+From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. 
 
 ```{r fig.cap="Decrease in Relative Frequency of Prepositional Phrases with Nouns Over Time", out.height = "30%"}
 
@@ -811,6 +815,8 @@ ggplot(df_P, aes(x = decade, y = RF, group = 1)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
+
+From Figure 5, the relative frequency of prepositional phrases declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. 
 
 
 # Discussion
