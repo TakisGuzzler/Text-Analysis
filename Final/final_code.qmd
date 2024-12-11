@@ -789,13 +789,36 @@ sub_anno_list_1950s_nn_ct <- gen_file_ct(sub_anno_list_1950s_nn, annotation_1950
 
 sub_anno_mean_nn <- c(mean(sub_anno_list_1850s_nn_ct), mean(sub_anno_list_1875s_nn_ct), mean(sub_anno_list_1900s_nn_ct), mean(sub_anno_list_1925s_nn_ct), mean(sub_anno_list_1950s_nn_ct))
 
-pattern_counts_nn <- data.frame(decade = c(1850, 1875, 1900, 1925, 1950),
-                                RF = sub_anno_mean_nn)
+sub_anno_sd_nn <- c(sd(sub_anno_list_1850s_nn_ct),
+                    sd(sub_anno_list_1875s_nn_ct),
+                    sd(sub_anno_list_1900s_nn_ct),
+                    sd(sub_anno_list_1925s_nn_ct),
+                    sd(sub_anno_list_1950s_nn_ct)
+)
 
+sub_anno_n_nn <- c(length(sub_anno_list_1850s_nn_ct),
+                   length(sub_anno_list_1875s_nn_ct),
+                   length(sub_anno_list_1900s_nn_ct),
+                   length(sub_anno_list_1925s_nn_ct),
+                   length(sub_anno_list_1950s_nn_ct)
+)
+
+sub_anno_se_nn <- sub_anno_sd_nn / sqrt(sub_anno_n_nn)
+z <- 1.96
+sub_anno_ci_lower_nn <- sub_anno_mean_nn - z * sub_anno_se_nn
+sub_anno_ci_upper_nn <- sub_anno_mean_nn + z * sub_anno_se_nn
+
+pattern_counts_nn <- data.frame(
+  decade = c(1850, 1875, 1900, 1925, 1950),
+  RF = sub_anno_mean_nn,
+  CI_lower = sub_anno_ci_lower_nn,
+  CI_upper = sub_anno_ci_upper_nn
+)
 
 ggplot(pattern_counts_nn, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
     x = "Year",
     y = "Mean RF (Unique_NN/total_words)"
@@ -811,7 +834,7 @@ all_counts_nn <- c(sub_anno_list_1850s_nn_ct, sub_anno_list_1875s_nn_ct, sub_ann
 #cor(all_years, all_counts_nn, method="pearson")
 ```
 
-From Figure 3, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions. We additionally ran a correlation test between the dates and relative frequencies of the phrases. The Pearson Correlation Coefficient for relative frequency of noun + noun phrases over time is $0.0607$, which implies a very slight positive correlation for the data.
+From Figure 3, the relative frequency of adjective-noun phrases slightly decreased from the mid-1800s to the mid-1900s, declining from a relative frequency of 8 in the 1850s to around 7.2 in the 1950s. This suggests a slight reduction in grammatical complexity, potentially reflecting a shift in writing style toward simpler and more direct expressions. Many of the error bars for the 95% confidence intervals are very large and overlap greatly, making the true trend less clear. We additionally ran a correlation test between the dates and relative frequencies of the phrases. The Pearson Correlation Coefficient for relative frequency of noun + noun phrases over time is $0.0607$, which implies a very slight positive correlation for the data.
 
 
 ```{r fig.cap="Relative Frequency of Grammatical Adj + Noun Pattern Over Time", out.height = "28%"}
@@ -830,12 +853,36 @@ sub_anno_list_1950s_an_ct <- gen_file_ct(sub_anno_list_1950s_an, annotation_1950
 
 sub_anno_mean_an <- c(mean(sub_anno_list_1850s_an_ct), mean(sub_anno_list_1875s_an_ct), mean(sub_anno_list_1900s_an_ct), mean(sub_anno_list_1925s_an_ct), mean(sub_anno_list_1950s_an_ct))
 
-pattern_counts_an <- data.frame(decade = c(1850, 1875, 1900, 1925, 1950),
-                                RF = sub_anno_mean_an)
+sub_anno_sd_an <- c(sd(sub_anno_list_1850s_an_ct),
+                    sd(sub_anno_list_1875s_an_ct),
+                    sd(sub_anno_list_1900s_an_ct),
+                    sd(sub_anno_list_1925s_an_ct),
+                    sd(sub_anno_list_1950s_an_ct)
+)
+
+sub_anno_n_an <- c(length(sub_anno_list_1850s_an_ct),
+                   length(sub_anno_list_1875s_an_ct),
+                   length(sub_anno_list_1900s_an_ct),
+                   length(sub_anno_list_1925s_an_ct),
+                   length(sub_anno_list_1950s_an_ct)
+)
+
+sub_anno_se_an <- sub_anno_sd_an / sqrt(sub_anno_n_an)
+z <- 1.96
+sub_anno_ci_lower <- sub_anno_mean_an - z * sub_anno_se_an
+sub_anno_ci_upper <- sub_anno_mean_an + z * sub_anno_se_an
+
+pattern_counts_an <- data.frame(
+  decade = c(1850, 1875, 1900, 1925, 1950),
+  RF = sub_anno_mean_an,
+  CI_lower = sub_anno_ci_lower,
+  CI_upper = sub_anno_ci_upper
+)
 
 ggplot(pattern_counts_an, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
     x = "Year",
     y = "Mean RF (Unique_AN/total_words)"
@@ -849,7 +896,7 @@ all_counts_an <- c(sub_anno_list_1850s_an_ct, sub_anno_list_1875s_an_ct, sub_ann
 #cor(all_years, all_counts_an)
 
 ```
-From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
+From Figure 4, the relative frequency of noun-noun phrases increased slightly over the same period, rising from approximately 12.5 in the 1850s to around 15 in the 1950s. This trend could suggest a shift towards more concise and direct language. Some of the error bars for the 95% confidence intervals overlap, but not all. This lends potential credibility to the observed trend. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4525414$, which implies a negative correlation for the data.
 
 ```{r fig.cap="Relative Frequency of Prepositions Over Time", out.height = "28%"}
 
@@ -868,12 +915,34 @@ sub_anno_list_1950s_p_ct <- gen_file_ct(sub_anno_list_1950s_p, annotation_1950s)
 
 sub_anno_mean_p <- c(mean(sub_anno_list_1850s_p_ct), mean(sub_anno_list_1875s_p_ct), mean(sub_anno_list_1900s_p_ct), mean(sub_anno_list_1925s_p_ct), mean(sub_anno_list_1950s_p_ct))
 
-pattern_counts_p <- data.frame(decade = c(1850, 1875, 1900, 1925, 1950),
-                                RF = sub_anno_mean_p)
+sub_anno_sd_p <- c(sd(sub_anno_list_1850s_p_ct), 
+                   sd(sub_anno_list_1875s_p_ct), 
+                   sd(sub_anno_list_1900s_p_ct), 
+                   sd(sub_anno_list_1925s_p_ct), 
+                   sd(sub_anno_list_1950s_p_ct))
+
+sub_anno_n_p <- c(length(sub_anno_list_1850s_p_ct), 
+                  length(sub_anno_list_1875s_p_ct), 
+                  length(sub_anno_list_1900s_p_ct), 
+                  length(sub_anno_list_1925s_p_ct), 
+                  length(sub_anno_list_1950s_p_ct))
+
+sub_anno_se_p <- sub_anno_sd_p / sqrt(sub_anno_n_p)
+z <- 1.96
+sub_anno_ci_lower <- sub_anno_mean_p - z * sub_anno_se_p
+sub_anno_ci_upper <- sub_anno_mean_p + z * sub_anno_se_p
+
+pattern_counts_p <- data.frame(
+  decade = c(1850, 1875, 1900, 1925, 1950),
+  RF = sub_anno_mean_p,
+  CI_lower = sub_anno_ci_lower,
+  CI_upper = sub_anno_ci_upper
+)
 
 ggplot(pattern_counts_p, aes(x = decade, y = RF, group = 1)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
     x = "Year",
     y = "Mean RF (prep_ct/total_words)"
@@ -888,7 +957,7 @@ all_counts_an <- c(sub_anno_list_1850s_p_ct, sub_anno_list_1875s_p_ct, sub_anno_
 
 ```
 
-From Figure 5, the relative frequency of prepositional phrases declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4651396$, which implies a negative correlation for the data.
+From Figure 5, the relative frequency of prepositional phrases declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. Many of the error bars for the 95% confidence intervals overlap, calling into question the significance of the observed trend. The Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4651396$, which implies a negative correlation for the data.
 
 # Discussion
 
