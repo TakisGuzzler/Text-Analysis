@@ -391,7 +391,7 @@ Evidently, the number of texts per time period is relatively even, with more tex
 
 # Methods
 
-We sought to determine the complexity of the texts from the different time periods and if there was significant change across the time periods. To do so, we began by investigating average sentence and word lengths of each of the texts. We followed this by analyzing the lexical and grammatical complexity of each time period, focusing on average values. We split the corpus of short stories into equal periods of 25 years to allow us to view the impact of the stories over the smaller intervals when compared to each other. We did not shrink the periods more, considering the slow movements of language change and did not increase the periods to greater sizes to allow us enough distinct points of comparisons.
+We sought to determine the complexity and differences of the texts across the different time periods. To do so, we began by investigating average sentence and word length of each of the texts. We followed this by analyzing the lexical and grammatical complexity of each time period, focusing on average values. We split the corpus of short stories into equal periods of 25 years to allow us to view the impact of the stories over the smaller intervals when compared to each other. We decided not to shrink the periods more, considering the slow movements of language change, and decided not to increase the periods to greater sizes to allow us enough distinct points of for comparison.
 
 ## Average Sentence and Word Length
 We first analyzed the average sentence length and word length of each text across the entire 100 year period and displayed them in scatter plots. For the purpose of displaying additional texts from the same year, we placed these data points sequentially in the plot. The plot was otherwise organized by year. This offered a general overview of the changes over the periods and insight into the potential impact of each text on the subsequent measures.
@@ -399,14 +399,16 @@ We first analyzed the average sentence length and word length of each text acros
 ## Lexical Complexity
 We then sought to analyze three different common measurements for lexical complexity - lexical density, lexical diversity, and lexical sophistication (@ZHOU2023101262). We used all three measures because they offered an exhaustive exploration of lexical complexity. Specifically, average lexical density, average lexical diversity, and average lexical sophistication were used to draw comparison across time periods.
 
-Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words. To assess the significance of the observed differences in lexical density across time periods, we conducted t-tests.
+Lexical density is a measure of the proportion of content words to function words in a text. Content words, which include nouns, verbs, adjectives, etc, are words that carry meaning in a sentence. On the other hand, function words, such as articles, conjunctions, prepositions, etc, are used for grammatical purposes. Lexical density is higher when the proportion of content words is greater than that of function words.
 
-We examined lexical diversity using three different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber's Index (@uberIndex, @uberIndex2), and Yule's K (@yuleK). These measurements were chosen because they all account and correct for text length sensitivities. Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber's Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. The high score also signifies that unique words are repeated more often within the texts. To assess the significance of the observed differences in lexical diversity across time periods, we conducted additional t-tests for each of the measures.
+We examined lexical diversity using three different measurements - Carroll's Corrected Type Token Ratio (CTTR) (@cttr), Uber Index (@uberIndex), and Yule's K (@yuleK). These measurements were chosen because they all account and correct for text length sensitivities and are commonly used measures for lexical diversity (@yuleK, @uberIndex2). Yule's K was chosen because it is also sensitive to frequency distributions. A low score for CTTR and Uber Index typically indicates lower diversity when compared to a higher score. A high Yule's K score typically indicates low lexical diversity. The high score also signifies that unique words are repeated more often within the texts.
 
-We investigated lexical sophistication using two measurements: COCA Log Frequency and COCA Log Range, both of which have been used to measure lexical sophistication in papers concerning similar topics (@ZHOU2023101262). The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
+To assess the significance of the observed differences in lexical density and lexical diversity across time periods, we conducted t-tests. We decided to conduct t-tests for both the end periods and adjacent periods to help determine the validity of the trend and the comparison of the change between the start of the 100 year period and the end of the 100 year period.
+
+We concluded our investigations into lexical complexity by observing lexical sophistication using two measurements: COCA Log Frequency and COCA Log Range, both of which have been used to measure lexical sophistication in papers concerning similar topics (@ZHOU2023101262). The first metric, COCA Log Frequency, represents the logarithmic transformation of the frequency with which words appear in the Corpus of Contemporary American English (COCA) for fiction texts. A higher log frequency indicates that the words used in the text are more common in the COCA corpus, which suggests that the text uses more everyday, familiar vocabulary. The second metric, COCA Log Range, reflects the range of word frequencies, again in logarithmic form. A higher log range indicates a greater diversity in word choices, with a wider span of word frequencies. This suggests the presence of both commonly used and more rare or specialized words, which is characteristic of higher lexical sophistication. We used TAALES, a tool designed to measure various indices of lexical sophistication, to compute the metrics for this analysis (@Tales1, @Tales2).
 
 ## Grammatical Complexity
-We then investigated the grammatical complexity of each of the periods. To do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases (@WinNT). The unique phrases were matched to three different patterns - noun-noun (*NN*), adjective-noun phrases (*AN*), and prepositions (*P*). From there, we calculated the relative frequency of each pattern groupings for each text by summing the occurrences of the pattern and dividing by the total number of words from the udpipe text annotations. We then found the mean relative frequency for each period. We chose to investigate adj-noun and noun-noun patterns because they are recognized to represent 'phrasal' complexity in writing (@Biber_Gray_2016). Similarly, we chose to investigate the relative frequency of prepositions because they are a signal of 'clausal' complexity (@Biber_Gray_2016). We attempted to validate these scores in two different ways. When displaying the corresponding graphs, we included confidence intervals to establish the variance of the values for the individual texts used to compute the means. Additionally, we computed Pearson correlations to measure the linear trends of each of the graphs, following the methodology of time based grammatical studies (@Biber_Gray_2016). The Pearson correlation coefficient ranges from $-1$ to $1$ where increasingly negative values indicate increasingly negative correlation, $0$ indicates no correlation, and increasingly positive values indicate increasingly positive correlation within a data set.
+We then investigated the grammatical complexity of each of the periods. To do so, we split the corpora according to their part of speech tags using udpipe and further categorized them according to unique phrases (@WinNT). The unique phrases were matched to three different patterns - noun + noun (*NN*), adjective + noun phrases (*AN*), and prepositions (*P*). From there, we calculated the relative frequency of each pattern groupings for each text by summing the occurrences of the pattern and dividing by the total number of words from the udpipe text annotations. We then found the mean relative frequency for each period. We chose to investigate adj-noun and noun-noun patterns because they are recognized to represent 'phrasal' complexity in writing (@Biber_Gray_2016). Similarly, we chose to investigate the relative frequency of prepositions because they are a signal of 'clausal' complexity (@Biber_Gray_2016). We attempted to validate these scores in two different ways. When displaying the corresponding graphs, we included confidence intervals to establish the variance of the values for the individual texts used to compute the means. Additionally, we computed Pearson correlations to measure the linear trends of each of the graphs, following the methodology of time based grammatical studies (@Biber_Gray_2016). The Pearson correlation coefficient ranges from $-1$ to $1$ where increasingly negative values indicate increasingly negative correlation, $0$ indicates no correlation, and increasingly positive values indicate increasingly positive correlation within a data set.
 
 # Results
 
@@ -615,14 +617,14 @@ Yule_Index = c(k(lexdiv_ss_1850), k(lexdiv_ss_1875), k(lexdiv_ss_1900), k(lexdiv
 
 lex_div_res <- data.frame(Decade,CTTR,Uber_Index,Yule_Index)
 
-colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber's Index", "Yule's K")
+colnames(lex_div_res) <- c("Time Period", "CTTR", "Uber Index", "Yule's K")
 
 
 kable(lex_div_res, caption = "Average Lexical Diversity from the Mid 1800s and Mid 1900s")
 
 ```
 
-As seen in Table 4, for the CTTR and Uber's Index, the value from the mid 1800s is higher than that of the mid 1900s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
+As seen in Table 4, for the CTTR and Uber Index, the value from the mid 1800s is higher than that of the mid 1900s. This indicates a decrease in lexical diversity between the two time periods. The Yule's K value for the mid 1800s is 14.270 where the Yule's K value for the mid 1900s is 31.118. This suggests that the texts from the mid 1900s have a more uniform distribution of word frequencies and thus less lexical diversity. 
 
 ```{r}
 # t test for CTTR for consecutive periods
@@ -691,7 +693,7 @@ kable(k_results, caption = "Yule's K t-test Results")
 
 ```
 
-From Tables 5 and 6, we see that individual pairwise comparisons of consecutive years are not significant for CTTR and Yule's K, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127 and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans for these two metrics. The p-values from the t-tests for Uber's Index were considerably larger than the significance level $\alpha = 0.05$, indicating that the differences were not statistically significant.
+From Tables 5 and 6, we see that individual pairwise comparisons of consecutive years are not significant for CTTR and Yule's K, as they have large p-values. However, when comparing over a century (1850s vs. 1950s), the p-value for the CTTR t-test is 0.00127 and the p-value for Yule's K t-test is 0.00141. Thus, testing at a significance level of $\alpha = 0.05$, the differences in CTTR and Yule's K between the 1850s and 1950s are significant. This suggests that while differences between time periods close together may be difficult to detect, they become more apparent when comparing longer time spans for these two metrics. The p-values from the t-tests for the Uber Index were considerably larger than the significance level $\alpha = 0.05$, indicating that the differences were not statistically significant.
 
 ### Lexical Sophistication
 
@@ -820,8 +822,8 @@ ggplot(pattern_counts_nn, aes(x = decade, y = RF, group = 1)) +
   geom_point(color = "blue") +
   geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
-    x = "Time Period",
-    y = "Mean RF (Unique_NN/total_words)"
+    x = "Time Period (25 years)",
+    y = "Mean RF (Unique_NN/total_anno)"
   ) +
   ylim(0, NA) +
   theme_minimal() +
@@ -882,8 +884,8 @@ ggplot(pattern_counts_an, aes(x = decade, y = RF, group = 1)) +
   geom_point(color = "blue") +
   geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
-    x = "Time Period",
-    y = "Mean RF (Unique_AN/total_words)"
+    x = "Time Period (25 years)",
+    y = "Mean RF (Unique_AN/total_anno)"
   ) +
   ylim(0, NA)+
   theme_minimal() +
@@ -942,8 +944,8 @@ ggplot(pattern_counts_p, aes(x = decade, y = RF, group = 1)) +
   geom_point(color = "blue") +
   geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper), width = 5, color = "blue") +
   labs(
-    x = "Time Period",
-    y = "Mean RF (prep_ct/total_words)"
+    x = "Time Period (25 years)",
+    y = "Mean RF (prep_ct/total_anno)"
   ) +
   ylim(0, NA) +
   theme_minimal() +
@@ -955,14 +957,14 @@ all_counts_an <- c(sub_anno_list_1850s_p_ct, sub_anno_list_1875s_p_ct, sub_anno_
 
 ```
 
-From Figure 5, the relative frequency of prepositions declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. Many of the error bars for the 95% confidence intervals overlap, calling into question the significance of the observed trend. However, the Pearson Correlation Coefficient for relative frequency of adj + noun phrases over time is $-0.4651396$, implying a negative correlation for mean relative frequency to period.
+From Figure 5, the relative frequency of prepositions declined slightly from the mid-1800s to the mid-1900s. This suggests a minor shift away from longer or more detailed descriptions that may rely on prepositional phrases. While the difference is small, it aligns with the overall trend of slightly simpler sentence structures during this period. Many of the error bars for the 95% confidence intervals overlap, calling into question the significance of the observed trend. However, the Pearson Correlation Coefficient for relative frequency of prepositions over time is $-0.4651396$, implying a negative correlation for mean relative frequency to period.
 
 # Discussion
 
 From our exploration, we found a decreasing trend in average sentence length and a slight decreasing trend in average word length over time. This could indicate that short stories have become easier to read as both sentences and words have become shorter.
 
 We also determined that lexical density showed a small increase over time where  lexical diversity showed a decrease over time. However, there was a minimal difference between the five periods' lexical densities. This, alongside the t-test results from comparing concurrent periods and endpoint periods, which established a lack of significance for the measurement, likely implies a less significant impact on any changes in lexical complexity. 
-We also found that the average lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for the CTTR and Yule's K metrics. However, we saw that Uber's Index did not have a significant change between the time periods. It is interesting that the measurements for significance for CTTR and Uber's Index points us towards two different conclusions of the significance of lexical diversity in the differences between the texts over time. There are many explanations for this conclusion, however, including the different computations involved in the measurements and the small sample size for comparisons. 
+We also found that the average lexical diversity decreased significantly when comparing corpora from the mid 1850s and mid 1950s for the CTTR and Yule's K metrics. However, we saw that the Uber Index did not have a significant change between the time periods. It is interesting that the measurements for significance for CTTR and the Uber Index points us towards two different conclusions of the significance of lexical diversity in the differences between the texts over time. There are many explanations for this conclusion, however, including the different computations involved in the measurements and the small sample size for comparisons. 
 Additionally, we found that lexical sophistication slightly decreased over time. We chose not to perform a t-test or significance test for this metric because the data was collected using TAALES (Tool for the Automatic Analysis of Lexical Sophistication) in a way that did not allow for the use of a t-test, as we did not compute the metric ourselves. Future analyses could include computing significance tests to assess the changes in lexical sophistication in observing changes in short stories over time.
 
 Finally, we found that there were some shifts in grammatical complexity over time. The slight decrease in the mean relative frequency of adjective-noun phrases indicates a minor decrease in the usage of descriptive detail in sentences, potentially reflecting a move toward more concise writing. Similarly, the slight decline in use of prepositions may suggest a trend towards simpler sentence structures. In contrast, the small increase in mean noun-noun phrases suggests a rise in more compact word usage, which could indicate a shift in how writers conveyed information. These trends point to gradual changes in writing style, possibly influenced by changing audience preferences or cultural shifts toward more straightforward writing. However, the differences are relatively small, and the results should be interpreted with caution. That being said, the results of the pearson correlation coefficient tests do indicate the existence of these positive and negative correlational relationships.
